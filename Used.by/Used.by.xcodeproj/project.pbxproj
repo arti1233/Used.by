@@ -17,6 +17,10 @@
 		AE0BE89F28A2475100C0E116 /* MyAdsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0BE89E28A2475100C0E116 /* MyAdsViewController.swift */; };
 		AE0BE8A128A247A500C0E116 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0BE8A028A247A500C0E116 /* SettingViewController.swift */; };
 		AE0BE8A528A24FD600C0E116 /* UIColor + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0BE8A428A24FD600C0E116 /* UIColor + extension.swift */; };
+		AE0BE8A828A25A2A00C0E116 /* LoginFoarnViewController .swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0BE8A728A25A2A00C0E116 /* LoginFoarnViewController .swift */; };
+		AE0BE8AB28A260F600C0E116 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = AE0BE8AA28A260F600C0E116 /* SnapKit */; };
+		AE0BE8AF28A2B3E700C0E116 /* UITextField + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0BE8AE28A2B3E700C0E116 /* UITextField + extension.swift */; };
+		AE0BE8B128A2B56100C0E116 /* UIButton + extension .swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0BE8B028A2B56100C0E116 /* UIButton + extension .swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +36,9 @@
 		AE0BE89E28A2475100C0E116 /* MyAdsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAdsViewController.swift; sourceTree = "<group>"; };
 		AE0BE8A028A247A500C0E116 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		AE0BE8A428A24FD600C0E116 /* UIColor + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + extension.swift"; sourceTree = "<group>"; };
+		AE0BE8A728A25A2A00C0E116 /* LoginFoarnViewController .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginFoarnViewController .swift"; sourceTree = "<group>"; };
+		AE0BE8AE28A2B3E700C0E116 /* UITextField + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField + extension.swift"; sourceTree = "<group>"; };
+		AE0BE8B028A2B56100C0E116 /* UIButton + extension .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton + extension .swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,6 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE0BE8AB28A260F600C0E116 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,6 +90,7 @@
 				AE0BE89E28A2475100C0E116 /* MyAdsViewController.swift */,
 				AE0BE88A28A2403700C0E116 /* SearchViewController.swift */,
 				AE0BE89C28A2473A00C0E116 /* SaveAdsViewController.swift */,
+				AE0BE8A728A25A2A00C0E116 /* LoginFoarnViewController .swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -99,6 +108,8 @@
 			isa = PBXGroup;
 			children = (
 				AE0BE8A428A24FD600C0E116 /* UIColor + extension.swift */,
+				AE0BE8AE28A2B3E700C0E116 /* UITextField + extension.swift */,
+				AE0BE8B028A2B56100C0E116 /* UIButton + extension .swift */,
 			);
 			path = "Extension ";
 			sourceTree = "<group>";
@@ -119,6 +130,9 @@
 			dependencies = (
 			);
 			name = Used.by;
+			packageProductDependencies = (
+				AE0BE8AA28A260F600C0E116 /* SnapKit */,
+			);
 			productName = Used.by;
 			productReference = AE0BE88328A2403700C0E116 /* Used.by.app */;
 			productType = "com.apple.product-type.application";
@@ -147,6 +161,9 @@
 				Base,
 			);
 			mainGroup = AE0BE87A28A2403700C0E116;
+			packageReferences = (
+				AE0BE8A928A260F600C0E116 /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = AE0BE88428A2403700C0E116 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -173,13 +190,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE0BE8B128A2B56100C0E116 /* UIButton + extension .swift in Sources */,
 				AE0BE88B28A2403700C0E116 /* SearchViewController.swift in Sources */,
 				AE0BE8A528A24FD600C0E116 /* UIColor + extension.swift in Sources */,
 				AE0BE89F28A2475100C0E116 /* MyAdsViewController.swift in Sources */,
 				AE0BE88728A2403700C0E116 /* AppDelegate.swift in Sources */,
 				AE0BE89D28A2473A00C0E116 /* SaveAdsViewController.swift in Sources */,
+				AE0BE8AF28A2B3E700C0E116 /* UITextField + extension.swift in Sources */,
 				AE0BE89B28A245B100C0E116 /* MainTabBarController.swift in Sources */,
 				AE0BE8A128A247A500C0E116 /* SettingViewController.swift in Sources */,
+				AE0BE8A828A25A2A00C0E116 /* LoginFoarnViewController .swift in Sources */,
 				AE0BE88928A2403700C0E116 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -388,6 +408,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		AE0BE8A928A260F600C0E116 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		AE0BE8AA28A260F600C0E116 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AE0BE8A928A260F600C0E116 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = AE0BE87B28A2403700C0E116 /* Project object */;
 }

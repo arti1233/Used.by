@@ -9,8 +9,8 @@ import Foundation
 import UIKit
 
 extension UIColor {
-    static var tabBarItemAccent: UIColor {
-        #colorLiteral(red: 0.5791940689, green: 0.1280144453, blue: 0.5726861358, alpha: 1)
+    static var myCustomPurple: UIColor {
+        #colorLiteral(red: 0.3236978054, green: 0.1063579395, blue: 0.574860394, alpha: 1)
     }
     
     static var mainWhite: UIColor {
@@ -18,6 +18,15 @@ extension UIColor {
     }
     
     static var tabBarItemLight: UIColor {
-        #colorLiteral(red: 0.8446564078, green: 0.5145705342, blue: 1, alpha: 0.5)
+        #colorLiteral(red: 0.3236978054, green: 0.1063579395, blue: 0.574860394, alpha: 0.5)
     }
+    
+    static var colorForHeaderLoginFoarm: UIColor {
+        #colorLiteral(red: 0.7430565931, green: 0.7174590638, blue: 1, alpha: 1)
+    }
+    
+    static var mainBackgroundColor: UIColor {
+        #colorLiteral(red: 0.8378645351, green: 0.8546440879, blue: 1, alpha: 1)
+    }
+    
 }

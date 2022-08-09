@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import SnapKit
 
 class MainTabBarController: UITabBarController {
     
@@ -24,7 +25,7 @@ class MainTabBarController: UITabBarController {
     
     private func generateTabBar() {
         viewControllers = [
-            generateVC(viewController: SearchViewController(), title: "Search", image: UIImage(systemName: "magnifyingglass.circle.fill")),
+            generateVC(viewController: SearchViewController(), title: "Search", image: UIImage(systemName: "magnifyingglass")),
             generateVC(viewController: MyAdsViewController(), title: "My ads", image: UIImage(systemName: "list.bullet.rectangle")),
             generateVC(viewController: SaveAdsViewController(), title: "Save", image: UIImage(systemName: "bookmark")),
             generateVC(viewController: SettingViewController(), title: "Setting", image: UIImage(systemName: "gear"))
@@ -40,22 +41,8 @@ class MainTabBarController: UITabBarController {
     }
     
     private func setTabBarAppearance() {
-        let positionOnX: CGFloat = 10
-        let positionOnY: CGFloat = 14
-        let widht = tabBar.bounds.width - positionOnX * 2
-        let height = tabBar.bounds.height + positionOnY * 2
-        
-        let roundLayer = CAShapeLayer()
-        
-        let bezierPath = UIBezierPath(roundedRect: CGRect(x: positionOnX, y: tabBar.bounds.minY - positionOnY, width: widht, height: height), cornerRadius: height / 2)
-        
-        roundLayer.path = bezierPath.cgPath
-        tabBar.layer.insertSublayer(roundLayer, at: 0)
-        tabBar.itemWidth = widht / 4
-        tabBar.itemPositioning = .centered
-        
-        roundLayer.fillColor = UIColor.mainWhite.cgColor
-        tabBar.tintColor = .tabBarItemAccent
+        tabBar.backgroundColor = UIColor.mainWhite
+        tabBar.tintColor = .myCustomPurple
         tabBar.unselectedItemTintColor = .tabBarItemLight
     }
     
