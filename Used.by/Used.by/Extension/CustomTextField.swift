@@ -8,12 +8,13 @@
 import Foundation
 import UIKit
 
-extension UITextField {
-    
-    var mainTextFied: UITextField {
+class CustomTextField: UITextField {
+
+    override func `self`() -> Self {
         self.textColor = UIColor.myCustomPurple
         self.backgroundColor = .white
         self.layer.cornerRadius = 15
         return self
     }
+
 }

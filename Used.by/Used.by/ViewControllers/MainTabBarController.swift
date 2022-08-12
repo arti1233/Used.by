@@ -11,9 +11,6 @@ import SnapKit
 
 class MainTabBarController: UITabBarController {
     
-    
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         generateTabBar()
@@ -22,13 +19,17 @@ class MainTabBarController: UITabBarController {
         
     }
     
-    
     private func generateTabBar() {
+        
+        let myAdsViewController = UINavigationController(rootViewController: MyAdsViewController())
+        let saveAdsViewController = UINavigationController(rootViewController:  SaveAdsViewController())
+        let settingViewController = UINavigationController(rootViewController: SettingViewController())
+        
         viewControllers = [
             generateVC(viewController: SearchViewController(), title: "Search", image: UIImage(systemName: "magnifyingglass")),
-            generateVC(viewController: MyAdsViewController(), title: "My ads", image: UIImage(systemName: "list.bullet.rectangle")),
-            generateVC(viewController: SaveAdsViewController(), title: "Save", image: UIImage(systemName: "bookmark")),
-            generateVC(viewController: SettingViewController(), title: "Setting", image: UIImage(systemName: "gear"))
+            generateVC(viewController: myAdsViewController, title: "My ads", image: UIImage(systemName: "list.bullet.rectangle")),
+            generateVC(viewController: saveAdsViewController, title: "Save", image: UIImage(systemName: "bookmark")),
+            generateVC(viewController: settingViewController, title: "Setting", image: UIImage(systemName: "gear"))
         ]
         
     }
@@ -36,7 +37,7 @@ class MainTabBarController: UITabBarController {
     private func generateVC(viewController: UIViewController, title: String, image: UIImage?) -> UIViewController {
         viewController.tabBarItem.title = title
         viewController.tabBarItem.image = image
-        
+
         return viewController
     }
     
@@ -45,6 +46,4 @@ class MainTabBarController: UITabBarController {
         tabBar.tintColor = .myCustomPurple
         tabBar.unselectedItemTintColor = .tabBarItemLight
     }
-    
-    
 }

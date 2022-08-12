@@ -7,16 +7,10 @@
 
 import UIKit
 
-class SearchViewController: UIViewController {
+class SearchViewController: BaseViewController {
 
-    
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.mainBackgroundColor
-        
-        
         
     }
 

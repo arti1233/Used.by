@@ -9,12 +9,12 @@ import Foundation
 import UIKit
 
 
-extension UIButton {
+class CustomButton: UIButton {
     
-    var mainButton: UIButton {
+    override func `self`() -> Self {
         self.backgroundColor = UIColor.myCustomPurple
-        self.tintColor = .white
         self.layer.cornerRadius = 15
+        self.tintColor = .white
         return self
     }
 }

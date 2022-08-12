@@ -9,10 +9,10 @@ import Foundation
 import UIKit
 import SnapKit
 
-class LoginFoarnViewController: UIViewController {
+final class LoginFormViewController: UIViewController {
     // Назвпние приложения в title
-    private var titleName: UILabel = {
-       var titleName = UILabel()
+    private lazy var titleName: UILabel = {
+        var titleName = UILabel()
         titleName.textColor = UIColor.myCustomPurple
         titleName.textAlignment = .center
         titleName.text = "USED.BY"
@@ -21,7 +21,7 @@ class LoginFoarnViewController: UIViewController {
     }()
     
     // SegmentController для переключения между регистрацией и входом
-    private var segmentController: UISegmentedControl = {
+    private lazy var segmentController: UISegmentedControl = {
         var segmentController = UISegmentedControl(items: ["Log in", "Registration"])
         segmentController.selectedSegmentIndex = 0
         segmentController.selectedSegmentTintColor = UIColor.myCustomPurple
@@ -31,83 +31,86 @@ class LoginFoarnViewController: UIViewController {
         return segmentController
     }()
     
-//MARK: View для входа
-    private var viewForEntryUser: UIView = {
+    //MARK: View для входа
+    private lazy var viewForEntryUser: UIView = {
         var viewEnterUser = UIView()
         viewEnterUser.backgroundColor = UIColor.mainBackgroundColor
         return viewEnterUser
     }()
     // TextField почты для входа
-    private var emailForEntryTextField: UITextField = {
-        var textlabel = UITextField().mainTextFied
+    private lazy var emailForEntryTextField: CustomTextField = {
+        var textlabel = CustomTextField()
         textlabel.placeholder = "  Enter email adress"
         return textlabel
     }()
     // TextField пароля для входа
-    private var passwordForEntryTextField: UITextField = {
-        var textlabel = UITextField().mainTextFied
+    private lazy var passwordForEntryTextField: CustomTextField = {
+        var textlabel = CustomTextField()
         textlabel.placeholder = "  Password"
         return textlabel
     }()
     
-    private var loginButton: UIButton = {
-        var loginButton = UIButton().mainButton
+    private lazy var loginButton: CustomButton = {
+        var loginButton = CustomButton()
         loginButton.setTitle("Log in", for: .normal)
         loginButton.addTarget(self, action: #selector(loginButtonPressed), for: .touchUpInside)
+        loginButton.`self`()
         return loginButton
     }()
     
-    
-    
-//MARK: View для регистрации
-    private var viewForRegisterUser: UIView = {
+    //MARK: View для регистрации
+    private lazy var viewForRegisterUser: UIView = {
         var viewRegisterUser = UIView()
         viewRegisterUser.backgroundColor = UIColor.mainBackgroundColor
         return viewRegisterUser
     }()
     // TextField имени пользователя(ник) для регистрации
-    private var loginNameForRegisterTextField: UITextField = {
-        var textlabel = UITextField().mainTextFied
+    private lazy var loginNameForRegisterTextField: CustomTextField = {
+        var textlabel = CustomTextField()
         textlabel.placeholder = "  Enter your name"
         return textlabel
     }()
     // TextField почты для регистрации
-    private var emailForRegisterTextField: UITextField = {
-        var textlabel = UITextField().mainTextFied
+    private lazy var emailForRegisterTextField: CustomTextField = {
+        var textlabel = CustomTextField()
         textlabel.placeholder = "  Enter email adress"
         return textlabel
     }()
     // TextField пароля для регистрации
-    private var passwordForRegisterTextField: UITextField = {
-        var textlabel = UITextField().mainTextFied
+    private lazy var passwordForRegisterTextField: CustomTextField = {
+        var textlabel = CustomTextField()
         textlabel.placeholder = "  Password"
         return textlabel
     }()
     
-    private var registrationButton: UIButton = {
-        var registrationButton = UIButton().mainButton
+    private lazy var registrationButton: CustomButton = {
+        var registrationButton = CustomButton()
         registrationButton.setTitle("Registration", for: .normal)
         registrationButton.addTarget(self, action: #selector(registrationButtonPressed), for: .touchUpInside)
+        registrationButton.`self`()
         return registrationButton
     }()
     
-    
-    
+    // MARK: ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
+        addElementsToSuperview()
         
-        addMainElements()
-        addViewEnterUser()
-        addViewRegisterUser()
         changeViewForIndexSegment(index: segmentController.selectedSegmentIndex)
-        
-        
-        
-        
         view.backgroundColor = UIColor.colorForHeaderLoginFoarm
     }
     
-// MARK: Actions
+    // MARK: UpdateViewConstraints
+    override func updateViewConstraints() {
+        super.updateViewConstraints()
+        addMainElements()
+        addViewEnterUser()
+        addViewRegisterUser()
+    }
+    
+    
+    
+    // MARK: Actions
     
     // Actions for segment controller
     @objc fileprivate func changeView(_ sender: UISegmentedControl) {
@@ -128,62 +131,47 @@ class LoginFoarnViewController: UIViewController {
     
     
     
-// MARK: Metods
+    // MARK: Metods
     // Метод измения с входа на регистрацию
     private func changeViewForIndexSegment(index: Int) {
-        switch index {
-        case 0:
-            viewForEntryUser.isHidden = false
-            viewForRegisterUser.isHidden = true
-        case 1:
-            viewForEntryUser.isHidden = true
-            viewForRegisterUser.isHidden = false
-        default:
-            break
-        }
+        viewForEntryUser.isHidden = index == 1
+        viewForRegisterUser.isHidden = index == 0
     }
     
     
     // Добавление элементов которые не зависят от действия (вход или регистрация)
     private func addMainElements() {
-        view.addSubview(titleName)
         titleName.snp.makeConstraints{
             $0.top.leading.trailing.equalToSuperview().inset(16)
             $0.height.equalTo(40)
         }
         
-        view.addSubview(segmentController)
         segmentController.snp.makeConstraints {
             $0.top.equalTo(titleName.snp.bottom).offset(16)
             $0.leading.trailing.equalToSuperview().inset(16)
             $0.height.equalTo(40)
         }
-
     }
     
     // Добавление вью с авторизацией
     private func addViewEnterUser() {
-        view.addSubview(viewForEntryUser)
         viewForEntryUser.snp.makeConstraints {
             $0.bottom.leading.trailing.equalToSuperview().inset(0)
             $0.top.equalTo(segmentController.snp.bottom).offset(16)
         }
         
-        viewForEntryUser.addSubview(emailForEntryTextField)
         emailForEntryTextField.snp.makeConstraints {
             $0.top.equalTo(viewForEntryUser.snp.top).inset(48)
             $0.leading.trailing.equalTo(viewForEntryUser).inset(16)
             $0.height.equalTo(70)
         }
         
-        viewForEntryUser.addSubview(passwordForEntryTextField)
         passwordForEntryTextField.snp.makeConstraints {
             $0.top.equalTo(emailForEntryTextField.snp.bottom).offset(16)
             $0.leading.trailing.equalTo(viewForEntryUser).inset(16)
             $0.height.equalTo(70)
         }
         
-        viewForEntryUser.addSubview(loginButton)
         loginButton.snp.makeConstraints {
             $0.top.equalTo(passwordForEntryTextField.snp.bottom).offset(32)
             $0.leading.trailing.equalTo(viewForEntryUser).inset(16)
@@ -193,41 +181,47 @@ class LoginFoarnViewController: UIViewController {
     
     // Добавление вью с регистрацией
     private func addViewRegisterUser() {
-        view.addSubview(viewForRegisterUser)
         viewForRegisterUser.snp.makeConstraints {
             $0.bottom.leading.trailing.equalToSuperview().inset(0)
             $0.top.equalTo(segmentController.snp.bottom).offset(16)
         }
         
-        viewForRegisterUser.addSubview(loginNameForRegisterTextField)
         loginNameForRegisterTextField.snp.makeConstraints {
             $0.top.equalTo(viewForRegisterUser.snp.top).inset(48)
             $0.leading.trailing.equalTo(viewForRegisterUser).inset(16)
             $0.height.equalTo(70)
         }
         
-        viewForRegisterUser.addSubview(emailForRegisterTextField)
         emailForRegisterTextField.snp.makeConstraints {
             $0.top.equalTo(loginNameForRegisterTextField.snp.bottom).offset(16)
             $0.leading.trailing.equalTo(viewForRegisterUser).inset(16)
             $0.height.equalTo(70)
         }
         
-        viewForRegisterUser.addSubview(passwordForRegisterTextField)
         passwordForRegisterTextField.snp.makeConstraints {
             $0.top.equalTo(emailForRegisterTextField.snp.bottom).offset(16)
             $0.leading.trailing.equalTo(viewForRegisterUser).inset(16)
             $0.height.equalTo(70)
         }
         
-        viewForRegisterUser.addSubview(registrationButton)
         registrationButton.snp.makeConstraints {
             $0.top.equalTo(passwordForRegisterTextField.snp.bottom).offset(32)
             $0.leading.trailing.equalTo(viewForRegisterUser).inset(16)
             $0.height.equalTo(70)
         }
-
     }
     
-
+    private func addElementsToSuperview() {
+        view.addSubview(titleName)
+        view.addSubview(segmentController)
+        view.addSubview(viewForEntryUser)
+        viewForEntryUser.addSubview(emailForEntryTextField)
+        viewForEntryUser.addSubview(passwordForEntryTextField)
+        viewForEntryUser.addSubview(loginButton)
+        view.addSubview(viewForRegisterUser)
+        viewForRegisterUser.addSubview(loginNameForRegisterTextField)
+        viewForRegisterUser.addSubview(emailForRegisterTextField)
+        viewForRegisterUser.addSubview(passwordForRegisterTextField)
+        viewForRegisterUser.addSubview(registrationButton)
+    }
 }

@@ -7,31 +7,46 @@
 
 import Foundation
 import UIKit
+import SnapKit
 
-class MyAdsViewController: UIViewController {
-
-     var myButton = UIButton()
+class MyAdsViewController: BaseViewController {
     
+    private lazy var loginButton: CustomButton = {
+        var button = CustomButton()
+        button.setTitle("Log in...", for: .normal)
+        button.addTarget(self, action: #selector(loginButtonPressed), for: .touchUpInside)
+        button.`self`()
+        return button
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.mainBackgroundColor
-        
-        myButton = UIButton(type: .roundedRect)
-        myButton.frame = CGRect(x: 150, y: 150, width: 200, height: 40)
-        myButton.tintColor = .purple
-        myButton.setTitle("add", for: .normal)
-        myButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
-        
-        
-        view.addSubview(myButton)
-        
-    }
+        addLoginButton()
 
+    }
     
-    @objc func buttonPressed(sender: UIButton) {
-        let LoginFoarmViewController = LoginFoarnViewController()
+    override func updateViewConstraints() {
+        super.updateViewConstraints()
+       
+    }
+    
+// MARK: Actions
+    @objc private func loginButtonPressed(sender: UIButton) {
+        let LoginFoarmViewController = LoginFormViewController()
         present(LoginFoarmViewController, animated: true)
     }
-
+    
+    
+// MARK: Metods
+    
+    private func addLoginButton() {
+        view.addSubview(loginButton)
+        loginButton.snp.makeConstraints {
+            guard let tabBar = tabBarController?.tabBar.frame.height else { return }
+            $0.bottom.equalToSuperview().inset(tabBar + 16)
+            $0.centerX.equalTo(view.snp.centerX).inset(0)
+            $0.height.equalTo(50)
+            $0.trailing.leading.equalToSuperview().inset(16)
+        }
+    }
 }
