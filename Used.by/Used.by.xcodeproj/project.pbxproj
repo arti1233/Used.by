@@ -9,21 +9,42 @@
 /* Begin PBXBuildFile section */
 		AE0BE88728A2403700C0E116 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0BE88628A2403700C0E116 /* AppDelegate.swift */; };
 		AE0BE88928A2403700C0E116 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0BE88828A2403700C0E116 /* SceneDelegate.swift */; };
-		AE0BE88B28A2403700C0E116 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0BE88A28A2403700C0E116 /* ViewController.swift */; };
-		AE0BE88E28A2403700C0E116 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE0BE88C28A2403700C0E116 /* Main.storyboard */; };
+		AE0BE88B28A2403700C0E116 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0BE88A28A2403700C0E116 /* SearchViewController.swift */; };
 		AE0BE89028A2403A00C0E116 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE0BE88F28A2403A00C0E116 /* Assets.xcassets */; };
 		AE0BE89328A2403A00C0E116 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE0BE89128A2403A00C0E116 /* LaunchScreen.storyboard */; };
+		AE0BE89B28A245B100C0E116 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0BE89A28A245B100C0E116 /* MainTabBarController.swift */; };
+		AE0BE89D28A2473A00C0E116 /* SaveAdsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0BE89C28A2473A00C0E116 /* SaveAdsViewController.swift */; };
+		AE0BE89F28A2475100C0E116 /* MyAdsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0BE89E28A2475100C0E116 /* MyAdsViewController.swift */; };
+		AE0BE8A128A247A500C0E116 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0BE8A028A247A500C0E116 /* SettingViewController.swift */; };
+		AE0BE8A528A24FD600C0E116 /* UIColor+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0BE8A428A24FD600C0E116 /* UIColor+extension.swift */; };
+		AE0BE8A828A25A2A00C0E116 /* LoginFoarnViewController .swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0BE8A728A25A2A00C0E116 /* LoginFoarnViewController .swift */; };
+		AE0BE8AB28A260F600C0E116 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = AE0BE8AA28A260F600C0E116 /* SnapKit */; };
+		AE0BE8AF28A2B3E700C0E116 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0BE8AE28A2B3E700C0E116 /* CustomTextField.swift */; };
+		AE0BE8B128A2B56100C0E116 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0BE8B028A2B56100C0E116 /* CustomButton.swift */; };
+		AE0BE8B328A3ACD500C0E116 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AE0BE8B228A3ACD500C0E116 /* GoogleService-Info.plist */; };
+		AE0BE8F228A3E53200C0E116 /* ProfileCellForSettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0BE8F128A3E53200C0E116 /* ProfileCellForSettingVC.swift */; };
+		AE39BD2D28A647FC0080DB52 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE39BD2C28A647FB0080DB52 /* BaseViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		AE0BE88328A2403700C0E116 /* Used.by.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Used.by.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE0BE88628A2403700C0E116 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AE0BE88828A2403700C0E116 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		AE0BE88A28A2403700C0E116 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		AE0BE88D28A2403700C0E116 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		AE0BE88A28A2403700C0E116 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		AE0BE88F28A2403A00C0E116 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AE0BE89228A2403A00C0E116 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AE0BE89428A2403A00C0E116 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AE0BE89A28A245B100C0E116 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		AE0BE89C28A2473A00C0E116 /* SaveAdsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveAdsViewController.swift; sourceTree = "<group>"; };
+		AE0BE89E28A2475100C0E116 /* MyAdsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAdsViewController.swift; sourceTree = "<group>"; };
+		AE0BE8A028A247A500C0E116 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		AE0BE8A428A24FD600C0E116 /* UIColor+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+extension.swift"; sourceTree = "<group>"; };
+		AE0BE8A728A25A2A00C0E116 /* LoginFoarnViewController .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginFoarnViewController .swift"; sourceTree = "<group>"; };
+		AE0BE8AE28A2B3E700C0E116 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		AE0BE8B028A2B56100C0E116 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		AE0BE8B228A3ACD500C0E116 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		AE0BE8F128A3E53200C0E116 /* ProfileCellForSettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCellForSettingVC.swift; sourceTree = "<group>"; };
+		AE39BD2C28A647FB0080DB52 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +52,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE0BE8AB28A260F600C0E116 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,15 +78,65 @@
 		AE0BE88528A2403700C0E116 /* Used.by */ = {
 			isa = PBXGroup;
 			children = (
-				AE0BE88628A2403700C0E116 /* AppDelegate.swift */,
-				AE0BE88828A2403700C0E116 /* SceneDelegate.swift */,
-				AE0BE88A28A2403700C0E116 /* ViewController.swift */,
-				AE0BE88C28A2403700C0E116 /* Main.storyboard */,
+				AE0BE8A628A24FDB00C0E116 /* Extension */,
+				AE0BE8A328A2481D00C0E116 /* Delegate */,
+				AE0BE8A228A2480400C0E116 /* ViewControllers */,
 				AE0BE88F28A2403A00C0E116 /* Assets.xcassets */,
+				AE0BE8F328A3E54000C0E116 /* CellForSettingVC */,
 				AE0BE89128A2403A00C0E116 /* LaunchScreen.storyboard */,
 				AE0BE89428A2403A00C0E116 /* Info.plist */,
+				AE0BE8B428A3ACE100C0E116 /* Plists */,
 			);
 			path = Used.by;
+			sourceTree = "<group>";
+		};
+		AE0BE8A228A2480400C0E116 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				AE0BE89A28A245B100C0E116 /* MainTabBarController.swift */,
+				AE0BE88A28A2403700C0E116 /* SearchViewController.swift */,
+				AE0BE89E28A2475100C0E116 /* MyAdsViewController.swift */,
+				AE0BE89C28A2473A00C0E116 /* SaveAdsViewController.swift */,
+				AE0BE8A028A247A500C0E116 /* SettingViewController.swift */,
+				AE0BE8A728A25A2A00C0E116 /* LoginFoarnViewController .swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		AE0BE8A328A2481D00C0E116 /* Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				AE0BE88628A2403700C0E116 /* AppDelegate.swift */,
+				AE0BE88828A2403700C0E116 /* SceneDelegate.swift */,
+			);
+			path = Delegate;
+			sourceTree = "<group>";
+		};
+		AE0BE8A628A24FDB00C0E116 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				AE0BE8A428A24FD600C0E116 /* UIColor+extension.swift */,
+				AE0BE8AE28A2B3E700C0E116 /* CustomTextField.swift */,
+				AE0BE8B028A2B56100C0E116 /* CustomButton.swift */,
+				AE39BD2C28A647FB0080DB52 /* BaseViewController.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		AE0BE8B428A3ACE100C0E116 /* Plists */ = {
+			isa = PBXGroup;
+			children = (
+				AE0BE8B228A3ACD500C0E116 /* GoogleService-Info.plist */,
+			);
+			path = Plists;
+			sourceTree = "<group>";
+		};
+		AE0BE8F328A3E54000C0E116 /* CellForSettingVC */ = {
+			isa = PBXGroup;
+			children = (
+				AE0BE8F128A3E53200C0E116 /* ProfileCellForSettingVC.swift */,
+			);
+			path = CellForSettingVC;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -83,6 +155,9 @@
 			dependencies = (
 			);
 			name = Used.by;
+			packageProductDependencies = (
+				AE0BE8AA28A260F600C0E116 /* SnapKit */,
+			);
 			productName = Used.by;
 			productReference = AE0BE88328A2403700C0E116 /* Used.by.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +186,9 @@
 				Base,
 			);
 			mainGroup = AE0BE87A28A2403700C0E116;
+			packageReferences = (
+				AE0BE8A928A260F600C0E116 /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = AE0BE88428A2403700C0E116 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -127,7 +205,7 @@
 			files = (
 				AE0BE89328A2403A00C0E116 /* LaunchScreen.storyboard in Resources */,
 				AE0BE89028A2403A00C0E116 /* Assets.xcassets in Resources */,
-				AE0BE88E28A2403700C0E116 /* Main.storyboard in Resources */,
+				AE0BE8B328A3ACD500C0E116 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,23 +216,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AE0BE88B28A2403700C0E116 /* ViewController.swift in Sources */,
+				AE0BE8B128A2B56100C0E116 /* CustomButton.swift in Sources */,
+				AE0BE88B28A2403700C0E116 /* SearchViewController.swift in Sources */,
+				AE0BE8A528A24FD600C0E116 /* UIColor+extension.swift in Sources */,
+				AE0BE89F28A2475100C0E116 /* MyAdsViewController.swift in Sources */,
 				AE0BE88728A2403700C0E116 /* AppDelegate.swift in Sources */,
+				AE0BE89D28A2473A00C0E116 /* SaveAdsViewController.swift in Sources */,
+				AE0BE8AF28A2B3E700C0E116 /* CustomTextField.swift in Sources */,
+				AE0BE89B28A245B100C0E116 /* MainTabBarController.swift in Sources */,
+				AE0BE8A128A247A500C0E116 /* SettingViewController.swift in Sources */,
+				AE0BE8A828A25A2A00C0E116 /* LoginFoarnViewController .swift in Sources */,
+				AE39BD2D28A647FC0080DB52 /* BaseViewController.swift in Sources */,
 				AE0BE88928A2403700C0E116 /* SceneDelegate.swift in Sources */,
+				AE0BE8F228A3E53200C0E116 /* ProfileCellForSettingVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		AE0BE88C28A2403700C0E116 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				AE0BE88D28A2403700C0E116 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		AE0BE89128A2403A00C0E116 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -285,13 +365,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Used.by/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Used.by;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -302,6 +384,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.teachmeskills.i32.Used-by";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -313,13 +396,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = NY9SGUADU3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Used.by/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Used.by;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -330,6 +415,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.teachmeskills.i32.Used-by";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -358,6 +444,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		AE0BE8A928A260F600C0E116 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		AE0BE8AA28A260F600C0E116 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AE0BE8A928A260F600C0E116 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = AE0BE87B28A2403700C0E116 /* Project object */;
 }
