@@ -9,7 +9,7 @@ import UIKit
 
 class ProfileCellForSettingVC: UITableViewCell {
 
-    private var logInLabel: UILabel = {
+    private lazy var logInLabel: UILabel = {
        var label = UILabel()
         label.textColor = .white
         label.font = UIFont.systemFont(ofSize: 23, weight: .heavy)
@@ -17,7 +17,7 @@ class ProfileCellForSettingVC: UITableViewCell {
         return label
     }()
     
-    private var textEtentionsLabel: UILabel = {
+    private lazy var textEtentionsLabel: UILabel = {
         var label = UILabel()
         label.textColor = .white
         label.text = "asdf"
@@ -25,7 +25,7 @@ class ProfileCellForSettingVC: UITableViewCell {
         return label
     }()
     
-    private var image: UIImageView = {
+    private lazy var image: UIImageView = {
         var imageView = UIImageView()
         imageView.image = UIImage(systemName: "chevron.right")
         return imageView

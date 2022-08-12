@@ -15,19 +15,19 @@ class MyAdsViewController: BaseViewController {
         var button = CustomButton()
         button.setTitle("Log in...", for: .normal)
         button.addTarget(self, action: #selector(loginButtonPressed), for: .touchUpInside)
-        button.`self`()
         return button
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        addLoginButton()
+        view.addSubview(loginButton)
+        
 
     }
     
     override func updateViewConstraints() {
         super.updateViewConstraints()
-       
+        addLoginButton()
     }
     
 // MARK: Actions
@@ -40,7 +40,6 @@ class MyAdsViewController: BaseViewController {
 // MARK: Metods
     
     private func addLoginButton() {
-        view.addSubview(loginButton)
         loginButton.snp.makeConstraints {
             guard let tabBar = tabBarController?.tabBar.frame.height else { return }
             $0.bottom.equalToSuperview().inset(tabBar + 16)

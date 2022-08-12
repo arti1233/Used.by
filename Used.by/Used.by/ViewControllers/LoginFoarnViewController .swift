@@ -54,7 +54,6 @@ final class LoginFormViewController: UIViewController {
         var loginButton = CustomButton()
         loginButton.setTitle("Log in", for: .normal)
         loginButton.addTarget(self, action: #selector(loginButtonPressed), for: .touchUpInside)
-        loginButton.`self`()
         return loginButton
     }()
     
@@ -87,7 +86,6 @@ final class LoginFormViewController: UIViewController {
         var registrationButton = CustomButton()
         registrationButton.setTitle("Registration", for: .normal)
         registrationButton.addTarget(self, action: #selector(registrationButtonPressed), for: .touchUpInside)
-        registrationButton.`self`()
         return registrationButton
     }()
     

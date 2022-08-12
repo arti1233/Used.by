@@ -19,14 +19,21 @@ class SettingViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
-        addTableView()
+        view.addSubview(tableView)
         tableView.dataSource = self
         tableView.delegate = self
     }
 
+    override func updateViewConstraints() {
+        super.updateViewConstraints()
+        addTableView()
+    }
+    
+    
+    
+    
+    
     private func addTableView() {
-        view.addSubview(tableView)
         tableView.snp.makeConstraints {
             guard let tabBar = tabBarController?.tabBar.frame.height else { return }
             $0.bottom.equalToSuperview().inset(tabBar)
