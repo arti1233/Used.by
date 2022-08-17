@@ -7,6 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AE04219728A935FF00034C2F /* SearchCarListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE04219628A935FF00034C2F /* SearchCarListViewController.swift */; };
+		AE04219B28A94DEA00034C2F /* ModelsForSearchCar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE04219A28A94DE900034C2F /* ModelsForSearchCar.swift */; };
+		AE04219D28A95CD900034C2F /* BasicCellForSearchList.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE04219C28A95CD900034C2F /* BasicCellForSearchList.swift */; };
+		AE04219F28A95D5D00034C2F /* CustomUILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE04219E28A95D5D00034C2F /* CustomUILabel.swift */; };
+		AE0421A228AA433600034C2F /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = AE0421A128AA433600034C2F /* GoogleSignIn */; };
+		AE0421A428AA433600034C2F /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = AE0421A328AA433600034C2F /* GoogleSignInSwift */; };
+		AE0421B328AA8C6900034C2F /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = AE0421B228AA8C6900034C2F /* FirebaseAuth */; };
+		AE0421B528AA8C6900034C2F /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = AE0421B428AA8C6900034C2F /* FirebaseDatabase */; };
+		AE0421B728AA8C6900034C2F /* FirebaseDatabaseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = AE0421B628AA8C6900034C2F /* FirebaseDatabaseSwift */; };
+		AE0421B928AA8C6900034C2F /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = AE0421B828AA8C6900034C2F /* FirebaseFirestore */; };
+		AE0421BB28AA8C6900034C2F /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = AE0421BA28AA8C6900034C2F /* FirebaseFirestoreSwift */; };
+		AE0421BD28AA8C6900034C2F /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = AE0421BC28AA8C6900034C2F /* FirebaseStorage */; };
 		AE0BE88728A2403700C0E116 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0BE88628A2403700C0E116 /* AppDelegate.swift */; };
 		AE0BE88928A2403700C0E116 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0BE88828A2403700C0E116 /* SceneDelegate.swift */; };
 		AE0BE88B28A2403700C0E116 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0BE88A28A2403700C0E116 /* SearchViewController.swift */; };
@@ -24,9 +36,18 @@
 		AE0BE8B328A3ACD500C0E116 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AE0BE8B228A3ACD500C0E116 /* GoogleService-Info.plist */; };
 		AE0BE8F228A3E53200C0E116 /* ProfileCellForSettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0BE8F128A3E53200C0E116 /* ProfileCellForSettingVC.swift */; };
 		AE39BD2D28A647FC0080DB52 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE39BD2C28A647FB0080DB52 /* BaseViewController.swift */; };
+		AEBB439228AD17D50037E5B1 /* ModelForCarBrendAndModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBB439128AD17D50037E5B1 /* ModelForCarBrendAndModel.swift */; };
+		AEBB439428AD259E0037E5B1 /* ChoiceModelCarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBB439328AD259E0037E5B1 /* ChoiceModelCarViewController.swift */; };
+		AEBB439628AD28630037E5B1 /* BrendCarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBB439528AD28630037E5B1 /* BrendCarCell.swift */; };
+		AEBB439928AD5A070037E5B1 /* LogInFireBaseService .swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBB439828AD5A070037E5B1 /* LogInFireBaseService .swift */; };
+		AEC70F8228AB9B6B00C84BB6 /* CellForRequestPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC70F8128AB9B6B00C84BB6 /* CellForRequestPicker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AE04219628A935FF00034C2F /* SearchCarListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCarListViewController.swift; sourceTree = "<group>"; };
+		AE04219A28A94DE900034C2F /* ModelsForSearchCar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelsForSearchCar.swift; sourceTree = "<group>"; };
+		AE04219C28A95CD900034C2F /* BasicCellForSearchList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicCellForSearchList.swift; sourceTree = "<group>"; };
+		AE04219E28A95D5D00034C2F /* CustomUILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUILabel.swift; sourceTree = "<group>"; };
 		AE0BE88328A2403700C0E116 /* Used.by.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Used.by.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE0BE88628A2403700C0E116 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AE0BE88828A2403700C0E116 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -45,6 +66,11 @@
 		AE0BE8B228A3ACD500C0E116 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AE0BE8F128A3E53200C0E116 /* ProfileCellForSettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCellForSettingVC.swift; sourceTree = "<group>"; };
 		AE39BD2C28A647FB0080DB52 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		AEBB439128AD17D50037E5B1 /* ModelForCarBrendAndModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelForCarBrendAndModel.swift; sourceTree = "<group>"; };
+		AEBB439328AD259E0037E5B1 /* ChoiceModelCarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceModelCarViewController.swift; sourceTree = "<group>"; };
+		AEBB439528AD28630037E5B1 /* BrendCarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrendCarCell.swift; sourceTree = "<group>"; };
+		AEBB439828AD5A070037E5B1 /* LogInFireBaseService .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LogInFireBaseService .swift"; sourceTree = "<group>"; };
+		AEC70F8128AB9B6B00C84BB6 /* CellForRequestPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellForRequestPicker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,13 +78,40 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE0421B728AA8C6900034C2F /* FirebaseDatabaseSwift in Frameworks */,
+				AE0421B528AA8C6900034C2F /* FirebaseDatabase in Frameworks */,
+				AE0421BD28AA8C6900034C2F /* FirebaseStorage in Frameworks */,
+				AE0421A428AA433600034C2F /* GoogleSignInSwift in Frameworks */,
 				AE0BE8AB28A260F600C0E116 /* SnapKit in Frameworks */,
+				AE0421A228AA433600034C2F /* GoogleSignIn in Frameworks */,
+				AE0421B328AA8C6900034C2F /* FirebaseAuth in Frameworks */,
+				AE0421B928AA8C6900034C2F /* FirebaseFirestore in Frameworks */,
+				AE0421BB28AA8C6900034C2F /* FirebaseFirestoreSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AE04219828A94C9E00034C2F /* CellForSearchCarList */ = {
+			isa = PBXGroup;
+			children = (
+				AE04219C28A95CD900034C2F /* BasicCellForSearchList.swift */,
+				AEC70F8128AB9B6B00C84BB6 /* CellForRequestPicker.swift */,
+				AEBB439528AD28630037E5B1 /* BrendCarCell.swift */,
+			);
+			path = CellForSearchCarList;
+			sourceTree = "<group>";
+		};
+		AE04219928A94DAA00034C2F /* ModelsForSearchCar */ = {
+			isa = PBXGroup;
+			children = (
+				AE04219A28A94DE900034C2F /* ModelsForSearchCar.swift */,
+				AEBB439128AD17D50037E5B1 /* ModelForCarBrendAndModel.swift */,
+			);
+			path = ModelsForSearchCar;
+			sourceTree = "<group>";
+		};
 		AE0BE87A28A2403700C0E116 = {
 			isa = PBXGroup;
 			children = (
@@ -78,6 +131,9 @@
 		AE0BE88528A2403700C0E116 /* Used.by */ = {
 			isa = PBXGroup;
 			children = (
+				AEBB439728AD59C80037E5B1 /* ServiceFireBase */,
+				AE04219928A94DAA00034C2F /* ModelsForSearchCar */,
+				AE04219828A94C9E00034C2F /* CellForSearchCarList */,
 				AE0BE8A628A24FDB00C0E116 /* Extension */,
 				AE0BE8A328A2481D00C0E116 /* Delegate */,
 				AE0BE8A228A2480400C0E116 /* ViewControllers */,
@@ -85,7 +141,7 @@
 				AE0BE8F328A3E54000C0E116 /* CellForSettingVC */,
 				AE0BE89128A2403A00C0E116 /* LaunchScreen.storyboard */,
 				AE0BE89428A2403A00C0E116 /* Info.plist */,
-				AE0BE8B428A3ACE100C0E116 /* Plists */,
+				AE0BE8B228A3ACD500C0E116 /* GoogleService-Info.plist */,
 			);
 			path = Used.by;
 			sourceTree = "<group>";
@@ -98,7 +154,9 @@
 				AE0BE89E28A2475100C0E116 /* MyAdsViewController.swift */,
 				AE0BE89C28A2473A00C0E116 /* SaveAdsViewController.swift */,
 				AE0BE8A028A247A500C0E116 /* SettingViewController.swift */,
+				AE04219628A935FF00034C2F /* SearchCarListViewController.swift */,
 				AE0BE8A728A25A2A00C0E116 /* LoginFoarnViewController .swift */,
+				AEBB439328AD259E0037E5B1 /* ChoiceModelCarViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -119,16 +177,9 @@
 				AE0BE8AE28A2B3E700C0E116 /* CustomTextField.swift */,
 				AE0BE8B028A2B56100C0E116 /* CustomButton.swift */,
 				AE39BD2C28A647FB0080DB52 /* BaseViewController.swift */,
+				AE04219E28A95D5D00034C2F /* CustomUILabel.swift */,
 			);
 			path = Extension;
-			sourceTree = "<group>";
-		};
-		AE0BE8B428A3ACE100C0E116 /* Plists */ = {
-			isa = PBXGroup;
-			children = (
-				AE0BE8B228A3ACD500C0E116 /* GoogleService-Info.plist */,
-			);
-			path = Plists;
 			sourceTree = "<group>";
 		};
 		AE0BE8F328A3E54000C0E116 /* CellForSettingVC */ = {
@@ -137,6 +188,14 @@
 				AE0BE8F128A3E53200C0E116 /* ProfileCellForSettingVC.swift */,
 			);
 			path = CellForSettingVC;
+			sourceTree = "<group>";
+		};
+		AEBB439728AD59C80037E5B1 /* ServiceFireBase */ = {
+			isa = PBXGroup;
+			children = (
+				AEBB439828AD5A070037E5B1 /* LogInFireBaseService .swift */,
+			);
+			name = ServiceFireBase;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -157,6 +216,14 @@
 			name = Used.by;
 			packageProductDependencies = (
 				AE0BE8AA28A260F600C0E116 /* SnapKit */,
+				AE0421A128AA433600034C2F /* GoogleSignIn */,
+				AE0421A328AA433600034C2F /* GoogleSignInSwift */,
+				AE0421B228AA8C6900034C2F /* FirebaseAuth */,
+				AE0421B428AA8C6900034C2F /* FirebaseDatabase */,
+				AE0421B628AA8C6900034C2F /* FirebaseDatabaseSwift */,
+				AE0421B828AA8C6900034C2F /* FirebaseFirestore */,
+				AE0421BA28AA8C6900034C2F /* FirebaseFirestoreSwift */,
+				AE0421BC28AA8C6900034C2F /* FirebaseStorage */,
 			);
 			productName = Used.by;
 			productReference = AE0BE88328A2403700C0E116 /* Used.by.app */;
@@ -188,6 +255,8 @@
 			mainGroup = AE0BE87A28A2403700C0E116;
 			packageReferences = (
 				AE0BE8A928A260F600C0E116 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				AE0421A028AA433600034C2F /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				AE0421B128AA8C6900034C2F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = AE0BE88428A2403700C0E116 /* Products */;
 			projectDirPath = "";
@@ -216,17 +285,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE04219728A935FF00034C2F /* SearchCarListViewController.swift in Sources */,
 				AE0BE8B128A2B56100C0E116 /* CustomButton.swift in Sources */,
+				AEBB439428AD259E0037E5B1 /* ChoiceModelCarViewController.swift in Sources */,
+				AE04219D28A95CD900034C2F /* BasicCellForSearchList.swift in Sources */,
 				AE0BE88B28A2403700C0E116 /* SearchViewController.swift in Sources */,
 				AE0BE8A528A24FD600C0E116 /* UIColor+extension.swift in Sources */,
+				AE04219F28A95D5D00034C2F /* CustomUILabel.swift in Sources */,
 				AE0BE89F28A2475100C0E116 /* MyAdsViewController.swift in Sources */,
 				AE0BE88728A2403700C0E116 /* AppDelegate.swift in Sources */,
+				AEBB439928AD5A070037E5B1 /* LogInFireBaseService .swift in Sources */,
+				AE04219B28A94DEA00034C2F /* ModelsForSearchCar.swift in Sources */,
+				AEBB439228AD17D50037E5B1 /* ModelForCarBrendAndModel.swift in Sources */,
+				AEBB439628AD28630037E5B1 /* BrendCarCell.swift in Sources */,
 				AE0BE89D28A2473A00C0E116 /* SaveAdsViewController.swift in Sources */,
 				AE0BE8AF28A2B3E700C0E116 /* CustomTextField.swift in Sources */,
 				AE0BE89B28A245B100C0E116 /* MainTabBarController.swift in Sources */,
 				AE0BE8A128A247A500C0E116 /* SettingViewController.swift in Sources */,
 				AE0BE8A828A25A2A00C0E116 /* LoginFoarnViewController .swift in Sources */,
 				AE39BD2D28A647FC0080DB52 /* BaseViewController.swift in Sources */,
+				AEC70F8228AB9B6B00C84BB6 /* CellForRequestPicker.swift in Sources */,
 				AE0BE88928A2403700C0E116 /* SceneDelegate.swift in Sources */,
 				AE0BE8F228A3E53200C0E116 /* ProfileCellForSettingVC.swift in Sources */,
 			);
@@ -368,7 +446,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = NY9SGUADU3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Used.by/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Used.by;
@@ -446,6 +524,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		AE0421A028AA433600034C2F /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.0;
+			};
+		};
+		AE0421B128AA8C6900034C2F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
 		AE0BE8A928A260F600C0E116 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -457,6 +551,46 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		AE0421A128AA433600034C2F /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AE0421A028AA433600034C2F /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
+		};
+		AE0421A328AA433600034C2F /* GoogleSignInSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AE0421A028AA433600034C2F /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignInSwift;
+		};
+		AE0421B228AA8C6900034C2F /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AE0421B128AA8C6900034C2F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		AE0421B428AA8C6900034C2F /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AE0421B128AA8C6900034C2F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+		AE0421B628AA8C6900034C2F /* FirebaseDatabaseSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AE0421B128AA8C6900034C2F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabaseSwift;
+		};
+		AE0421B828AA8C6900034C2F /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AE0421B128AA8C6900034C2F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		AE0421BA28AA8C6900034C2F /* FirebaseFirestoreSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AE0421B128AA8C6900034C2F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestoreSwift;
+		};
+		AE0421BC28AA8C6900034C2F /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AE0421B128AA8C6900034C2F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
 		AE0BE8AA28A260F600C0E116 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = AE0BE8A928A260F600C0E116 /* XCRemoteSwiftPackageReference "SnapKit" */;
