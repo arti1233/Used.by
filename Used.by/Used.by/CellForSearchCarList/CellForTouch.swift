@@ -9,24 +9,21 @@ import Foundation
 import UIKit
 import SnapKit
 
-class BasicCellForSearchList: UITableViewCell {
+class CellForTouch: UITableViewCell {
 
-    static let key = "BasicCellForSearchList"
+    static let key = "CellForTouch"
     
     private lazy var nameCellLabel: CustomUILabel = {
         var label = CustomUILabel()
+        label.text = "sdasd"
         return label
     }()
     
     private lazy var iconView: UIImageView = {
         var view = UIImageView()
         view.image = UIImage(systemName: "circle")?.withTintColor(.myCustomPurple)
+        view.tintColor = .myCustomPurple
         return view
-    }()
-    
-    private lazy var dataPickerYearProduction: UIDatePicker = {
-        var picker = UIDatePicker()
-        return picker 
     }()
     
     
@@ -35,29 +32,35 @@ class BasicCellForSearchList: UITableViewCell {
         contentView.addSubview(nameCellLabel)
         contentView.addSubview(iconView)
         contentView.layer.cornerRadius = 10
-        nameCellLabel.text = "dsdsdsdsd"
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
+    
+    
+    override func updateConstraints() {
         addElementsConstraint()
-        self.layer.masksToBounds = true
-        self.layer.cornerRadius = 10
+        super.updateConstraints()
     }
+    
 
     func changeNameCell(name: String) {
         nameCellLabel.text = name
     }
     
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        iconView.image = UIImage(systemName: selected ? "circle.fill" : "circle" )
+    }
     
     func setSelectedAttribute(isSelected: Bool) {
         iconView.image = UIImage(systemName: isSelected ? "circle.fill" : "circle" )
     }
-
+    
+    
+    
     private func addElementsConstraint() {
         
         nameCellLabel.snp.makeConstraints {

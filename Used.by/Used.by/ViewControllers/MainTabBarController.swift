@@ -22,10 +22,9 @@ class MainTabBarController: UITabBarController {
         let myAdsViewController = UINavigationController(rootViewController: MyAdsViewController())
         let saveAdsViewController = UINavigationController(rootViewController:  SaveAdsViewController())
         let settingViewController = UINavigationController(rootViewController: SettingViewController())
-        let searchViewController = UINavigationController(rootViewController: SearchViewController())
           
         viewControllers = [
-            generateVC(viewController: searchViewController, title: "Search", image: UIImage(systemName: "magnifyingglass")),
+            generateVC(viewController: SearchViewController(), title: "Search", image: UIImage(systemName: "magnifyingglass")),
             generateVC(viewController: myAdsViewController, title: "My ads", image: UIImage(systemName: "list.bullet.rectangle")),
             generateVC(viewController: saveAdsViewController, title: "Save", image: UIImage(systemName: "bookmark")),
             generateVC(viewController: settingViewController, title: "Setting", image: UIImage(systemName: "gear"))

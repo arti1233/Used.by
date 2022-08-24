@@ -20,7 +20,7 @@ import FirebaseDatabase
 final class LoginFormViewController: UIViewController {
    
     private var fireBase: FireBaseProtocol!
-    private var signInConfig = GIDConfiguration(clientID: "110530291494-utjaq1tejih8qaknoj6jl72cngtbbeh8.apps.googleusercontent.com")
+    private var signInConfig: GIDConfiguration!
     
     private lazy var googleButton: GIDSignInButton = {
         var button = GIDSignInButton()
@@ -113,11 +113,12 @@ final class LoginFormViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         addElementsToSuperview()
-        
+        guard let clientId = Bundle.main.object(forInfoDictionaryKey: "CLIENT_ID") as? String else { return }
+        signInConfig = GIDConfiguration(clientID: clientId)
         changeViewForIndexSegment(index: segmentController.selectedSegmentIndex)
         view.backgroundColor = UIColor.colorForHeaderLoginFoarm
         
-        fireBase = FiriBaseService()
+        fireBase = FireBaseService()
 //        loginNameForRegisterTextField.delegate = self
 //        emailForRegisterTextField.delegate = self
 //        passwordForRegisterTextField.delegate = self

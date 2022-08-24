@@ -20,7 +20,7 @@ protocol FireBaseProtocol {
     func addNewUserForGoogle(name: String, email: String, userId: String)
 }
 
-class FiriBaseService: FireBaseProtocol {
+class FireBaseService: FireBaseProtocol {
    
     let reference = Database.database().reference().child("users")
     

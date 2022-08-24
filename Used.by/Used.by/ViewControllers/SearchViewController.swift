@@ -12,7 +12,7 @@ import SnapKit
 class SearchViewController: BaseViewController {
 
     private var quantityAds: Int = 23424234
-    
+
     private lazy var adsLabel: UILabel = {
         var label = UILabel()
         label.textColor = .myCustomPurple
@@ -31,12 +31,10 @@ class SearchViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Used.by"
         view.addSubview(adsLabel)
         view.addSubview(searchButton)
         addAppName()
         adsLabel.text = "\(quantityAds) ads for the sale of used cars"
-
         
     }
 
@@ -47,12 +45,11 @@ class SearchViewController: BaseViewController {
     
     @objc private func searchButtonPressed(sender: UIButton) {
         let VC = SearchCarListViewController()
-        navigationController?.pushViewController(VC, animated: true)
+        present(VC, animated: true)
     }
-    
-    
-    
-    
+
+// MARK: Metods
+
 // MARK: Metods for constreint
     
     private func addAppName() {
@@ -63,8 +60,7 @@ class SearchViewController: BaseViewController {
         }
         
         searchButton.snp.makeConstraints {
-            guard let tabBar = tabBarController?.tabBar.frame.height else { return }
-            $0.bottom.equalToSuperview().inset(tabBar + 16)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(16)
             $0.centerX.equalTo(view.snp.centerX).inset(0)
             $0.height.equalTo(50)
             $0.trailing.leading.equalToSuperview().inset(16)

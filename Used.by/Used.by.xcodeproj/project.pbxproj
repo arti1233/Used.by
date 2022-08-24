@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		AE04219728A935FF00034C2F /* SearchCarListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE04219628A935FF00034C2F /* SearchCarListViewController.swift */; };
 		AE04219B28A94DEA00034C2F /* ModelsForSearchCar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE04219A28A94DE900034C2F /* ModelsForSearchCar.swift */; };
-		AE04219D28A95CD900034C2F /* BasicCellForSearchList.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE04219C28A95CD900034C2F /* BasicCellForSearchList.swift */; };
+		AE04219D28A95CD900034C2F /* CellForTouch.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE04219C28A95CD900034C2F /* CellForTouch.swift */; };
 		AE04219F28A95D5D00034C2F /* CustomUILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE04219E28A95D5D00034C2F /* CustomUILabel.swift */; };
 		AE0421A228AA433600034C2F /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = AE0421A128AA433600034C2F /* GoogleSignIn */; };
 		AE0421A428AA433600034C2F /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = AE0421A328AA433600034C2F /* GoogleSignInSwift */; };
@@ -36,17 +36,29 @@
 		AE0BE8B328A3ACD500C0E116 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AE0BE8B228A3ACD500C0E116 /* GoogleService-Info.plist */; };
 		AE0BE8F228A3E53200C0E116 /* ProfileCellForSettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0BE8F128A3E53200C0E116 /* ProfileCellForSettingVC.swift */; };
 		AE39BD2D28A647FC0080DB52 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE39BD2C28A647FB0080DB52 /* BaseViewController.swift */; };
+		AEA43D7B28AEB79D002BF0C0 /* CellForMileage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA43D7A28AEB79D002BF0C0 /* CellForMileage.swift */; };
+		AEA43D7E28AFB6C4002BF0C0 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = AEA43D7D28AFB6C4002BF0C0 /* Alamofire */; };
+		AEA43D8128AFB6FA002BF0C0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA43D8028AFB6FA002BF0C0 /* Constants.swift */; };
+		AEA43D8328AFB721002BF0C0 /* AlamofireProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA43D8228AFB721002BF0C0 /* AlamofireProvider.swift */; };
+		AEA43D8528AFBA5E002BF0C0 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA43D8428AFBA5E002BF0C0 /* UserModel.swift */; };
+		AEA43D8728B0DDB8002BF0C0 /* ChoiceModelCarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA43D8628B0DDB8002BF0C0 /* ChoiceModelCarViewController.swift */; };
+		AEA43D8C28B15844002BF0C0 /* ChooseMileageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA43D8B28B15844002BF0C0 /* ChooseMileageViewController.swift */; };
+		AEA43D8F28B36D12002BF0C0 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = AEA43D8E28B36D12002BF0C0 /* Realm */; };
+		AEA43D9128B36D12002BF0C0 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = AEA43D9028B36D12002BF0C0 /* RealmSwift */; };
+		AEA43D9328B370F9002BF0C0 /* PickerCapacityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA43D9228B370F8002BF0C0 /* PickerCapacityViewController.swift */; };
 		AEBB439228AD17D50037E5B1 /* ModelForCarBrendAndModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBB439128AD17D50037E5B1 /* ModelForCarBrendAndModel.swift */; };
-		AEBB439428AD259E0037E5B1 /* ChoiceModelCarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBB439328AD259E0037E5B1 /* ChoiceModelCarViewController.swift */; };
+		AEBB439428AD259E0037E5B1 /* ChoiceBrendCarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBB439328AD259E0037E5B1 /* ChoiceBrendCarViewController.swift */; };
 		AEBB439628AD28630037E5B1 /* BrendCarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBB439528AD28630037E5B1 /* BrendCarCell.swift */; };
 		AEBB439928AD5A070037E5B1 /* LogInFireBaseService .swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBB439828AD5A070037E5B1 /* LogInFireBaseService .swift */; };
-		AEC70F8228AB9B6B00C84BB6 /* CellForRequestPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC70F8128AB9B6B00C84BB6 /* CellForRequestPicker.swift */; };
+		AEC70F8228AB9B6B00C84BB6 /* CellForRequestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC70F8128AB9B6B00C84BB6 /* CellForRequestView.swift */; };
+		AED205A628B4D39D00EC8C83 /* RealmServise .swift in Sources */ = {isa = PBXBuildFile; fileRef = AED205A528B4D39D00EC8C83 /* RealmServise .swift */; };
+		AED205A828B614F300EC8C83 /* ChooseCostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AED205A728B614F300EC8C83 /* ChooseCostViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		AE04219628A935FF00034C2F /* SearchCarListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCarListViewController.swift; sourceTree = "<group>"; };
 		AE04219A28A94DE900034C2F /* ModelsForSearchCar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelsForSearchCar.swift; sourceTree = "<group>"; };
-		AE04219C28A95CD900034C2F /* BasicCellForSearchList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicCellForSearchList.swift; sourceTree = "<group>"; };
+		AE04219C28A95CD900034C2F /* CellForTouch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellForTouch.swift; sourceTree = "<group>"; };
 		AE04219E28A95D5D00034C2F /* CustomUILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUILabel.swift; sourceTree = "<group>"; };
 		AE0BE88328A2403700C0E116 /* Used.by.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Used.by.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE0BE88628A2403700C0E116 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -66,11 +78,20 @@
 		AE0BE8B228A3ACD500C0E116 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AE0BE8F128A3E53200C0E116 /* ProfileCellForSettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCellForSettingVC.swift; sourceTree = "<group>"; };
 		AE39BD2C28A647FB0080DB52 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		AEA43D7A28AEB79D002BF0C0 /* CellForMileage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellForMileage.swift; sourceTree = "<group>"; };
+		AEA43D8028AFB6FA002BF0C0 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		AEA43D8228AFB721002BF0C0 /* AlamofireProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireProvider.swift; sourceTree = "<group>"; };
+		AEA43D8428AFBA5E002BF0C0 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		AEA43D8628B0DDB8002BF0C0 /* ChoiceModelCarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceModelCarViewController.swift; sourceTree = "<group>"; };
+		AEA43D8B28B15844002BF0C0 /* ChooseMileageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseMileageViewController.swift; sourceTree = "<group>"; };
+		AEA43D9228B370F8002BF0C0 /* PickerCapacityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerCapacityViewController.swift; sourceTree = "<group>"; };
 		AEBB439128AD17D50037E5B1 /* ModelForCarBrendAndModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelForCarBrendAndModel.swift; sourceTree = "<group>"; };
-		AEBB439328AD259E0037E5B1 /* ChoiceModelCarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceModelCarViewController.swift; sourceTree = "<group>"; };
+		AEBB439328AD259E0037E5B1 /* ChoiceBrendCarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceBrendCarViewController.swift; sourceTree = "<group>"; };
 		AEBB439528AD28630037E5B1 /* BrendCarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrendCarCell.swift; sourceTree = "<group>"; };
 		AEBB439828AD5A070037E5B1 /* LogInFireBaseService .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LogInFireBaseService .swift"; sourceTree = "<group>"; };
-		AEC70F8128AB9B6B00C84BB6 /* CellForRequestPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellForRequestPicker.swift; sourceTree = "<group>"; };
+		AEC70F8128AB9B6B00C84BB6 /* CellForRequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellForRequestView.swift; sourceTree = "<group>"; };
+		AED205A528B4D39D00EC8C83 /* RealmServise .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RealmServise .swift"; sourceTree = "<group>"; };
+		AED205A728B614F300EC8C83 /* ChooseCostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseCostViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,11 +99,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AEA43D9128B36D12002BF0C0 /* RealmSwift in Frameworks */,
+				AEA43D8F28B36D12002BF0C0 /* Realm in Frameworks */,
 				AE0421B728AA8C6900034C2F /* FirebaseDatabaseSwift in Frameworks */,
 				AE0421B528AA8C6900034C2F /* FirebaseDatabase in Frameworks */,
 				AE0421BD28AA8C6900034C2F /* FirebaseStorage in Frameworks */,
 				AE0421A428AA433600034C2F /* GoogleSignInSwift in Frameworks */,
 				AE0BE8AB28A260F600C0E116 /* SnapKit in Frameworks */,
+				AEA43D7E28AFB6C4002BF0C0 /* Alamofire in Frameworks */,
 				AE0421A228AA433600034C2F /* GoogleSignIn in Frameworks */,
 				AE0421B328AA8C6900034C2F /* FirebaseAuth in Frameworks */,
 				AE0421B928AA8C6900034C2F /* FirebaseFirestore in Frameworks */,
@@ -96,8 +120,9 @@
 		AE04219828A94C9E00034C2F /* CellForSearchCarList */ = {
 			isa = PBXGroup;
 			children = (
-				AE04219C28A95CD900034C2F /* BasicCellForSearchList.swift */,
-				AEC70F8128AB9B6B00C84BB6 /* CellForRequestPicker.swift */,
+				AEA43D7A28AEB79D002BF0C0 /* CellForMileage.swift */,
+				AE04219C28A95CD900034C2F /* CellForTouch.swift */,
+				AEC70F8128AB9B6B00C84BB6 /* CellForRequestView.swift */,
 				AEBB439528AD28630037E5B1 /* BrendCarCell.swift */,
 			);
 			path = CellForSearchCarList;
@@ -131,6 +156,8 @@
 		AE0BE88528A2403700C0E116 /* Used.by */ = {
 			isa = PBXGroup;
 			children = (
+				AED205A428B4D37C00EC8C83 /* RealmServise */,
+				AEA43D7F28AFB6D9002BF0C0 /* AlamofireServise  */,
 				AEBB439728AD59C80037E5B1 /* ServiceFireBase */,
 				AE04219928A94DAA00034C2F /* ModelsForSearchCar */,
 				AE04219828A94C9E00034C2F /* CellForSearchCarList */,
@@ -154,9 +181,8 @@
 				AE0BE89E28A2475100C0E116 /* MyAdsViewController.swift */,
 				AE0BE89C28A2473A00C0E116 /* SaveAdsViewController.swift */,
 				AE0BE8A028A247A500C0E116 /* SettingViewController.swift */,
-				AE04219628A935FF00034C2F /* SearchCarListViewController.swift */,
 				AE0BE8A728A25A2A00C0E116 /* LoginFoarnViewController .swift */,
-				AEBB439328AD259E0037E5B1 /* ChoiceModelCarViewController.swift */,
+				AEA43D8A28B15479002BF0C0 /* ViewControllerForSearchList */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -190,12 +216,43 @@
 			path = CellForSettingVC;
 			sourceTree = "<group>";
 		};
+		AEA43D7F28AFB6D9002BF0C0 /* AlamofireServise  */ = {
+			isa = PBXGroup;
+			children = (
+				AEA43D8028AFB6FA002BF0C0 /* Constants.swift */,
+				AEA43D8228AFB721002BF0C0 /* AlamofireProvider.swift */,
+				AEA43D8428AFBA5E002BF0C0 /* UserModel.swift */,
+			);
+			name = "AlamofireServise ";
+			sourceTree = "<group>";
+		};
+		AEA43D8A28B15479002BF0C0 /* ViewControllerForSearchList */ = {
+			isa = PBXGroup;
+			children = (
+				AE04219628A935FF00034C2F /* SearchCarListViewController.swift */,
+				AEBB439328AD259E0037E5B1 /* ChoiceBrendCarViewController.swift */,
+				AEA43D8628B0DDB8002BF0C0 /* ChoiceModelCarViewController.swift */,
+				AEA43D8B28B15844002BF0C0 /* ChooseMileageViewController.swift */,
+				AEA43D9228B370F8002BF0C0 /* PickerCapacityViewController.swift */,
+				AED205A728B614F300EC8C83 /* ChooseCostViewController.swift */,
+			);
+			path = ViewControllerForSearchList;
+			sourceTree = "<group>";
+		};
 		AEBB439728AD59C80037E5B1 /* ServiceFireBase */ = {
 			isa = PBXGroup;
 			children = (
 				AEBB439828AD5A070037E5B1 /* LogInFireBaseService .swift */,
 			);
 			name = ServiceFireBase;
+			sourceTree = "<group>";
+		};
+		AED205A428B4D37C00EC8C83 /* RealmServise */ = {
+			isa = PBXGroup;
+			children = (
+				AED205A528B4D39D00EC8C83 /* RealmServise .swift */,
+			);
+			name = RealmServise;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -224,6 +281,9 @@
 				AE0421B828AA8C6900034C2F /* FirebaseFirestore */,
 				AE0421BA28AA8C6900034C2F /* FirebaseFirestoreSwift */,
 				AE0421BC28AA8C6900034C2F /* FirebaseStorage */,
+				AEA43D7D28AFB6C4002BF0C0 /* Alamofire */,
+				AEA43D8E28B36D12002BF0C0 /* Realm */,
+				AEA43D9028B36D12002BF0C0 /* RealmSwift */,
 			);
 			productName = Used.by;
 			productReference = AE0BE88328A2403700C0E116 /* Used.by.app */;
@@ -257,6 +317,8 @@
 				AE0BE8A928A260F600C0E116 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				AE0421A028AA433600034C2F /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 				AE0421B128AA8C6900034C2F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				AEA43D7C28AFB6C4002BF0C0 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				AEA43D8D28B36D12002BF0C0 /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = AE0BE88428A2403700C0E116 /* Products */;
 			projectDirPath = "";
@@ -287,13 +349,15 @@
 			files = (
 				AE04219728A935FF00034C2F /* SearchCarListViewController.swift in Sources */,
 				AE0BE8B128A2B56100C0E116 /* CustomButton.swift in Sources */,
-				AEBB439428AD259E0037E5B1 /* ChoiceModelCarViewController.swift in Sources */,
-				AE04219D28A95CD900034C2F /* BasicCellForSearchList.swift in Sources */,
+				AEBB439428AD259E0037E5B1 /* ChoiceBrendCarViewController.swift in Sources */,
+				AE04219D28A95CD900034C2F /* CellForTouch.swift in Sources */,
 				AE0BE88B28A2403700C0E116 /* SearchViewController.swift in Sources */,
 				AE0BE8A528A24FD600C0E116 /* UIColor+extension.swift in Sources */,
+				AEA43D9328B370F9002BF0C0 /* PickerCapacityViewController.swift in Sources */,
 				AE04219F28A95D5D00034C2F /* CustomUILabel.swift in Sources */,
 				AE0BE89F28A2475100C0E116 /* MyAdsViewController.swift in Sources */,
 				AE0BE88728A2403700C0E116 /* AppDelegate.swift in Sources */,
+				AED205A628B4D39D00EC8C83 /* RealmServise .swift in Sources */,
 				AEBB439928AD5A070037E5B1 /* LogInFireBaseService .swift in Sources */,
 				AE04219B28A94DEA00034C2F /* ModelsForSearchCar.swift in Sources */,
 				AEBB439228AD17D50037E5B1 /* ModelForCarBrendAndModel.swift in Sources */,
@@ -301,12 +365,19 @@
 				AE0BE89D28A2473A00C0E116 /* SaveAdsViewController.swift in Sources */,
 				AE0BE8AF28A2B3E700C0E116 /* CustomTextField.swift in Sources */,
 				AE0BE89B28A245B100C0E116 /* MainTabBarController.swift in Sources */,
+				AED205A828B614F300EC8C83 /* ChooseCostViewController.swift in Sources */,
 				AE0BE8A128A247A500C0E116 /* SettingViewController.swift in Sources */,
 				AE0BE8A828A25A2A00C0E116 /* LoginFoarnViewController .swift in Sources */,
+				AEA43D8C28B15844002BF0C0 /* ChooseMileageViewController.swift in Sources */,
+				AEA43D8528AFBA5E002BF0C0 /* UserModel.swift in Sources */,
+				AEA43D8328AFB721002BF0C0 /* AlamofireProvider.swift in Sources */,
 				AE39BD2D28A647FC0080DB52 /* BaseViewController.swift in Sources */,
-				AEC70F8228AB9B6B00C84BB6 /* CellForRequestPicker.swift in Sources */,
+				AEC70F8228AB9B6B00C84BB6 /* CellForRequestView.swift in Sources */,
 				AE0BE88928A2403700C0E116 /* SceneDelegate.swift in Sources */,
 				AE0BE8F228A3E53200C0E116 /* ProfileCellForSettingVC.swift in Sources */,
+				AEA43D7B28AEB79D002BF0C0 /* CellForMileage.swift in Sources */,
+				AEA43D8728B0DDB8002BF0C0 /* ChoiceModelCarViewController.swift in Sources */,
+				AEA43D8128AFB6FA002BF0C0 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -548,6 +619,22 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		AEA43D7C28AFB6C4002BF0C0 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		AEA43D8D28B36D12002BF0C0 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.19.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -595,6 +682,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = AE0BE8A928A260F600C0E116 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		AEA43D7D28AFB6C4002BF0C0 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AEA43D7C28AFB6C4002BF0C0 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		AEA43D8E28B36D12002BF0C0 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AEA43D8D28B36D12002BF0C0 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		AEA43D9028B36D12002BF0C0 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AEA43D8D28B36D12002BF0C0 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

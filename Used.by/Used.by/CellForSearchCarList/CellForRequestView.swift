@@ -10,9 +10,9 @@ import SnapKit
 import UIKit
 
 
-class CellForRequestPicker: UITableViewCell {
+class CellForRequestView: UITableViewCell {
     
-    static let key = "CellForReqestPicker"
+    static let key = "CellForRequestView"
     
     private lazy var fieldNameLabel: CustomUILabel = {
         var label = CustomUILabel()
@@ -21,7 +21,6 @@ class CellForRequestPicker: UITableViewCell {
     
     private lazy var resultChoiceLabel: CustomUILabel = {
         var label = CustomUILabel()
-        label.text = "BMW"
         return label
     }()
 
@@ -35,14 +34,17 @@ class CellForRequestPicker: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-//        addFieldName()
+    override func updateConstraints() {
+        super.updateConstraints()
         addResultChoiceLabel()
     }
     
     func changeFieldName(name: String) {
         fieldNameLabel.text = name
+    }
+    
+    func changeResultLabel(name: String) {
+        resultChoiceLabel.text = name
     }
 
     private func addFieldName() {
