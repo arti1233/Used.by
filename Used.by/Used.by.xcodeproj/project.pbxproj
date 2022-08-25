@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AE04219728A935FF00034C2F /* SearchCarListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE04219628A935FF00034C2F /* SearchCarListViewController.swift */; };
+		AE04219728A935FF00034C2F /* ListSearchParametrVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE04219628A935FF00034C2F /* ListSearchParametrVC.swift */; };
 		AE04219B28A94DEA00034C2F /* ModelsForSearchCar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE04219A28A94DE900034C2F /* ModelsForSearchCar.swift */; };
 		AE04219D28A95CD900034C2F /* CellForTouch.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE04219C28A95CD900034C2F /* CellForTouch.swift */; };
 		AE04219F28A95D5D00034C2F /* CustomUILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE04219E28A95D5D00034C2F /* CustomUILabel.swift */; };
@@ -41,22 +41,22 @@
 		AEA43D8128AFB6FA002BF0C0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA43D8028AFB6FA002BF0C0 /* Constants.swift */; };
 		AEA43D8328AFB721002BF0C0 /* AlamofireProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA43D8228AFB721002BF0C0 /* AlamofireProvider.swift */; };
 		AEA43D8528AFBA5E002BF0C0 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA43D8428AFBA5E002BF0C0 /* UserModel.swift */; };
-		AEA43D8728B0DDB8002BF0C0 /* ChoiceModelCarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA43D8628B0DDB8002BF0C0 /* ChoiceModelCarViewController.swift */; };
-		AEA43D8C28B15844002BF0C0 /* ChooseMileageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA43D8B28B15844002BF0C0 /* ChooseMileageViewController.swift */; };
+		AEA43D8728B0DDB8002BF0C0 /* ModelCarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA43D8628B0DDB8002BF0C0 /* ModelCarVC.swift */; };
+		AEA43D8C28B15844002BF0C0 /* ChooseMileageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA43D8B28B15844002BF0C0 /* ChooseMileageVC.swift */; };
 		AEA43D8F28B36D12002BF0C0 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = AEA43D8E28B36D12002BF0C0 /* Realm */; };
 		AEA43D9128B36D12002BF0C0 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = AEA43D9028B36D12002BF0C0 /* RealmSwift */; };
-		AEA43D9328B370F9002BF0C0 /* PickerCapacityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA43D9228B370F8002BF0C0 /* PickerCapacityViewController.swift */; };
+		AEA43D9328B370F9002BF0C0 /* PickerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA43D9228B370F8002BF0C0 /* PickerVC.swift */; };
 		AEBB439228AD17D50037E5B1 /* ModelForCarBrendAndModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBB439128AD17D50037E5B1 /* ModelForCarBrendAndModel.swift */; };
-		AEBB439428AD259E0037E5B1 /* ChoiceBrendCarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBB439328AD259E0037E5B1 /* ChoiceBrendCarViewController.swift */; };
+		AEBB439428AD259E0037E5B1 /* BrendCarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBB439328AD259E0037E5B1 /* BrendCarVC.swift */; };
 		AEBB439628AD28630037E5B1 /* BrendCarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBB439528AD28630037E5B1 /* BrendCarCell.swift */; };
 		AEBB439928AD5A070037E5B1 /* LogInFireBaseService .swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBB439828AD5A070037E5B1 /* LogInFireBaseService .swift */; };
 		AEC70F8228AB9B6B00C84BB6 /* CellForRequestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC70F8128AB9B6B00C84BB6 /* CellForRequestView.swift */; };
 		AED205A628B4D39D00EC8C83 /* RealmServise .swift in Sources */ = {isa = PBXBuildFile; fileRef = AED205A528B4D39D00EC8C83 /* RealmServise .swift */; };
-		AED205A828B614F300EC8C83 /* ChooseCostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AED205A728B614F300EC8C83 /* ChooseCostViewController.swift */; };
+		AED205A828B614F300EC8C83 /* ChooseCostVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AED205A728B614F300EC8C83 /* ChooseCostVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		AE04219628A935FF00034C2F /* SearchCarListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCarListViewController.swift; sourceTree = "<group>"; };
+		AE04219628A935FF00034C2F /* ListSearchParametrVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListSearchParametrVC.swift; sourceTree = "<group>"; };
 		AE04219A28A94DE900034C2F /* ModelsForSearchCar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelsForSearchCar.swift; sourceTree = "<group>"; };
 		AE04219C28A95CD900034C2F /* CellForTouch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellForTouch.swift; sourceTree = "<group>"; };
 		AE04219E28A95D5D00034C2F /* CustomUILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUILabel.swift; sourceTree = "<group>"; };
@@ -82,16 +82,16 @@
 		AEA43D8028AFB6FA002BF0C0 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		AEA43D8228AFB721002BF0C0 /* AlamofireProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireProvider.swift; sourceTree = "<group>"; };
 		AEA43D8428AFBA5E002BF0C0 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
-		AEA43D8628B0DDB8002BF0C0 /* ChoiceModelCarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceModelCarViewController.swift; sourceTree = "<group>"; };
-		AEA43D8B28B15844002BF0C0 /* ChooseMileageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseMileageViewController.swift; sourceTree = "<group>"; };
-		AEA43D9228B370F8002BF0C0 /* PickerCapacityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerCapacityViewController.swift; sourceTree = "<group>"; };
+		AEA43D8628B0DDB8002BF0C0 /* ModelCarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelCarVC.swift; sourceTree = "<group>"; };
+		AEA43D8B28B15844002BF0C0 /* ChooseMileageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseMileageVC.swift; sourceTree = "<group>"; };
+		AEA43D9228B370F8002BF0C0 /* PickerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerVC.swift; sourceTree = "<group>"; };
 		AEBB439128AD17D50037E5B1 /* ModelForCarBrendAndModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelForCarBrendAndModel.swift; sourceTree = "<group>"; };
-		AEBB439328AD259E0037E5B1 /* ChoiceBrendCarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceBrendCarViewController.swift; sourceTree = "<group>"; };
+		AEBB439328AD259E0037E5B1 /* BrendCarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrendCarVC.swift; sourceTree = "<group>"; };
 		AEBB439528AD28630037E5B1 /* BrendCarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrendCarCell.swift; sourceTree = "<group>"; };
 		AEBB439828AD5A070037E5B1 /* LogInFireBaseService .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LogInFireBaseService .swift"; sourceTree = "<group>"; };
 		AEC70F8128AB9B6B00C84BB6 /* CellForRequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellForRequestView.swift; sourceTree = "<group>"; };
 		AED205A528B4D39D00EC8C83 /* RealmServise .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RealmServise .swift"; sourceTree = "<group>"; };
-		AED205A728B614F300EC8C83 /* ChooseCostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseCostViewController.swift; sourceTree = "<group>"; };
+		AED205A728B614F300EC8C83 /* ChooseCostVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseCostVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,7 +163,8 @@
 				AE04219828A94C9E00034C2F /* CellForSearchCarList */,
 				AE0BE8A628A24FDB00C0E116 /* Extension */,
 				AE0BE8A328A2481D00C0E116 /* Delegate */,
-				AE0BE8A228A2480400C0E116 /* ViewControllers */,
+				AED205AC28B77E7400EC8C83 /* TabBarController */,
+				AE0BE8A228A2480400C0E116 /* VC */,
 				AE0BE88F28A2403A00C0E116 /* Assets.xcassets */,
 				AE0BE8F328A3E54000C0E116 /* CellForSettingVC */,
 				AE0BE89128A2403A00C0E116 /* LaunchScreen.storyboard */,
@@ -173,18 +174,14 @@
 			path = Used.by;
 			sourceTree = "<group>";
 		};
-		AE0BE8A228A2480400C0E116 /* ViewControllers */ = {
+		AE0BE8A228A2480400C0E116 /* VC */ = {
 			isa = PBXGroup;
 			children = (
-				AE0BE89A28A245B100C0E116 /* MainTabBarController.swift */,
-				AE0BE88A28A2403700C0E116 /* SearchViewController.swift */,
-				AE0BE89E28A2475100C0E116 /* MyAdsViewController.swift */,
-				AE0BE89C28A2473A00C0E116 /* SaveAdsViewController.swift */,
-				AE0BE8A028A247A500C0E116 /* SettingViewController.swift */,
-				AE0BE8A728A25A2A00C0E116 /* LoginFoarnViewController .swift */,
-				AEA43D8A28B15479002BF0C0 /* ViewControllerForSearchList */,
+				AED205AD28B77E8C00EC8C83 /* MainVC */,
+				AED205AE28B77E9600EC8C83 /* LoginFoarmVC */,
+				AED205AF28B77EA700EC8C83 /* SearchListVC */,
 			);
-			path = ViewControllers;
+			path = VC;
 			sourceTree = "<group>";
 		};
 		AE0BE8A328A2481D00C0E116 /* Delegate */ = {
@@ -226,19 +223,6 @@
 			name = "AlamofireServise ";
 			sourceTree = "<group>";
 		};
-		AEA43D8A28B15479002BF0C0 /* ViewControllerForSearchList */ = {
-			isa = PBXGroup;
-			children = (
-				AE04219628A935FF00034C2F /* SearchCarListViewController.swift */,
-				AEBB439328AD259E0037E5B1 /* ChoiceBrendCarViewController.swift */,
-				AEA43D8628B0DDB8002BF0C0 /* ChoiceModelCarViewController.swift */,
-				AEA43D8B28B15844002BF0C0 /* ChooseMileageViewController.swift */,
-				AEA43D9228B370F8002BF0C0 /* PickerCapacityViewController.swift */,
-				AED205A728B614F300EC8C83 /* ChooseCostViewController.swift */,
-			);
-			path = ViewControllerForSearchList;
-			sourceTree = "<group>";
-		};
 		AEBB439728AD59C80037E5B1 /* ServiceFireBase */ = {
 			isa = PBXGroup;
 			children = (
@@ -253,6 +237,46 @@
 				AED205A528B4D39D00EC8C83 /* RealmServise .swift */,
 			);
 			name = RealmServise;
+			sourceTree = "<group>";
+		};
+		AED205AC28B77E7400EC8C83 /* TabBarController */ = {
+			isa = PBXGroup;
+			children = (
+				AE0BE89A28A245B100C0E116 /* MainTabBarController.swift */,
+			);
+			path = TabBarController;
+			sourceTree = "<group>";
+		};
+		AED205AD28B77E8C00EC8C83 /* MainVC */ = {
+			isa = PBXGroup;
+			children = (
+				AE0BE88A28A2403700C0E116 /* SearchViewController.swift */,
+				AE0BE89E28A2475100C0E116 /* MyAdsViewController.swift */,
+				AE0BE89C28A2473A00C0E116 /* SaveAdsViewController.swift */,
+				AE0BE8A028A247A500C0E116 /* SettingViewController.swift */,
+			);
+			path = MainVC;
+			sourceTree = "<group>";
+		};
+		AED205AE28B77E9600EC8C83 /* LoginFoarmVC */ = {
+			isa = PBXGroup;
+			children = (
+				AE0BE8A728A25A2A00C0E116 /* LoginFoarnViewController .swift */,
+			);
+			path = LoginFoarmVC;
+			sourceTree = "<group>";
+		};
+		AED205AF28B77EA700EC8C83 /* SearchListVC */ = {
+			isa = PBXGroup;
+			children = (
+				AE04219628A935FF00034C2F /* ListSearchParametrVC.swift */,
+				AEBB439328AD259E0037E5B1 /* BrendCarVC.swift */,
+				AEA43D8628B0DDB8002BF0C0 /* ModelCarVC.swift */,
+				AEA43D8B28B15844002BF0C0 /* ChooseMileageVC.swift */,
+				AEA43D9228B370F8002BF0C0 /* PickerVC.swift */,
+				AED205A728B614F300EC8C83 /* ChooseCostVC.swift */,
+			);
+			path = SearchListVC;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -347,13 +371,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AE04219728A935FF00034C2F /* SearchCarListViewController.swift in Sources */,
+				AE04219728A935FF00034C2F /* ListSearchParametrVC.swift in Sources */,
 				AE0BE8B128A2B56100C0E116 /* CustomButton.swift in Sources */,
-				AEBB439428AD259E0037E5B1 /* ChoiceBrendCarViewController.swift in Sources */,
+				AEBB439428AD259E0037E5B1 /* BrendCarVC.swift in Sources */,
 				AE04219D28A95CD900034C2F /* CellForTouch.swift in Sources */,
 				AE0BE88B28A2403700C0E116 /* SearchViewController.swift in Sources */,
 				AE0BE8A528A24FD600C0E116 /* UIColor+extension.swift in Sources */,
-				AEA43D9328B370F9002BF0C0 /* PickerCapacityViewController.swift in Sources */,
+				AEA43D9328B370F9002BF0C0 /* PickerVC.swift in Sources */,
 				AE04219F28A95D5D00034C2F /* CustomUILabel.swift in Sources */,
 				AE0BE89F28A2475100C0E116 /* MyAdsViewController.swift in Sources */,
 				AE0BE88728A2403700C0E116 /* AppDelegate.swift in Sources */,
@@ -365,10 +389,10 @@
 				AE0BE89D28A2473A00C0E116 /* SaveAdsViewController.swift in Sources */,
 				AE0BE8AF28A2B3E700C0E116 /* CustomTextField.swift in Sources */,
 				AE0BE89B28A245B100C0E116 /* MainTabBarController.swift in Sources */,
-				AED205A828B614F300EC8C83 /* ChooseCostViewController.swift in Sources */,
+				AED205A828B614F300EC8C83 /* ChooseCostVC.swift in Sources */,
 				AE0BE8A128A247A500C0E116 /* SettingViewController.swift in Sources */,
 				AE0BE8A828A25A2A00C0E116 /* LoginFoarnViewController .swift in Sources */,
-				AEA43D8C28B15844002BF0C0 /* ChooseMileageViewController.swift in Sources */,
+				AEA43D8C28B15844002BF0C0 /* ChooseMileageVC.swift in Sources */,
 				AEA43D8528AFBA5E002BF0C0 /* UserModel.swift in Sources */,
 				AEA43D8328AFB721002BF0C0 /* AlamofireProvider.swift in Sources */,
 				AE39BD2D28A647FC0080DB52 /* BaseViewController.swift in Sources */,
@@ -376,7 +400,7 @@
 				AE0BE88928A2403700C0E116 /* SceneDelegate.swift in Sources */,
 				AE0BE8F228A3E53200C0E116 /* ProfileCellForSettingVC.swift in Sources */,
 				AEA43D7B28AEB79D002BF0C0 /* CellForMileage.swift in Sources */,
-				AEA43D8728B0DDB8002BF0C0 /* ChoiceModelCarViewController.swift in Sources */,
+				AEA43D8728B0DDB8002BF0C0 /* ModelCarVC.swift in Sources */,
 				AEA43D8128AFB6FA002BF0C0 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

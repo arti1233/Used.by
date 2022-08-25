@@ -20,8 +20,6 @@ class CellForMileage: UITableViewCell {
         return label
     }()
     
-    
-    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(nameCellLabel)
@@ -33,7 +31,9 @@ class CellForMileage: UITableViewCell {
 
     override func updateConstraints() {
         super.updateConstraints()
-        addConstreit()
+        nameCellLabel.snp.makeConstraints {
+            $0.trailing.leading.bottom.top.equalToSuperview().inset(16)
+        }
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -43,12 +43,4 @@ class CellForMileage: UITableViewCell {
     func changeNameCell(name: String) {
         nameCellLabel.text = name
     }
-
-    fileprivate func addConstreit() {
-        
-        nameCellLabel.snp.makeConstraints {
-            $0.trailing.leading.bottom.top.equalToSuperview().inset(16)
-        }
-    }
-    
 }

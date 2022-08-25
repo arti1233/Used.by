@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import SwiftUI
 
-class PickerCapacityViewController: BaseViewController {
+class PickerVC: BaseViewController {
     
     private lazy var titleName: UILabel = {
         var titleName = UILabel()
@@ -42,18 +42,20 @@ class PickerCapacityViewController: BaseViewController {
     
     private lazy var picker: UIPickerView = {
         var picker = UIPickerView()
+        picker.dataSource = self
+        picker.delegate = self
         return picker
     }()
     
-    var realmServise: RealmServiceProtocol!
+    private var realmServise: RealmServiceProtocol!
     var isCapacityPicker = true
-    var arrayInt = [Int] (10...90)
-    var arrayCapacity: [Double] = []
-    var arrayYear = [Int] (1970...2022)
-    var firstResultCapacity: Double?
-    var secondResultCapacity: Double?
-    var firstYear: Int?
-    var secondYear: Int?
+    private var arrayInt = [Int] (10...90)
+    private var arrayCapacity: [Double] = []
+    private var arrayYear = [Int] (1970...2022)
+    private var firstResultCapacity: Double?
+    private var secondResultCapacity: Double?
+    private var firstYear: Int?
+    private var secondYear: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,12 +64,7 @@ class PickerCapacityViewController: BaseViewController {
         view.addSubview(acceptButton)
         view.addSubview(closeButton)
         view.addSubview(picker)
-        
-        picker.dataSource = self
-        picker.delegate = self
-        
         arrayInt.forEach({arrayCapacity.append(Double($0) / 10)})
-        print(arrayCapacity)
     }
 
     override func updateViewConstraints() {
@@ -80,43 +77,28 @@ class PickerCapacityViewController: BaseViewController {
     }
     
     @objc fileprivate func acceptWithChoise(_ sender: UIButton) {
-        if isCapacityPicker {
-            addCapacityRange(first: firstResultCapacity, second: secondResultCapacity)
+        isCapacityPicker ?  addCapacityRange(first: firstResultCapacity, second: secondResultCapacity) : addYearRange(first: firstYear, second: secondYear)
             dismiss(animated: true)
-        } else {
-            addYearRange(first: firstYear, second: secondYear)
-            dismiss(animated: true)
-        }
     }
 // MARK: Metods
     func changeTitleName(name: String) {
         titleName.text = name
     }
     
-    func addYearRange(first: Int!, second: Int!) {
+    private func addYearRange(first: Int!, second: Int!) {
         guard let first = first, let second = second else { return }
-        if first >= second {
-            realmServise.addObjectInSearchSetting(yearOfProductionMin: second)
-            realmServise.addObjectInSearchSetting(yearOfProductionMax: first)
-        } else {
-            realmServise.addObjectInSearchSetting(yearOfProductionMin: first)
-            realmServise.addObjectInSearchSetting(yearOfProductionMax: second)
-        }
+        first >= second ? realmServise.addObjectInSearchSetting(yearOfProductionMax: first) : realmServise.addObjectInSearchSetting(yearOfProductionMax: second)
+        first < second ? realmServise.addObjectInSearchSetting(yearOfProductionMin: second) : realmServise.addObjectInSearchSetting(yearOfProductionMin: first)
     }
     
-    func addCapacityRange(first: Double!, second: Double!) {
+    private func addCapacityRange(first: Double!, second: Double!) {
         guard let first = first, let second = second else { return }
-        if first >= second {
-            realmServise.addObjectInSearchSetting(engineCapacityMin: second)
-            realmServise.addObjectInSearchSetting(engineCapacityMax: first)
-        } else {
-            realmServise.addObjectInSearchSetting(engineCapacityMin: first)
-            realmServise.addObjectInSearchSetting(engineCapacityMax: second)
-        }
+        first >= second ? realmServise.addObjectInSearchSetting(engineCapacityMax: first) : realmServise.addObjectInSearchSetting(engineCapacityMax: second)
+        first < second ? realmServise.addObjectInSearchSetting(engineCapacityMin: second) :  realmServise.addObjectInSearchSetting(engineCapacityMin: first)
     }
     
     private func addElements() {
-        
+    
         titleName.snp.makeConstraints{
             $0.top.trailing.equalToSuperview()
             $0.leading.equalToSuperview().inset(16)
@@ -145,33 +127,17 @@ class PickerCapacityViewController: BaseViewController {
     }
 }
 
-extension PickerCapacityViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+extension PickerVC: UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 2
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        if isCapacityPicker {
-            return arrayCapacity.count
-        } else {
-            return arrayYear.count
-        }
+        isCapacityPicker ? arrayCapacity.count : arrayYear.count
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        if isCapacityPicker {
-            if component == 0 {
-                return "\(arrayCapacity[row]) L"
-            } else {
-                return "\(arrayCapacity[row]) L"
-            }
-        } else {
-            if component == 0 {
-                return "\(arrayYear[row])"
-            } else {
-                return "\(arrayYear[row])"
-            }
-        }
+        isCapacityPicker ? "\(arrayCapacity[row]) L" : "\(arrayYear[row])"
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {

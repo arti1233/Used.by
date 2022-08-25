@@ -10,11 +10,14 @@ import UIKit
 import Foundation
 import SnapKit
 
-class ChoiceModelCarViewController: BaseViewController {
+class ModelCarVC: BaseViewController {
 
     private lazy var tableView: UITableView = {
         var tableView = UITableView()
         tableView.backgroundColor = .purple
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(BrendCarCell.self, forCellReuseIdentifier: BrendCarCell.key)
         return tableView
     }()
     
@@ -28,16 +31,13 @@ class ChoiceModelCarViewController: BaseViewController {
     }()
     
     var carModel: CarBrend!
-    var realmServise: RealmServiceProtocol!
+    private var realmServise: RealmServiceProtocol!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         realmServise = RealmService()
         view.addSubview(titleName)
         view.addSubview(tableView)
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.register(BrendCarCell.self, forCellReuseIdentifier: BrendCarCell.key)
     }
     
     override func updateViewConstraints() {
@@ -65,11 +65,7 @@ class ChoiceModelCarViewController: BaseViewController {
     }
 }
 
-
-
-
-
-extension ChoiceModelCarViewController: UITableViewDelegate, UITableViewDataSource {
+extension ModelCarVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let carModel = carModel else { return 0 }
         return carModel.modelSeries.count

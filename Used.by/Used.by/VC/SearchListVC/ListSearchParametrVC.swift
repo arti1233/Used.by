@@ -11,19 +11,25 @@ import SnapKit
 import RealmSwift
 
 
-class SearchCarListViewController: BaseViewController {
+class ListSearchParametrVC: BaseViewController {
 
-    var realmServise: RealmServiceProtocol!
-    var alamofireProvider: RestAPIProviderProtocol!
-    var searchSettinmgItems: Results<SearchSetting>!
+    private var realmServise: RealmServiceProtocol!
+    private var alamofireProvider: RestAPIProviderProtocol!
+    private var searchSettinmgItems: Results<SearchSetting>!
     private var notificationToken: NotificationToken?
-    var carBrend: [CarBrend]?
+    private var carBrend: [CarBrend] = []
     
-    var typeEngineStruct = TypeEngimeStruct()
-    var typeDriveStruct = TypeOfDriveStruct()
-    var gearBoxStruct = GearBoxStruct()
-    var conditionsStruct = ConditionStruct()
-    let realm = try! Realm()
+    private var typeEngineStruct = TypeEngimeStruct()
+    private var typeDriveStruct = TypeOfDriveStruct()
+    private var gearBoxStruct = GearBoxStruct()
+    private var conditionsStruct = ConditionStruct()
+    private let section = CreateSections.allCases
+    private let modelCars = ModelCars.allCases
+    private let parametrs = Parametrs.allCases
+    private let typeEngine = TypeEngime.allCases
+    private let typeDrive = TypeOfDrive.allCases
+    private let gearBox = GearBox.allCases
+    private let conditions = Conditions.allCases
     
     private lazy var titleName: UILabel = {
         var titleName = UILabel()
@@ -36,6 +42,11 @@ class SearchCarListViewController: BaseViewController {
     
     private lazy var tableView: UITableView = {
         var tableView = UITableView()
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(CellForTouch.self, forCellReuseIdentifier: CellForTouch.key)
+        tableView.register(CellForRequestView.self, forCellReuseIdentifier: CellForRequestView.key)
+        tableView.allowsMultipleSelection = true
         return tableView
     }()
     
@@ -45,9 +56,7 @@ class SearchCarListViewController: BaseViewController {
         button.addTarget(self, action: #selector(searchButtonPressed), for: .touchUpInside)
         return button
     }()
-    
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         realmServise = RealmService()
@@ -55,12 +64,7 @@ class SearchCarListViewController: BaseViewController {
         view.addSubview(titleName)
         view.addSubview(tableView)
         view.addSubview(searchButton)
-        tableView.delegate = self
-        tableView.dataSource = self
-        
-        tableView.register(CellForTouch.self, forCellReuseIdentifier: CellForTouch.key)
-        tableView.register(CellForRequestView.self, forCellReuseIdentifier: CellForRequestView.key)
-        tableView.allowsMultipleSelection = true
+       
         print(Realm.Configuration.defaultConfiguration.fileURL!)
         getCarbrend()
     
@@ -141,7 +145,7 @@ class SearchCarListViewController: BaseViewController {
     }
 }
 
-extension SearchCarListViewController: UITableViewDelegate, UITableViewDataSource {
+extension ListSearchParametrVC: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         CreateSections.allCases.count
     }
@@ -161,13 +165,7 @@ extension SearchCarListViewController: UITableViewDelegate, UITableViewDataSourc
         cellForTouch.selectionStyle = .none
         cellForRequestView.selectionStyle = .none
         
-        let section = CreateSections.allCases[indexPath.section]
-        let modelCars = ModelCars.allCases
-        let parametrs = Parametrs.allCases
-        let typeEngine = TypeEngime.allCases
-        let typeDrive = TypeOfDrive.allCases
-        let gearBox = GearBox.allCases
-        let conditions = Conditions.allCases
+        let section = section[indexPath.section]
         
         
         switch section {
@@ -237,19 +235,13 @@ extension SearchCarListViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let section = CreateSections.allCases[indexPath.section]
-        let modelCars = ModelCars.allCases
-        let parametrs = Parametrs.allCases
-        let typeEngine = TypeEngime.allCases
-        let typeDrive = TypeOfDrive.allCases
-        let gearBox = GearBox.allCases
-        let conditions = Conditions.allCases
+        let section = section[indexPath.section]
         
         switch section {
         case .modelCars:
             switch modelCars[indexPath.row] {
             case .carBrend:
-                let vc = ChoiceBrendCarViewController()
+                let vc = BrendCarVC()
                 vc.carBrend = carBrend
                 let navVC = UINavigationController(rootViewController: vc)
                 present(navVC, animated: true)
@@ -259,15 +251,15 @@ extension SearchCarListViewController: UITableViewDelegate, UITableViewDataSourc
         case .parametrs:
             switch parametrs[indexPath.row] {
             case .yearOfProduction:
-                let vc = PickerCapacityViewController()
+                let vc = PickerVC()
                 vc.isCapacityPicker = false
                 present(vc, animated: true)
             case .cost:
-                let vc = ChooseCostViewController()
+                let vc = ChooseCostVC()
                 vc.changeTitleName(name: "\(parametrs[indexPath.row].title) USD")
                 present(vc, animated: true)
             case .engineСapacity:
-                let vc = PickerCapacityViewController()
+                let vc = PickerVC()
                 vc.isCapacityPicker = true
                 present(vc, animated: true)
             }
@@ -283,7 +275,7 @@ extension SearchCarListViewController: UITableViewDelegate, UITableViewDataSourc
         case .conditions:
             switch conditions[indexPath.row] {
             case .mileage:
-                let vc = ChooseMileageViewController()
+                let vc = ChooseMileageVC()
                 vc.changeTitleName(name: conditions[indexPath.row].title)
                 present(vc, animated: true)
             case .new:
@@ -304,13 +296,7 @@ extension SearchCarListViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        let section = CreateSections.allCases[indexPath.section]
-        let modelCars = ModelCars.allCases
-        let parametrs = Parametrs.allCases
-        let typeEngine = TypeEngime.allCases
-        let typeDrive = TypeOfDrive.allCases
-        let gearBox = GearBox.allCases
-        let conditions = Conditions.allCases
+        let section = section[indexPath.section]
         
         switch section {
         case .modelCars:

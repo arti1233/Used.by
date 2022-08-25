@@ -9,7 +9,7 @@ import UIKit
 import Foundation
 import SnapKit
 
-class ChoiceBrendCarViewController: BaseViewController {
+class BrendCarVC: BaseViewController {
 
     private lazy var titleName: UILabel = {
         var titleName = UILabel()
@@ -23,19 +23,18 @@ class ChoiceBrendCarViewController: BaseViewController {
     private lazy var tableView: UITableView = {
         var tableView = UITableView()
         tableView.backgroundColor = .purple
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(BrendCarCell.self, forCellReuseIdentifier: BrendCarCell.key)
         return tableView
     }()
     
-    var carBrend: [CarBrend]!
+    var carBrend: [CarBrend] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(titleName)
         view.addSubview(tableView)
-       
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.register(BrendCarCell.self, forCellReuseIdentifier: BrendCarCell.key)
     }
     
     override func updateViewConstraints() {
@@ -58,25 +57,21 @@ class ChoiceBrendCarViewController: BaseViewController {
     }
 }
 
-extension ChoiceBrendCarViewController: UITableViewDelegate, UITableViewDataSource {
+extension BrendCarVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let carBrend = carBrend else { return 0 }
         return carBrend.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: BrendCarCell.key) as? BrendCarCell,
-              let carBrend = carBrend else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: BrendCarCell.key) as? BrendCarCell else { return UITableViewCell() }
         cell.updateConstraints()
         cell.changeNameCell(name: carBrend[indexPath.row].name)
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let carBrend = carBrend else { return }
-        
         let carModel = carBrend[indexPath.row]
-        let VC = ChoiceModelCarViewController()
+        let VC = ModelCarVC()
         VC.carModel = carModel
         VC.changeTitleName(name: carModel.name)
         navigationController?.pushViewController(VC, animated: true)

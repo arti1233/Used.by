@@ -44,12 +44,10 @@ class SearchViewController: BaseViewController {
     }
     
     @objc private func searchButtonPressed(sender: UIButton) {
-        let VC = SearchCarListViewController()
+        let VC = ListSearchParametrVC()
         present(VC, animated: true)
     }
-
-// MARK: Metods
-
+    
 // MARK: Metods for constreint
     
     private func addAppName() {

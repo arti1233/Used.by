@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 
 
-class  ChooseCostViewController: BaseViewController {
+class  ChooseCostVC: BaseViewController {
     static let key = "ChooseCostViewController"
     
     private lazy var titleName: UILabel = {
@@ -46,7 +46,7 @@ class  ChooseCostViewController: BaseViewController {
         return textlabel
     }()
     
-    var realmServise: RealmServiceProtocol!
+    private var realmServise: RealmServiceProtocol!
     
     override func viewDidLoad() {
         super.viewDidLoad()

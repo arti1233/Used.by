@@ -38,8 +38,6 @@ class CellForTouch: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
-    
     override func updateConstraints() {
         addElementsConstraint()
         super.updateConstraints()

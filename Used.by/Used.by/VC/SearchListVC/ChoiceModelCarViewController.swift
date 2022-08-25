@@ -1,5 +1,5 @@
 //
-//  PopUpWithParametrsViewController .swift
+//  ChoiceModelCarViewController.swift
 //  Used.by
 //
 //  Created by Artsiom Korenko on 20.08.22.
@@ -10,37 +10,24 @@ import UIKit
 import Foundation
 import SnapKit
 
-class ChooseMileageViewController: BaseViewController {
+class ModelCarVC: BaseViewController {
 
     private lazy var tableView: UITableView = {
         var tableView = UITableView()
         tableView.backgroundColor = .purple
-        tableView.allowsMultipleSelection = true
         return tableView
     }()
     
     private lazy var titleName: UILabel = {
         var titleName = UILabel()
         titleName.textColor = UIColor.myCustomPurple
-        titleName.textAlignment = .left
+        titleName.textAlignment = .center
         titleName.text = "Model"
         titleName.font = UIFont.systemFont(ofSize: 30, weight: .heavy)
         return titleName
     }()
-
-    private lazy var closeButton: UIButton = {
-        var button = UIButton()
-        button.backgroundColor = .myCustomPurple
-        button.tintColor = .white
-        button.setImage(UIImage(systemName: "xmark"), for: .normal)
-        button.addTarget(self, action: #selector(closeVC), for: .touchUpInside)
-        return button
-    }()
     
-    // для того чтобы не писать массивы в ручную 
-    let array = Array (1...50)
-    var arrayMilegeInt: [Int] = []
-    var arrayMilegeString: [String] = []
+    var carModel: CarBrend!
     var realmServise: RealmServiceProtocol!
     
     override func viewDidLoad() {
@@ -48,19 +35,9 @@ class ChooseMileageViewController: BaseViewController {
         realmServise = RealmService()
         view.addSubview(titleName)
         view.addSubview(tableView)
-        view.addSubview(closeButton)
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(CellForMileage.self, forCellReuseIdentifier: CellForMileage.key)
-        
-        arrayMilegeInt = array.map({$0 * 10})
-        arrayMilegeString = arrayMilegeInt.map({"from \($0) thousands km "})
-        
-        
-    }
-    
-    @objc fileprivate func closeVC(_ sender: UIButton) {
-        dismiss(animated: true)
+        tableView.register(BrendCarCell.self, forCellReuseIdentifier: BrendCarCell.key)
     }
     
     override func updateViewConstraints() {
@@ -71,15 +48,8 @@ class ChooseMileageViewController: BaseViewController {
     private func addElementsForView() {
         titleName.snp.makeConstraints{
             $0.top.trailing.equalToSuperview()
-            $0.leading.equalToSuperview().inset(16)
+            $0.leading.equalToSuperview()
             $0.height.equalTo(60)
-        }
-        
-        closeButton.snp.makeConstraints {
-            $0.trailing.equalToSuperview().inset(16)
-            $0.height.width.equalTo(40)
-            $0.centerY.equalTo(titleName.snp.centerY)
-            closeButton.layer.cornerRadius = 40 / 2
         }
         
         tableView.snp.makeConstraints {
@@ -95,22 +65,29 @@ class ChooseMileageViewController: BaseViewController {
     }
 }
 
-extension ChooseMileageViewController: UITableViewDelegate, UITableViewDataSource {
+
+
+
+
+extension ChoiceModelCarViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        arrayMilegeString.count
+        guard let carModel = carModel else { return 0 }
+        return carModel.modelSeries.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: CellForMileage.key) as? CellForMileage else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: BrendCarCell.key) as? BrendCarCell,
+              let carModel = carModel else { return UITableViewCell() }
         cell.updateConstraints()
-        cell.changeNameCell(name: arrayMilegeString[indexPath.row])
+        cell.changeNameCell(name: carModel.modelSeries[indexPath.row].name)
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        realmServise.addObjectInSearchSetting(mileage: arrayMilegeInt[indexPath.row])
+        guard let carModel = carModel else { return }
+        realmServise.addObjectInSearchSetting(carBrend: carModel.name)
+        realmServise.addObjectInSearchSetting(carModel: carModel.modelSeries[indexPath.row].name)
         dismiss(animated: true)
     }
-
+    
 }
-
