@@ -133,6 +133,7 @@ class ListSearchParametrVC: BaseViewController {
     private func presentPickerVC(isCapacity: Bool) {
         let vc = PickerVC()
         vc.isCapacityPicker = isCapacity
+        vc.isCapacityPicker ? vc.changeTitleName(name: "Capacity engine") : vc.changeTitleName(name: "Year of prodaction")
         present(vc, animated: true)
     }
     
@@ -246,14 +247,12 @@ extension ListSearchParametrVC: UITableViewDelegate, UITableViewDataSource {
             }
         case .parametrs:
             switch parametrs[indexPath.row] {
-            case .yearOfProduction:
-                presentPickerVC(isCapacity: false)
             case .cost:
                 let vc = ChooseCostVC()
                 vc.changeTitleName(name: "\(parametrs[indexPath.row].title) USD")
                 present(vc, animated: true)
-            case .engineСapacity:
-                presentPickerVC(isCapacity: true)
+            default:
+                presentPickerVC(isCapacity: parametrs[indexPath.row].isCapacity)
             }
         case .typeEngine:
             typeEngineStruct.insert(typeEngine[indexPath.row].options)

@@ -52,10 +52,10 @@ class PickerVC: BaseViewController {
     private var arrayInt = [Int] (10...90)
     private var arrayCapacity: [Double] = []
     private var arrayYear = [Int] (1970...2022)
-    private var firstResultCapacity: Double?
-    private var secondResultCapacity: Double?
-    private var firstYear: Int?
-    private var secondYear: Int?
+    private var firstResultCapacity: Double = 0
+    private var secondResultCapacity: Double = 0
+    private var firstYear: Int = 0
+    private var secondYear: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -85,15 +85,13 @@ class PickerVC: BaseViewController {
         titleName.text = name
     }
     
-    private func addYearRange(first: Int!, second: Int!) {
-        guard let first = first, let second = second else { return }
+    private func addYearRange(first: Int, second: Int) {
         realmServise.addObjectInSearchSetting(yearOfProductionMin: description.min(first, second))
         realmServise.addObjectInSearchSetting(yearOfProductionMax: description.max(first, second))
        
     }
     
-    private func addCapacityRange(first: Double!, second: Double!) {
-        guard let first = first, let second = second else { return }
+    private func addCapacityRange(first: Double, second: Double) {
         realmServise.addObjectInSearchSetting(engineCapacityMin: description.min(first, second))
         realmServise.addObjectInSearchSetting(engineCapacityMax: description.max(first, second))
     }

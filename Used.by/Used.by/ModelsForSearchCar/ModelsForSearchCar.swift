@@ -83,6 +83,17 @@ enum Parametrs: CaseIterable {
             return "Engine capacity"
         }
     }
+    
+    var isCapacity: Bool {
+        switch self {
+        case .yearOfProduction:
+             return false
+        case .engineСapacity:
+            return true
+        default :
+            return true
+        }
+    }
 }
 
 enum TypeEngime: CaseIterable {
