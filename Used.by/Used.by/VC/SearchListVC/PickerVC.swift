@@ -78,7 +78,7 @@ class PickerVC: BaseViewController {
     
     @objc fileprivate func acceptWithChoise(_ sender: UIButton) {
         isCapacityPicker ?  addCapacityRange(first: firstResultCapacity, second: secondResultCapacity) : addYearRange(first: firstYear, second: secondYear)
-            dismiss(animated: true)
+        dismiss(animated: true)
     }
 // MARK: Metods
     func changeTitleName(name: String) {
@@ -87,14 +87,15 @@ class PickerVC: BaseViewController {
     
     private func addYearRange(first: Int!, second: Int!) {
         guard let first = first, let second = second else { return }
-        first >= second ? realmServise.addObjectInSearchSetting(yearOfProductionMax: first) : realmServise.addObjectInSearchSetting(yearOfProductionMax: second)
-        first < second ? realmServise.addObjectInSearchSetting(yearOfProductionMin: second) : realmServise.addObjectInSearchSetting(yearOfProductionMin: first)
+        realmServise.addObjectInSearchSetting(yearOfProductionMin: description.min(first, second))
+        realmServise.addObjectInSearchSetting(yearOfProductionMax: description.max(first, second))
+       
     }
     
     private func addCapacityRange(first: Double!, second: Double!) {
         guard let first = first, let second = second else { return }
-        first >= second ? realmServise.addObjectInSearchSetting(engineCapacityMax: first) : realmServise.addObjectInSearchSetting(engineCapacityMax: second)
-        first < second ? realmServise.addObjectInSearchSetting(engineCapacityMin: second) :  realmServise.addObjectInSearchSetting(engineCapacityMin: first)
+        realmServise.addObjectInSearchSetting(engineCapacityMin: description.min(first, second))
+        realmServise.addObjectInSearchSetting(engineCapacityMax: description.max(first, second))
     }
     
     private func addElements() {

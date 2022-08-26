@@ -42,7 +42,7 @@ class CellForTouch: UITableViewCell {
         addElementsConstraint()
         super.updateConstraints()
     }
-    
+        
 
     func changeNameCell(name: String) {
         nameCellLabel.text = name

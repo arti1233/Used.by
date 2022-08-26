@@ -52,9 +52,10 @@ protocol RealmServiceProtocol {
 class RealmService: RealmServiceProtocol {
 
     let realm = try! Realm()
-    var searchSettingObjec = SearchSetting()
-   
-    var searchList = SearchSetting(value: ["id": 1])
+    
+    private lazy var searchList: SearchSetting = {
+        getListSearchSetting().first ?? SearchSetting()
+    }()
     
     func resetSearchSetting() {
         searchList.carBrend = ""

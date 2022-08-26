@@ -39,6 +39,11 @@ class CellForRequestView: UITableViewCell {
         addResultChoiceLabel()
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        resultChoiceLabel.text = ""
+    }
+    
     func changeFieldName(name: String) {
         fieldNameLabel.text = name
     }

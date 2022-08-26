@@ -13,7 +13,7 @@ import RealmSwift
 
 class ListSearchParametrVC: BaseViewController {
 
-    private var realmServise: RealmServiceProtocol!
+    var realmServise: RealmServiceProtocol!
     private var alamofireProvider: RestAPIProviderProtocol!
     private var searchSettinmgItems: Results<SearchSetting>!
     private var notificationToken: NotificationToken?
@@ -70,19 +70,18 @@ class ListSearchParametrVC: BaseViewController {
     
         searchSettinmgItems = realmServise.getListSearchSetting()
         print(searchSettinmgItems)
-        if searchSettinmgItems == nil {
-            realmServise.resetSearchSetting()
-            searchSettinmgItems = realmServise.getListSearchSetting()
-        }
-        
+    
         guard let items = searchSettinmgItems.first else { return }
+        typeEngineStruct.rawValue = items.typeEngine
+        typeDriveStruct.rawValue = items.typeDrive
+        gearBoxStruct.rawValue = items.gearbox
+        conditionsStruct.rawValue = items.conditionAuto
         notificationToken = items.observe{ [weak self] change in
             guard let self = self else { return }
             switch change {
             case .change(_, _):
                 self.searchSettinmgItems = self.realmServise.getListSearchSetting()
                 self.tableView.reloadData()
-                print(self.searchSettinmgItems)
             default:
                 break
             }
@@ -131,6 +130,12 @@ class ListSearchParametrVC: BaseViewController {
     }
     
 // MARK: Metods
+    private func presentPickerVC(isCapacity: Bool) {
+        let vc = PickerVC()
+        vc.isCapacityPicker = isCapacity
+        present(vc, animated: true)
+    }
+    
     
     private func getCarbrend() {
         alamofireProvider.getCarBrendInfo { [weak self] result in
@@ -218,16 +223,7 @@ extension ListSearchParametrVC: UITableViewDelegate, UITableViewDataSource {
                     cellForRequestView.changeResultLabel(name: "from \(items.mileage) thousands km ")
                 }
                 return cellForRequestView
-            case .new:
-                cellForTouch.changeNameCell(name: conditions[indexPath.row].title)
-                return cellForTouch
-            case .used:
-                cellForTouch.changeNameCell(name: conditions[indexPath.row].title)
-                return cellForTouch
-            case .crash:
-                cellForTouch.changeNameCell(name: conditions[indexPath.row].title)
-                return cellForTouch
-            case .forParts:
+            default:
                 cellForTouch.changeNameCell(name: conditions[indexPath.row].title)
                 return cellForTouch
             }
@@ -251,17 +247,13 @@ extension ListSearchParametrVC: UITableViewDelegate, UITableViewDataSource {
         case .parametrs:
             switch parametrs[indexPath.row] {
             case .yearOfProduction:
-                let vc = PickerVC()
-                vc.isCapacityPicker = false
-                present(vc, animated: true)
+                presentPickerVC(isCapacity: false)
             case .cost:
                 let vc = ChooseCostVC()
                 vc.changeTitleName(name: "\(parametrs[indexPath.row].title) USD")
                 present(vc, animated: true)
             case .engineСapacity:
-                let vc = PickerVC()
-                vc.isCapacityPicker = true
-                present(vc, animated: true)
+                presentPickerVC(isCapacity: true)
             }
         case .typeEngine:
             typeEngineStruct.insert(typeEngine[indexPath.row].options)
@@ -278,19 +270,9 @@ extension ListSearchParametrVC: UITableViewDelegate, UITableViewDataSource {
                 let vc = ChooseMileageVC()
                 vc.changeTitleName(name: conditions[indexPath.row].title)
                 present(vc, animated: true)
-            case .new:
+            default:
                 conditionsStruct.insert(conditions[indexPath.row].options)
                 realmServise.addObjectInSearchSetting(conditionAuto: conditionsStruct.rawValue)
-            case .used:
-                conditionsStruct.insert(conditions[indexPath.row].options)
-                realmServise.addObjectInSearchSetting(conditionAuto: conditionsStruct.rawValue)
-            case .crash:
-                conditionsStruct.insert(conditions[indexPath.row].options)
-                realmServise.addObjectInSearchSetting(conditionAuto: conditionsStruct.rawValue)
-            case .forParts:
-                conditionsStruct.insert(conditions[indexPath.row].options)
-                realmServise.addObjectInSearchSetting(conditionAuto: conditionsStruct.rawValue)
-                print(searchSettinmgItems)
             }
         }
     }
@@ -331,16 +313,7 @@ extension ListSearchParametrVC: UITableViewDelegate, UITableViewDataSource {
             switch conditions[indexPath.row] {
             case .mileage:
                 realmServise.addObjectInSearchSetting(mileage: 0)
-            case .new:
-                conditionsStruct.remove(conditions[indexPath.row].options)
-                realmServise.addObjectInSearchSetting(conditionAuto: conditionsStruct.rawValue)
-            case .used:
-                conditionsStruct.remove(conditions[indexPath.row].options)
-                realmServise.addObjectInSearchSetting(conditionAuto: conditionsStruct.rawValue)
-            case .crash:
-                conditionsStruct.remove(conditions[indexPath.row].options)
-                realmServise.addObjectInSearchSetting(conditionAuto: conditionsStruct.rawValue)
-            case .forParts:
+            default:
                 conditionsStruct.remove(conditions[indexPath.row].options)
                 realmServise.addObjectInSearchSetting(conditionAuto: conditionsStruct.rawValue)
             }

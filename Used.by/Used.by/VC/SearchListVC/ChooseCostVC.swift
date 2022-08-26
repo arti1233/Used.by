@@ -50,7 +50,7 @@ class  ChooseCostVC: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        realmServise = RealmService() 
+        realmServise = RealmService()
         view.addSubview(titleName)
         view.addSubview(minCostTextField)
         view.addSubview(maxCostTextField)
