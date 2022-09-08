@@ -15,8 +15,6 @@ class MainTabBarController: UITabBarController {
         super.viewDidLoad()
         generateTabBar()
         setTabBarAppearance()
-        
-        
     }
     
     private func generateTabBar() {
@@ -24,7 +22,7 @@ class MainTabBarController: UITabBarController {
         let myAdsViewController = UINavigationController(rootViewController: MyAdsViewController())
         let saveAdsViewController = UINavigationController(rootViewController:  SaveAdsViewController())
         let settingViewController = UINavigationController(rootViewController: SettingViewController())
-        
+          
         viewControllers = [
             generateVC(viewController: SearchViewController(), title: "Search", image: UIImage(systemName: "magnifyingglass")),
             generateVC(viewController: myAdsViewController, title: "My ads", image: UIImage(systemName: "list.bullet.rectangle")),

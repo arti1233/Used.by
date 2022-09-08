@@ -8,8 +8,28 @@
 import Foundation
 import UIKit
 import SnapKit
+import GoogleSignInSwift
+import GoogleSignIn
+import FirebaseCore
+import FirebaseFirestore
+import FirebaseAuth
+import Firebase
+import FirebaseDatabaseSwift
+import FirebaseDatabase
 
 final class LoginFormViewController: UIViewController {
+   
+    private var fireBase: FireBaseProtocol!
+    private var signInConfig: GIDConfiguration!
+    
+    private lazy var googleButton: GIDSignInButton = {
+        var button = GIDSignInButton()
+        button.colorScheme = .light
+        button.style = .wide
+        button.addTarget(self, action: #selector(signIn), for: .touchUpInside)
+        return button
+    }()
+    
     // Назвпние приложения в title
     private lazy var titleName: UILabel = {
         var titleName = UILabel()
@@ -89,24 +109,28 @@ final class LoginFormViewController: UIViewController {
         return registrationButton
     }()
     
-    // MARK: ViewDidLoad
+// MARK: ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         addElementsToSuperview()
-        
+        guard let clientId = Bundle.main.object(forInfoDictionaryKey: "CLIENT_ID") as? String else { return }
+        signInConfig = GIDConfiguration(clientID: clientId)
         changeViewForIndexSegment(index: segmentController.selectedSegmentIndex)
         view.backgroundColor = UIColor.colorForHeaderLoginFoarm
+        
+        fireBase = FireBaseService()
+//        loginNameForRegisterTextField.delegate = self
+//        emailForRegisterTextField.delegate = self
+//        passwordForRegisterTextField.delegate = self
     }
     
-    // MARK: UpdateViewConstraints
+// MARK: UpdateViewConstraints
     override func updateViewConstraints() {
         super.updateViewConstraints()
         addMainElements()
         addViewEnterUser()
         addViewRegisterUser()
     }
-    
-    
     
     // MARK: Actions
     
@@ -118,25 +142,49 @@ final class LoginFormViewController: UIViewController {
     // Actions for loginButton
     @objc fileprivate func loginButtonPressed(sender: UIButton) {
         
-    }
-    
-    // Actions for registerButton
-    
-    @objc fileprivate func registrationButtonPressed(sender: UIButton) {
         
     }
     
+// Actions for registerButton
+    @objc fileprivate func registrationButtonPressed(sender: UIButton) {
+        guard let name = loginNameForRegisterTextField.text,
+              let email = emailForRegisterTextField.text,
+              let password = passwordForRegisterTextField.text,
+              !name.isEmpty,
+              !email.isEmpty,
+              !password.isEmpty else { return self.showAlertController() }
+        if fireBase.createNewUser(email: email, password: password, name: name) {
+            self.dismiss(animated: true)
+        } else {
+            showAlertController()
+        }
+    }
     
+// Google SigIn button
+    @objc fileprivate func signIn() {
+        GIDSignIn.sharedInstance.signIn(with: signInConfig, presenting: self) { user, error in
+            guard error == nil, let user = user, let userProfile = user.profile, let userId = user.userID else { return self.showAlertController() }
+            self.fireBase.addNewUserForGoogle(name: userProfile.name, email: userProfile.email, userId: userId)
+            self.dismiss(animated: true)
+        }
+    }
     
+// MARK: AlertController
+    fileprivate func showAlertController() {
+        let alertController = UIAlertController(title: "Error", message: "atuth", preferredStyle: .alert)
+        let closeButton = UIAlertAction(title: "Close", style: .cancel)
+        
+        alertController.addAction(closeButton)
+        present(alertController, animated: true)
+    }
     
-    // MARK: Metods
+// MARK: Metods
     // Метод измения с входа на регистрацию
     private func changeViewForIndexSegment(index: Int) {
         viewForEntryUser.isHidden = index == 1
         viewForRegisterUser.isHidden = index == 0
     }
-    
-    
+
     // Добавление элементов которые не зависят от действия (вход или регистрация)
     private func addMainElements() {
         titleName.snp.makeConstraints{
@@ -174,6 +222,12 @@ final class LoginFormViewController: UIViewController {
             $0.top.equalTo(passwordForEntryTextField.snp.bottom).offset(32)
             $0.leading.trailing.equalTo(viewForEntryUser).inset(16)
             $0.height.equalTo(70)
+        }
+        
+        googleButton.snp.makeConstraints {
+            $0.trailing.leading.equalTo(viewForEntryUser).inset(16)
+            $0.height.equalTo(70)
+            $0.top.equalTo(loginButton.snp.bottom).offset(16)
         }
     }
     
@@ -216,10 +270,27 @@ final class LoginFormViewController: UIViewController {
         viewForEntryUser.addSubview(emailForEntryTextField)
         viewForEntryUser.addSubview(passwordForEntryTextField)
         viewForEntryUser.addSubview(loginButton)
+        viewForEntryUser.addSubview(googleButton)
         view.addSubview(viewForRegisterUser)
         viewForRegisterUser.addSubview(loginNameForRegisterTextField)
         viewForRegisterUser.addSubview(emailForRegisterTextField)
         viewForRegisterUser.addSubview(passwordForRegisterTextField)
         viewForRegisterUser.addSubview(registrationButton)
+        
     }
 }
+
+
+//extension LoginFormViewController: UITextFieldDelegate {
+//
+//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+//        let name = loginNameForRegisterTextField.text
+//        let email = emailForRegisterTextField.text
+//        let password = passwordForRegisterTextField.text
+//
+//        loginNameForRegisterTextField.becomeFirstResponder()
+//
+//        return true
+//
+//    }
+    

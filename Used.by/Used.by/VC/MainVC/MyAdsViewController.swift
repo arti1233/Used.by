@@ -18,9 +18,14 @@ class MyAdsViewController: BaseViewController {
         return button
     }()
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(loginButton)
+        let rightButtonItem = UIBarButtonItem(image: UIImage(systemName: "plus"),style: .done, target: self, action: #selector(addAds))
+        self.navigationItem.rightBarButtonItem = rightButtonItem
+        title = "My ads"
         
 
     }
@@ -34,6 +39,10 @@ class MyAdsViewController: BaseViewController {
     @objc private func loginButtonPressed(sender: UIButton) {
         let LoginFoarmViewController = LoginFormViewController()
         present(LoginFoarmViewController, animated: true)
+    }
+    
+    @objc func addAds() {
+        print("23434")
     }
     
     
