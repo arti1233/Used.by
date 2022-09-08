@@ -164,6 +164,7 @@ extension ListSearchParametrVC: UITableViewDelegate, UITableViewDataSource {
         cellForTouch.selectionStyle = .none
         cellForRequestView.selectionStyle = .none
         
+        
         let section = section[indexPath.section]
         
         switch section {
@@ -201,12 +202,15 @@ extension ListSearchParametrVC: UITableViewDelegate, UITableViewDataSource {
             }
         case .typeEngine:
             cellForTouch.changeNameCell(name: typeEngine[indexPath.row].title)
+            cellForTouch.setSelectedAttribute(isSelected: TypeEngimeStruct(rawValue: items.typeEngine).contains(TypeEngime.allCases[indexPath.row].options))
             return cellForTouch
         case .typeDrive:
             cellForTouch.changeNameCell(name: typeDrive[indexPath.row].title)
+            cellForTouch.setSelectedAttribute(isSelected: TypeOfDriveStruct(rawValue: items.typeDrive).contains(TypeOfDrive.allCases[indexPath.row].options))
             return cellForTouch
         case .gearbox:
             cellForTouch.changeNameCell(name: gearBox[indexPath.row].title)
+            cellForTouch.setSelectedAttribute(isSelected: GearBoxStruct(rawValue: items.gearbox).contains(GearBox.allCases[indexPath.row].options))
             return cellForTouch
         case .conditions:
             switch conditions[indexPath.row] {
@@ -218,6 +222,7 @@ extension ListSearchParametrVC: UITableViewDelegate, UITableViewDataSource {
                 return cellForRequestView
             default:
                 cellForTouch.changeNameCell(name: conditions[indexPath.row].title)
+                cellForTouch.setSelectedAttribute(isSelected: ConditionStruct(rawValue: items.conditionAuto).contains(Conditions.allCases[indexPath.row].options))
                 return cellForTouch
             }
         }
