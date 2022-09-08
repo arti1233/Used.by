@@ -26,12 +26,10 @@ class CellForTouch: UITableViewCell {
         return view
     }()
     
-    
+//MARK: Override functions
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.addSubview(nameCellLabel)
-        contentView.addSubview(iconView)
-        contentView.layer.cornerRadius = 10
+        addElements()
     }
     
     required init?(coder: NSCoder) {
@@ -39,28 +37,27 @@ class CellForTouch: UITableViewCell {
     }
     
     override func updateConstraints() {
-        addElementsConstraint()
         super.updateConstraints()
+        addConstraint()
     }
         
-
-    func changeNameCell(name: String) {
-        nameCellLabel.text = name
-    }
-    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         iconView.image = UIImage(systemName: selected ? "circle.fill" : "circle" )
     }
     
+//MARK: Metods
+    
     func setSelectedAttribute(isSelected: Bool) {
         iconView.image = UIImage(systemName: isSelected ? "circle.fill" : "circle" )
     }
     
+    func changeNameCell(name: String) {
+        nameCellLabel.text = name
+    }
     
-    
-    private func addElementsConstraint() {
-        
+// MARK: Metods for constreint
+    private func addConstraint() {
         nameCellLabel.snp.makeConstraints {
             $0.trailing.leading.bottom.top.equalToSuperview().inset(16)
         }
@@ -72,8 +69,8 @@ class CellForTouch: UITableViewCell {
         }
     }
     
-    
-    
-    
-    
+    private func addElements() {
+        contentView.addSubview(nameCellLabel)
+        contentView.addSubview(iconView)
+    }
 }

@@ -11,13 +11,11 @@ import SnapKit
 
 class SearchViewController: BaseViewController {
 
-    private var quantityAds: Int = 23424234
-
     private lazy var adsLabel: UILabel = {
         var label = UILabel()
         label.textColor = .myCustomPurple
-        label.textAlignment = .left
-        label.numberOfLines = 2
+        label.textAlignment = .center
+        label.numberOfLines = 0
         label.font = UIFont.systemFont(ofSize: 26, weight: .heavy)
         return label
     }()
@@ -29,13 +27,29 @@ class SearchViewController: BaseViewController {
         return button
     }()
     
+    private lazy var tableView: UITableView = {
+        var tableView = UITableView()
+        return tableView
+    }()
+    
+    private var showAllAdsButton: CustomButton = {
+        var button = CustomButton()
+        button.setTitle("Show ads", for: .normal)
+        button.addTarget(self, action: #selector(showAllAdsButtonPressed), for: .touchUpInside)
+        return button
+    }()
+    
+    var alamofire: RestAPIProviderProtocol!
+    private var quantityAds: Int = 23424234
+
+//MARK: Override functions
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addSubview(adsLabel)
-        view.addSubview(searchButton)
-        addAppName()
-        adsLabel.text = "\(quantityAds) ads for the sale of used cars"
-        
+        alamofire = AlamofireProvider()
+        addElements()
+        addConsteint()
+        getQuantityAds()
+        title = "USED.BY"
     }
 
     override func updateViewConstraints() {
@@ -43,14 +57,34 @@ class SearchViewController: BaseViewController {
         
     }
     
+//MARK: Metods
+    
+    private func getQuantityAds() {
+        alamofire.getAllAdsId { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let result):
+                self.quantityAds = result.id.count
+                self.adsLabel.text = "\(self.quantityAds) ads for the sale of used cars"
+            case .failure:
+                print("Error")
+            }
+        }
+    }
+    
     @objc private func searchButtonPressed(sender: UIButton) {
-        let VC = ListSearchParametrVC()
-        present(VC, animated: true)
+        let vc = ListSearchParametrVC()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc private func showAllAdsButtonPressed(sender: UIButton) {
+        let vc = ViewingAdsVC()
+        navigationController?.pushViewController(vc, animated: true)
     }
     
 // MARK: Metods for constreint
     
-    private func addAppName() {
+    private func addConsteint() {
         
         adsLabel.snp.makeConstraints {
             $0.trailing.leading.equalToSuperview().inset(16)
@@ -63,7 +97,19 @@ class SearchViewController: BaseViewController {
             $0.height.equalTo(50)
             $0.trailing.leading.equalToSuperview().inset(16)
         }
+        
+        showAllAdsButton.snp.makeConstraints {
+            $0.bottom.equalTo(searchButton.snp.top).offset(-16)
+            $0.centerX.equalTo(view.snp.centerX).inset(0)
+            $0.height.equalTo(50)
+            $0.trailing.leading.equalToSuperview().inset(16)
+        }
     }
     
+    private func addElements() {
+        view.addSubview(adsLabel)
+        view.addSubview(searchButton)
+        view.addSubview(showAllAdsButton)
+    }
 }
 

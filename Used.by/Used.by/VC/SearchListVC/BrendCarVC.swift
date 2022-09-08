@@ -30,6 +30,7 @@ class BrendCarVC: BaseViewController {
     }()
     
     var carBrend: [CarBrend] = []
+    var isSearch = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,8 +74,8 @@ extension BrendCarVC: UITableViewDelegate, UITableViewDataSource {
         let carModel = carBrend[indexPath.row]
         let VC = ModelCarVC()
         VC.carModel = carModel
+        VC.isSearch = isSearch
         VC.changeTitleName(name: carModel.name)
         navigationController?.pushViewController(VC, animated: true)
     }
-    
 }

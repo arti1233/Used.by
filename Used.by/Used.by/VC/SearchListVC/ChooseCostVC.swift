@@ -84,25 +84,25 @@ class  ChooseCostVC: BaseViewController {
     fileprivate func addConstreit() {
 
         titleName.snp.makeConstraints{
-            $0.top.trailing.equalToSuperview()
+            $0.top.trailing.equalToSuperview().inset(16)
             $0.leading.equalToSuperview().inset(16)
-            $0.height.equalTo(60)
+            $0.height.equalTo(70)
         }
         
         minCostTextField.snp.makeConstraints {
-            $0.top.equalTo(titleName.snp.bottom).offset(32)
+            $0.top.equalTo(titleName.snp.bottom).offset(16)
             $0.leading.trailing.equalToSuperview().inset(16)
-            $0.height.equalTo(50)
+            $0.height.equalTo(60)
         }
         
         maxCostTextField.snp.makeConstraints {
             $0.top.equalTo(minCostTextField.snp.bottom).offset(16)
             $0.leading.trailing.equalToSuperview().inset(16)
-            $0.height.equalTo(50)
+            $0.height.equalTo(60)
         }
         
         acceptButton.snp.makeConstraints {
-            $0.top.equalTo(maxCostTextField.snp.bottom).offset(16)
+            $0.top.equalTo(maxCostTextField.snp.bottom).offset(32)
             $0.leading.trailing.equalToSuperview().inset(16)
             $0.height.equalTo(50)
         }

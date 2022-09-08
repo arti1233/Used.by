@@ -27,7 +27,7 @@
 		AE0BE89B28A245B100C0E116 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0BE89A28A245B100C0E116 /* MainTabBarController.swift */; };
 		AE0BE89D28A2473A00C0E116 /* SaveAdsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0BE89C28A2473A00C0E116 /* SaveAdsViewController.swift */; };
 		AE0BE89F28A2475100C0E116 /* MyAdsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0BE89E28A2475100C0E116 /* MyAdsViewController.swift */; };
-		AE0BE8A128A247A500C0E116 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0BE8A028A247A500C0E116 /* SettingViewController.swift */; };
+		AE0BE8A128A247A500C0E116 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0BE8A028A247A500C0E116 /* ProfileViewController.swift */; };
 		AE0BE8A528A24FD600C0E116 /* UIColor+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0BE8A428A24FD600C0E116 /* UIColor+extension.swift */; };
 		AE0BE8A828A25A2A00C0E116 /* LoginFoarnViewController .swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0BE8A728A25A2A00C0E116 /* LoginFoarnViewController .swift */; };
 		AE0BE8AB28A260F600C0E116 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = AE0BE8AA28A260F600C0E116 /* SnapKit */; };
@@ -35,6 +35,20 @@
 		AE0BE8B128A2B56100C0E116 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0BE8B028A2B56100C0E116 /* CustomButton.swift */; };
 		AE0BE8B328A3ACD500C0E116 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AE0BE8B228A3ACD500C0E116 /* GoogleService-Info.plist */; };
 		AE0BE8F228A3E53200C0E116 /* ProfileCellForSettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0BE8F128A3E53200C0E116 /* ProfileCellForSettingVC.swift */; };
+		AE343CAF28BE3D5A00B677A9 /* ViewingAdsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE343CAE28BE3D5900B677A9 /* ViewingAdsVC.swift */; };
+		AE343CB328BE42BB00B677A9 /* AdsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE343CB228BE42BB00B677A9 /* AdsCell.swift */; };
+		AE343CB528BF90F600B677A9 /* AdsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE343CB428BF90F600B677A9 /* AdsVC.swift */; };
+		AE343CB728BFD75B00B677A9 /* CellForSpecification.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE343CB628BFD75A00B677A9 /* CellForSpecification.swift */; };
+		AE343CB928C0FA1600B677A9 /* ChooseParamsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE343CB828C0FA1600B677A9 /* ChooseParamsVC.swift */; };
+		AE343CBB28C1EE8C00B677A9 /* TextViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE343CBA28C1EE8C00B677A9 /* TextViewVC.swift */; };
+		AE343CBD28C1FE5600B677A9 /* CellForAdsPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE343CBC28C1FE5500B677A9 /* CellForAdsPhoto.swift */; };
+		AE343CC128C7443200B677A9 /* String+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE343CC028C7442F00B677A9 /* String+extension.swift */; };
+		AE343CC328C780DE00B677A9 /* RealmModelForUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE343CC228C780DD00B677A9 /* RealmModelForUser.swift */; };
+		AE345AC928BB7C9F003C09CD /* CellForTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE345AC828BB7C9F003C09CD /* CellForTextField.swift */; };
+		AE345ACB28BB829D003C09CD /* CellForDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE345ACA28BB829D003C09CD /* CellForDescription.swift */; };
+		AE345ACE28BB8EB4003C09CD /* ModelsForAds.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE345ACD28BB8EB4003C09CD /* ModelsForAds.swift */; };
+		AE345AD028BB9033003C09CD /* RealmModelForSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE345ACF28BB9033003C09CD /* RealmModelForSearch.swift */; };
+		AE345AD228BB9047003C09CD /* RealmModelForAds.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE345AD128BB9046003C09CD /* RealmModelForAds.swift */; };
 		AE39BD2D28A647FC0080DB52 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE39BD2C28A647FB0080DB52 /* BaseViewController.swift */; };
 		AEA43D7B28AEB79D002BF0C0 /* CellForMileage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA43D7A28AEB79D002BF0C0 /* CellForMileage.swift */; };
 		AEA43D7E28AFB6C4002BF0C0 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = AEA43D7D28AFB6C4002BF0C0 /* Alamofire */; };
@@ -53,6 +67,7 @@
 		AEC70F8228AB9B6B00C84BB6 /* CellForRequestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC70F8128AB9B6B00C84BB6 /* CellForRequestView.swift */; };
 		AED205A628B4D39D00EC8C83 /* RealmServise .swift in Sources */ = {isa = PBXBuildFile; fileRef = AED205A528B4D39D00EC8C83 /* RealmServise .swift */; };
 		AED205A828B614F300EC8C83 /* ChooseCostVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AED205A728B614F300EC8C83 /* ChooseCostVC.swift */; };
+		AED205B128B8DB0C00EC8C83 /* AddAdsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AED205B028B8DB0C00EC8C83 /* AddAdsVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,13 +85,27 @@
 		AE0BE89A28A245B100C0E116 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		AE0BE89C28A2473A00C0E116 /* SaveAdsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveAdsViewController.swift; sourceTree = "<group>"; };
 		AE0BE89E28A2475100C0E116 /* MyAdsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAdsViewController.swift; sourceTree = "<group>"; };
-		AE0BE8A028A247A500C0E116 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		AE0BE8A028A247A500C0E116 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		AE0BE8A428A24FD600C0E116 /* UIColor+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+extension.swift"; sourceTree = "<group>"; };
 		AE0BE8A728A25A2A00C0E116 /* LoginFoarnViewController .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginFoarnViewController .swift"; sourceTree = "<group>"; };
 		AE0BE8AE28A2B3E700C0E116 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		AE0BE8B028A2B56100C0E116 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		AE0BE8B228A3ACD500C0E116 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AE0BE8F128A3E53200C0E116 /* ProfileCellForSettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCellForSettingVC.swift; sourceTree = "<group>"; };
+		AE343CAE28BE3D5900B677A9 /* ViewingAdsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewingAdsVC.swift; sourceTree = "<group>"; };
+		AE343CB228BE42BB00B677A9 /* AdsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsCell.swift; sourceTree = "<group>"; };
+		AE343CB428BF90F600B677A9 /* AdsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsVC.swift; sourceTree = "<group>"; };
+		AE343CB628BFD75A00B677A9 /* CellForSpecification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellForSpecification.swift; sourceTree = "<group>"; };
+		AE343CB828C0FA1600B677A9 /* ChooseParamsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseParamsVC.swift; sourceTree = "<group>"; };
+		AE343CBA28C1EE8C00B677A9 /* TextViewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewVC.swift; sourceTree = "<group>"; };
+		AE343CBC28C1FE5500B677A9 /* CellForAdsPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellForAdsPhoto.swift; sourceTree = "<group>"; };
+		AE343CC028C7442F00B677A9 /* String+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+extension.swift"; sourceTree = "<group>"; };
+		AE343CC228C780DD00B677A9 /* RealmModelForUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmModelForUser.swift; sourceTree = "<group>"; };
+		AE345AC828BB7C9F003C09CD /* CellForTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellForTextField.swift; sourceTree = "<group>"; };
+		AE345ACA28BB829D003C09CD /* CellForDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellForDescription.swift; sourceTree = "<group>"; };
+		AE345ACD28BB8EB4003C09CD /* ModelsForAds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelsForAds.swift; sourceTree = "<group>"; };
+		AE345ACF28BB9033003C09CD /* RealmModelForSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmModelForSearch.swift; sourceTree = "<group>"; };
+		AE345AD128BB9046003C09CD /* RealmModelForAds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmModelForAds.swift; sourceTree = "<group>"; };
 		AE39BD2C28A647FB0080DB52 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		AEA43D7A28AEB79D002BF0C0 /* CellForMileage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellForMileage.swift; sourceTree = "<group>"; };
 		AEA43D8028AFB6FA002BF0C0 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -92,6 +121,7 @@
 		AEC70F8128AB9B6B00C84BB6 /* CellForRequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellForRequestView.swift; sourceTree = "<group>"; };
 		AED205A528B4D39D00EC8C83 /* RealmServise .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RealmServise .swift"; sourceTree = "<group>"; };
 		AED205A728B614F300EC8C83 /* ChooseCostVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseCostVC.swift; sourceTree = "<group>"; };
+		AED205B028B8DB0C00EC8C83 /* AddAdsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAdsVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,8 +152,11 @@
 			children = (
 				AEA43D7A28AEB79D002BF0C0 /* CellForMileage.swift */,
 				AE04219C28A95CD900034C2F /* CellForTouch.swift */,
-				AEC70F8128AB9B6B00C84BB6 /* CellForRequestView.swift */,
+				AE345AC828BB7C9F003C09CD /* CellForTextField.swift */,
+				AE345ACA28BB829D003C09CD /* CellForDescription.swift */,
+				AE343CBC28C1FE5500B677A9 /* CellForAdsPhoto.swift */,
 				AEBB439528AD28630037E5B1 /* BrendCarCell.swift */,
+				AEC70F8128AB9B6B00C84BB6 /* CellForRequestView.swift */,
 			);
 			path = CellForSearchCarList;
 			sourceTree = "<group>";
@@ -156,15 +189,17 @@
 		AE0BE88528A2403700C0E116 /* Used.by */ = {
 			isa = PBXGroup;
 			children = (
+				AE343CB128BE42A600B677A9 /* CellForAds */,
 				AED205A428B4D37C00EC8C83 /* RealmServise */,
 				AEA43D7F28AFB6D9002BF0C0 /* AlamofireServise  */,
 				AEBB439728AD59C80037E5B1 /* ServiceFireBase */,
+				AE345ACC28BB8E89003C09CD /* ModelsForAddAds */,
 				AE04219928A94DAA00034C2F /* ModelsForSearchCar */,
 				AE04219828A94C9E00034C2F /* CellForSearchCarList */,
 				AE0BE8A628A24FDB00C0E116 /* Extension */,
+				AE0BE8A228A2480400C0E116 /* VC */,
 				AE0BE8A328A2481D00C0E116 /* Delegate */,
 				AED205AC28B77E7400EC8C83 /* TabBarController */,
-				AE0BE8A228A2480400C0E116 /* VC */,
 				AE0BE88F28A2403A00C0E116 /* Assets.xcassets */,
 				AE0BE8F328A3E54000C0E116 /* CellForSettingVC */,
 				AE0BE89128A2403A00C0E116 /* LaunchScreen.storyboard */,
@@ -180,6 +215,8 @@
 				AED205AD28B77E8C00EC8C83 /* MainVC */,
 				AED205AE28B77E9600EC8C83 /* LoginFoarmVC */,
 				AED205AF28B77EA700EC8C83 /* SearchListVC */,
+				AED205B228B8DB2000EC8C83 /* AddAdsVC */,
+				AE343CB028BE3D6100B677A9 /* ViewingAdsVC */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -201,6 +238,7 @@
 				AE0BE8B028A2B56100C0E116 /* CustomButton.swift */,
 				AE39BD2C28A647FB0080DB52 /* BaseViewController.swift */,
 				AE04219E28A95D5D00034C2F /* CustomUILabel.swift */,
+				AE343CC028C7442F00B677A9 /* String+extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -211,6 +249,32 @@
 				AE0BE8F128A3E53200C0E116 /* ProfileCellForSettingVC.swift */,
 			);
 			path = CellForSettingVC;
+			sourceTree = "<group>";
+		};
+		AE343CB028BE3D6100B677A9 /* ViewingAdsVC */ = {
+			isa = PBXGroup;
+			children = (
+				AE343CAE28BE3D5900B677A9 /* ViewingAdsVC.swift */,
+				AE343CB428BF90F600B677A9 /* AdsVC.swift */,
+			);
+			path = ViewingAdsVC;
+			sourceTree = "<group>";
+		};
+		AE343CB128BE42A600B677A9 /* CellForAds */ = {
+			isa = PBXGroup;
+			children = (
+				AE343CB228BE42BB00B677A9 /* AdsCell.swift */,
+				AE343CB628BFD75A00B677A9 /* CellForSpecification.swift */,
+			);
+			name = CellForAds;
+			sourceTree = "<group>";
+		};
+		AE345ACC28BB8E89003C09CD /* ModelsForAddAds */ = {
+			isa = PBXGroup;
+			children = (
+				AE345ACD28BB8EB4003C09CD /* ModelsForAds.swift */,
+			);
+			name = ModelsForAddAds;
 			sourceTree = "<group>";
 		};
 		AEA43D7F28AFB6D9002BF0C0 /* AlamofireServise  */ = {
@@ -235,6 +299,9 @@
 			isa = PBXGroup;
 			children = (
 				AED205A528B4D39D00EC8C83 /* RealmServise .swift */,
+				AE345ACF28BB9033003C09CD /* RealmModelForSearch.swift */,
+				AE345AD128BB9046003C09CD /* RealmModelForAds.swift */,
+				AE343CC228C780DD00B677A9 /* RealmModelForUser.swift */,
 			);
 			name = RealmServise;
 			sourceTree = "<group>";
@@ -253,7 +320,7 @@
 				AE0BE88A28A2403700C0E116 /* SearchViewController.swift */,
 				AE0BE89E28A2475100C0E116 /* MyAdsViewController.swift */,
 				AE0BE89C28A2473A00C0E116 /* SaveAdsViewController.swift */,
-				AE0BE8A028A247A500C0E116 /* SettingViewController.swift */,
+				AE0BE8A028A247A500C0E116 /* ProfileViewController.swift */,
 			);
 			path = MainVC;
 			sourceTree = "<group>";
@@ -277,6 +344,16 @@
 				AED205A728B614F300EC8C83 /* ChooseCostVC.swift */,
 			);
 			path = SearchListVC;
+			sourceTree = "<group>";
+		};
+		AED205B228B8DB2000EC8C83 /* AddAdsVC */ = {
+			isa = PBXGroup;
+			children = (
+				AED205B028B8DB0C00EC8C83 /* AddAdsVC.swift */,
+				AE343CB828C0FA1600B677A9 /* ChooseParamsVC.swift */,
+				AE343CBA28C1EE8C00B677A9 /* TextViewVC.swift */,
+			);
+			path = AddAdsVC;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -371,14 +448,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE343CC328C780DE00B677A9 /* RealmModelForUser.swift in Sources */,
 				AE04219728A935FF00034C2F /* ListSearchParametrVC.swift in Sources */,
+				AE343CBD28C1FE5600B677A9 /* CellForAdsPhoto.swift in Sources */,
 				AE0BE8B128A2B56100C0E116 /* CustomButton.swift in Sources */,
+				AE343CB928C0FA1600B677A9 /* ChooseParamsVC.swift in Sources */,
 				AEBB439428AD259E0037E5B1 /* BrendCarVC.swift in Sources */,
+				AED205B128B8DB0C00EC8C83 /* AddAdsVC.swift in Sources */,
 				AE04219D28A95CD900034C2F /* CellForTouch.swift in Sources */,
+				AE345AC928BB7C9F003C09CD /* CellForTextField.swift in Sources */,
+				AE345ACB28BB829D003C09CD /* CellForDescription.swift in Sources */,
+				AE343CAF28BE3D5A00B677A9 /* ViewingAdsVC.swift in Sources */,
 				AE0BE88B28A2403700C0E116 /* SearchViewController.swift in Sources */,
 				AE0BE8A528A24FD600C0E116 /* UIColor+extension.swift in Sources */,
+				AE343CBB28C1EE8C00B677A9 /* TextViewVC.swift in Sources */,
 				AEA43D9328B370F9002BF0C0 /* PickerVC.swift in Sources */,
 				AE04219F28A95D5D00034C2F /* CustomUILabel.swift in Sources */,
+				AE345AD028BB9033003C09CD /* RealmModelForSearch.swift in Sources */,
 				AE0BE89F28A2475100C0E116 /* MyAdsViewController.swift in Sources */,
 				AE0BE88728A2403700C0E116 /* AppDelegate.swift in Sources */,
 				AED205A628B4D39D00EC8C83 /* RealmServise .swift in Sources */,
@@ -389,18 +475,24 @@
 				AE0BE89D28A2473A00C0E116 /* SaveAdsViewController.swift in Sources */,
 				AE0BE8AF28A2B3E700C0E116 /* CustomTextField.swift in Sources */,
 				AE0BE89B28A245B100C0E116 /* MainTabBarController.swift in Sources */,
+				AE343CC128C7443200B677A9 /* String+extension.swift in Sources */,
+				AE343CB528BF90F600B677A9 /* AdsVC.swift in Sources */,
 				AED205A828B614F300EC8C83 /* ChooseCostVC.swift in Sources */,
-				AE0BE8A128A247A500C0E116 /* SettingViewController.swift in Sources */,
+				AE0BE8A128A247A500C0E116 /* ProfileViewController.swift in Sources */,
 				AE0BE8A828A25A2A00C0E116 /* LoginFoarnViewController .swift in Sources */,
 				AEA43D8C28B15844002BF0C0 /* ChooseMileageVC.swift in Sources */,
 				AEA43D8528AFBA5E002BF0C0 /* UserModel.swift in Sources */,
 				AEA43D8328AFB721002BF0C0 /* AlamofireProvider.swift in Sources */,
+				AE343CB728BFD75B00B677A9 /* CellForSpecification.swift in Sources */,
+				AE345ACE28BB8EB4003C09CD /* ModelsForAds.swift in Sources */,
+				AE345AD228BB9047003C09CD /* RealmModelForAds.swift in Sources */,
 				AE39BD2D28A647FC0080DB52 /* BaseViewController.swift in Sources */,
 				AEC70F8228AB9B6B00C84BB6 /* CellForRequestView.swift in Sources */,
 				AE0BE88928A2403700C0E116 /* SceneDelegate.swift in Sources */,
 				AE0BE8F228A3E53200C0E116 /* ProfileCellForSettingVC.swift in Sources */,
 				AEA43D7B28AEB79D002BF0C0 /* CellForMileage.swift in Sources */,
 				AEA43D8728B0DDB8002BF0C0 /* ModelCarVC.swift in Sources */,
+				AE343CB328BE42BB00B677A9 /* AdsCell.swift in Sources */,
 				AEA43D8128AFB6FA002BF0C0 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -550,6 +642,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -581,6 +674,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -14,7 +14,6 @@ struct ListItem {
     var index: Int
 }
 
-
 enum CreateSections: Int, CaseIterable {
     case modelCars, parametrs, typeEngine, typeDrive, gearbox, conditions
     
@@ -63,7 +62,6 @@ enum ModelCars: CaseIterable {
             return "Car brend"
         case .carModel:
             return "Car model"
-            
         }
     }
 }
@@ -88,8 +86,6 @@ enum Parametrs: CaseIterable {
         switch self {
         case .yearOfProduction:
              return false
-        case .engineСapacity:
-            return true
         default :
             return true
         }
@@ -105,13 +101,13 @@ enum TypeEngime: CaseIterable {
     var title: String {
         switch self {
         case .petrol:
-            return "Petrol"
+            return "petrol"
         case .diesel:
-            return "Diesel"
+            return "diesel"
         case .hybrid:
-            return "Hybrid"
+            return "hybrid"
         case .electro:
-            return "Electro"
+            return "electro"
         }
     }
     
@@ -170,7 +166,6 @@ enum TypeOfDrive: CaseIterable {
             return .awd
         }
     }
-    
 }
 
 struct TypeOfDriveStruct: OptionSet {
@@ -189,9 +184,9 @@ enum GearBox: CaseIterable {
     var title: String {
         switch self {
         case .manual:
-            return "Manual"
+            return "manual"
         case .automatic:
-            return "Automatic"
+            return "automatic"
         }
     }
     
@@ -245,7 +240,7 @@ enum Conditions: CaseIterable {
         case .forParts:
             return .forParts
         default:
-            return ConditionStruct()
+            return ConditionStruct() 
         }
     }
 }
@@ -259,6 +254,38 @@ struct ConditionStruct: OptionSet {
     static let forParts = ConditionStruct(rawValue: 1 << 3)
 }
 
+enum ConditionsForAddAds: CaseIterable {
+    case new
+    case used
+    case crash
+    case forParts
+    
+    var title: String {
+        switch self {
+        case .new:
+            return "New"
+        case .used:
+            return "Used"
+        case .crash:
+            return "Crash"
+        case .forParts:
+            return "For parts"
+        }
+    }
+    
+    var options: ConditionStruct {
+        switch self {
+        case .new:
+            return .new
+        case .used:
+            return .used
+        case .crash:
+            return .crash
+        case .forParts:
+            return .forParts
+        }
+    }
+}
 
 
 

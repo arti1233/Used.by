@@ -24,6 +24,7 @@ class CellForRequestView: UITableViewCell {
         return label
     }()
 
+//MARK: Override functions 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(fieldNameLabel)
@@ -43,7 +44,8 @@ class CellForRequestView: UITableViewCell {
         super.prepareForReuse()
         resultChoiceLabel.text = ""
     }
-    
+
+//MARK: Metods
     func changeFieldName(name: String) {
         fieldNameLabel.text = name
     }
@@ -52,16 +54,8 @@ class CellForRequestView: UITableViewCell {
         resultChoiceLabel.text = name
     }
 
-    private func addFieldName() {
-        fieldNameLabel.snp.makeConstraints {
-            $0.centerX.equalTo(contentView.snp.centerX)
-            $0.trailing.leading.equalToSuperview().inset(16)
-            $0.top.bottom.equalToSuperview().inset(16)
-        }
-    }
-    
+//MARK: Metods for Constreint
     private func addResultChoiceLabel () {
-        
         resultChoiceLabel.snp.makeConstraints {
             $0.centerX.equalTo(contentView.snp.centerX)
             $0.trailing.leading.equalToSuperview().inset(16)

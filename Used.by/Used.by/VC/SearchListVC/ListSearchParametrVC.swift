@@ -13,7 +13,7 @@ import RealmSwift
 
 class ListSearchParametrVC: BaseViewController {
 
-    var realmServise: RealmServiceProtocol!
+    private var realmServise: RealmServiceProtocol!
     private var alamofireProvider: RestAPIProviderProtocol!
     private var searchSettinmgItems: Results<SearchSetting>!
     private var notificationToken: NotificationToken?
@@ -30,16 +30,7 @@ class ListSearchParametrVC: BaseViewController {
     private let typeDrive = TypeOfDrive.allCases
     private let gearBox = GearBox.allCases
     private let conditions = Conditions.allCases
-    
-    private lazy var titleName: UILabel = {
-        var titleName = UILabel()
-        titleName.textColor = UIColor.myCustomPurple
-        titleName.textAlignment = .center
-        titleName.text = "Parametrs"
-        titleName.font = UIFont.systemFont(ofSize: 30, weight: .heavy)
-        return titleName
-    }()
-    
+
     private lazy var tableView: UITableView = {
         var tableView = UITableView()
         tableView.delegate = self
@@ -61,15 +52,19 @@ class ListSearchParametrVC: BaseViewController {
         super.viewDidLoad()
         realmServise = RealmService()
         alamofireProvider = AlamofireProvider()
-        view.addSubview(titleName)
         view.addSubview(tableView)
         view.addSubview(searchButton)
-       
+        title = "Parametrs"
         print(Realm.Configuration.defaultConfiguration.fileURL!)
         getCarbrend()
-    
+        
         searchSettinmgItems = realmServise.getListSearchSetting()
         print(searchSettinmgItems)
+        
+        if searchSettinmgItems.first == nil {
+            realmServise.resetSearchSetting()
+            searchSettinmgItems = realmServise.getListSearchSetting()
+        }
     
         guard let items = searchSettinmgItems.first else { return }
         typeEngineStruct.rawValue = items.typeEngine
@@ -86,14 +81,6 @@ class ListSearchParametrVC: BaseViewController {
                 break
             }
         }
-        
-//        var arrayName = ""
-//        Headlights.allCases.forEach {
-//            if selectedHead.contains($0.options) {
-//                arrayName.append("\($0.description), ")
-//            }
-//        }
-//        print(arrayName)
     }
     
     override func updateViewConstraints() {
@@ -101,28 +88,29 @@ class ListSearchParametrVC: BaseViewController {
         addConstreint()
         
     }
+    
+    deinit {
+        guard let token = notificationToken else { return }
+        token.invalidate()
+    }
 
     @objc private func searchButtonPressed(sender: UIButton) {
-        
+        let vc = ViewingAdsVC()
+        navigationController?.pushViewController(vc, animated: true)
     }
     
 // MARK: Metods for constreint
     
     private func addConstreint() {
         
-        titleName.snp.makeConstraints{
-            $0.top.leading.trailing.equalToSuperview()
-            $0.height.equalTo(60)
-        }
-        
         tableView.snp.makeConstraints {
-            $0.bottom.equalToSuperview()
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
             $0.trailing.leading.equalToSuperview().inset(0)
-            $0.top.equalToSuperview().inset(65)
+            $0.top.equalTo(view.safeAreaInsets.top)
         }
 
         searchButton.snp.makeConstraints {
-            $0.bottom.equalToSuperview().inset(16)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(16)
             $0.centerX.equalTo(view.snp.centerX).inset(0)
             $0.height.equalTo(50)
             $0.trailing.leading.equalToSuperview().inset(16)
@@ -134,6 +122,11 @@ class ListSearchParametrVC: BaseViewController {
         let vc = PickerVC()
         vc.isCapacityPicker = isCapacity
         vc.isCapacityPicker ? vc.changeTitleName(name: "Capacity engine") : vc.changeTitleName(name: "Year of prodaction")
+        
+        if let presentationConroller = vc.presentationController as? UISheetPresentationController {
+            presentationConroller.detents = [.medium()]
+        }
+        
         present(vc, animated: true)
     }
     
@@ -172,7 +165,6 @@ extension ListSearchParametrVC: UITableViewDelegate, UITableViewDataSource {
         cellForRequestView.selectionStyle = .none
         
         let section = section[indexPath.section]
-        
         
         switch section {
         case .modelCars:
@@ -250,6 +242,9 @@ extension ListSearchParametrVC: UITableViewDelegate, UITableViewDataSource {
             case .cost:
                 let vc = ChooseCostVC()
                 vc.changeTitleName(name: "\(parametrs[indexPath.row].title) USD")
+                if let presentationConroller = vc.presentationController as? UISheetPresentationController {
+                    presentationConroller.detents = [.medium()]
+                }
                 present(vc, animated: true)
             default:
                 presentPickerVC(isCapacity: parametrs[indexPath.row].isCapacity)
@@ -322,6 +317,4 @@ extension ListSearchParametrVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         CreateSections.allCases[section].title
     }
-
-
 }

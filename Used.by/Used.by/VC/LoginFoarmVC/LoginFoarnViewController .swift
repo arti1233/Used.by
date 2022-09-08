@@ -16,9 +16,13 @@ import FirebaseAuth
 import Firebase
 import FirebaseDatabaseSwift
 import FirebaseDatabase
+import RealmSwift
 
 final class LoginFormViewController: UIViewController {
    
+    private var userDataResults: Results<UserRealmModel>!
+    private var userData = UserRealmModel()
+    private var realmServise: RealmServiceProtocol!
     private var fireBase: FireBaseProtocol!
     private var signInConfig: GIDConfiguration!
     
@@ -112,11 +116,15 @@ final class LoginFormViewController: UIViewController {
 // MARK: ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
+        realmServise = RealmService()
+        title = "USED.BY"
         addElementsToSuperview()
         guard let clientId = Bundle.main.object(forInfoDictionaryKey: "CLIENT_ID") as? String else { return }
         signInConfig = GIDConfiguration(clientID: clientId)
         changeViewForIndexSegment(index: segmentController.selectedSegmentIndex)
         view.backgroundColor = UIColor.colorForHeaderLoginFoarm
+        userDataResults = realmServise.getUsersRealmModel()
+        userData = realmServise.getUserData()
         
         fireBase = FireBaseService()
 //        loginNameForRegisterTextField.delegate = self
@@ -141,8 +149,21 @@ final class LoginFormViewController: UIViewController {
     
     // Actions for loginButton
     @objc fileprivate func loginButtonPressed(sender: UIButton) {
-        
-        
+        guard let email = emailForEntryTextField.text,
+              let password = passwordForEntryTextField.text,
+              !email.isEmpty,
+              !password.isEmpty else { return }
+        fireBase.signInFireBase(email: email, password: password) { [weak self] result, userId in
+            guard let self = self else { return }
+            if result {
+                self.realmServise.addUserData(ID: userId)
+                self.realmServise.addUserData(isAuthFirebase: true)
+                self.realmServise.addUserData(isUserSignIn: true)
+                self.dismiss(animated: true)
+            } else {
+                self.showAlertController()
+            }
+        }
     }
     
 // Actions for registerButton
@@ -152,19 +173,31 @@ final class LoginFormViewController: UIViewController {
               let password = passwordForRegisterTextField.text,
               !name.isEmpty,
               !email.isEmpty,
-              !password.isEmpty else { return self.showAlertController() }
-        if fireBase.createNewUser(email: email, password: password, name: name) {
-            self.dismiss(animated: true)
-        } else {
-            showAlertController()
+              !password.isEmpty else { return }
+        fireBase.createNewUser(email: email, password: password, name: name) { [weak self] result, userId in
+            guard let self = self else { return }
+            if result {
+                self.realmServise.addUserData(ID: userId)
+                self.realmServise.addUserData(isAuthFirebase: true)
+                self.realmServise.addUserData(isUserSignIn: true)
+                self.dismiss(animated: true)
+            } else {
+                self.showAlertController()
+            }
         }
     }
     
 // Google SigIn button
     @objc fileprivate func signIn() {
-        GIDSignIn.sharedInstance.signIn(with: signInConfig, presenting: self) { user, error in
-            guard error == nil, let user = user, let userProfile = user.profile, let userId = user.userID else { return self.showAlertController() }
-            self.fireBase.addNewUserForGoogle(name: userProfile.name, email: userProfile.email, userId: userId)
+        GIDSignIn.sharedInstance.signIn(with: signInConfig, presenting: self) { [weak self] user, error in
+            guard let self = self, error == nil, let user = user, let userProfile = user.profile, let userId = user.userID else {
+                self!.showAlertController()
+                return
+            }
+            self.fireBase.addNewUserForGoogle(name: userProfile.name, email: userProfile.email, userIdGoogle: userId)
+            self.realmServise.addUserData(ID: userId)
+            self.realmServise.addUserData(isAuthFirebase: false)
+            self.realmServise.addUserData(isUserSignIn: true)
             self.dismiss(animated: true)
         }
     }

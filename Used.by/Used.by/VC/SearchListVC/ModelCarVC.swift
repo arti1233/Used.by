@@ -32,6 +32,7 @@ class ModelCarVC: BaseViewController {
     
     var carModel: CarBrend!
     private var realmServise: RealmServiceProtocol!
+    var isSearch = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,8 +82,13 @@ extension ModelCarVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let carModel = carModel else { return }
-        realmServise.addObjectInSearchSetting(carBrend: carModel.name)
-        realmServise.addObjectInSearchSetting(carModel: carModel.modelSeries[indexPath.row].name)
+        if isSearch {
+            realmServise.addObjectInSearchSetting(carBrend: carModel.name)
+            realmServise.addObjectInSearchSetting(carModel: carModel.modelSeries[indexPath.row].name)
+        } else {
+            realmServise.addAdsParams(carBrendName: carModel.name)
+            realmServise.addAdsParams(carModelName: carModel.modelSeries[indexPath.row].name)
+        }
         dismiss(animated: true)
     }
     
