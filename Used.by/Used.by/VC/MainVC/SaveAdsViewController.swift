@@ -83,6 +83,11 @@ class SaveAdsViewController: BaseViewController {
         addConstreint()
     }
     
+    deinit {
+        guard let token = notificationToken else { return }
+        token.invalidate()
+    }
+    
 // MARK: Actions
     @objc private func loginButtonPressed(sender: UIButton) {
         let LoginFoarmViewController = LoginFormViewController()

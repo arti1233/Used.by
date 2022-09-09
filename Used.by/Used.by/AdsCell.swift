@@ -96,28 +96,20 @@ class AdsCell: UITableViewCell {
         let urlPhoto = adsInfo.photo
         var arrayImage: [UIImage] = []
         
-        GearBox.allCases.forEach {
-            if GearBoxStruct(rawValue: adsInfo.gearBox).contains($0.options) {
-                gearBox = "\($0.title)"
-            }
+        if let text = GearBox.allCases.first(where: {GearBoxStruct(rawValue: adsInfo.gearBox).contains($0.options)}) {
+            gearBox = text.title
         }
         
-        TypeOfDrive.allCases.forEach {
-            if TypeOfDriveStruct(rawValue: adsInfo.typeDrive).contains($0.options) {
-                typeDrive = "\($0.title)"
-            }
+        if let text = TypeOfDrive.allCases.first(where: {TypeOfDriveStruct(rawValue: adsInfo.typeDrive).contains($0.options)}) {
+            typeDrive = text.title
         }
         
-        TypeEngime.allCases.forEach {
-            if TypeEngimeStruct(rawValue: adsInfo.gearBox).contains($0.options) {
-                typeEngine = "\($0.title)"
-            }
+        if let text = TypeEngime.allCases.first(where: {TypeEngimeStruct(rawValue: adsInfo.typeEngine).contains($0.options)}) {
+            typeEngine = text.title
         }
         
-        ConditionsForAddAds.allCases.forEach {
-            if ConditionStruct(rawValue: adsInfo.condition).contains($0.options) {
-                condition = "\($0.title)"
-            }
+        if let text = ConditionsForAddAds.allCases.first(where: {ConditionStruct(rawValue: adsInfo.condition).contains($0.options)}) {
+            condition = text.title
         }
         
         self.smallDescription.text = "\(year) year, gearbox: \(gearBox), \(capacity) cm, \(typeEngine), \(typeDrive), \(mileage) km, \(condition)"

@@ -31,16 +31,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if let user = userFirebase {
           // User is signed in.
-            realmServise.addUserData(ID: user.uid)
-            realmServise.addUserData(isAuthFirebase: true)
-            realmServise.addUserData(isUserSignIn: true)
+            changeUserStatus(userId: user.uid, isAuthFirebase: true, isUserSignIn: true)
             userData = realmServise.getUserData()
             print("чел авторизован Firebase")
         } else {
           // No user is signed in.
-            realmServise.addUserData(ID: "")
-            realmServise.addUserData(isAuthFirebase: false)
-            realmServise.addUserData(isUserSignIn: false)
+            changeUserStatus(userId: "", isAuthFirebase: false, isUserSignIn: false)
             userData = realmServise.getUserData()
             print("чел не авторизован Firebase")
         }
@@ -49,15 +45,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             GIDSignIn.sharedInstance.restorePreviousSignIn { [weak self] user, error in
                 guard let self = self else { return }
                 if error != nil || user == nil {
-                    self.realmServise.addUserData(ID: "")
-                    self.realmServise.addUserData(isAuthFirebase: false)
-                    self.realmServise.addUserData(isUserSignIn: false)
+                    self.changeUserStatus(userId: "", isAuthFirebase: false, isUserSignIn: false)
                     print("чел не авторизован Google")
                 } else {
                     guard let userId = user?.userID else { return }
-                    self.realmServise.addUserData(ID: userId)
-                    self.realmServise.addUserData(isAuthFirebase: true)
-                    self.realmServise.addUserData(isUserSignIn: true)
+                    self.changeUserStatus(userId: userId, isAuthFirebase: true, isUserSignIn: true)
                     print("чел авторизован Google")
                 }
             }
@@ -74,6 +66,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
         
+    }
+    
+    func changeUserStatus(userId: String, isAuthFirebase: Bool, isUserSignIn: Bool) {
+        realmServise.addUserData(ID: userId)
+        realmServise.addUserData(isAuthFirebase: isAuthFirebase)
+        realmServise.addUserData(isUserSignIn: isUserSignIn)
     }
 }
 

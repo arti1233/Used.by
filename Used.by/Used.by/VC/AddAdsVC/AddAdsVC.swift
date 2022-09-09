@@ -260,7 +260,7 @@ extension AddAdsVC: UITableViewDataSource, UITableViewDelegate {
             switch ParametrsForAds.allCases[indexPath.row] {
             case .year:
                 cellForPhoneNumber.changeTextField(text: adsConfigure.year == 0 ? "" : String(adsConfigure.year))
-                cellForPhoneNumber.targetTextField = TargetTextField.year
+                cellForPhoneNumber.targetTextField = TargetStateCell.year
                 cellForPhoneNumber.prepareForReuse()
                 return cellForPhoneNumber
             case .typeEngine:
@@ -295,12 +295,12 @@ extension AddAdsVC: UITableViewDataSource, UITableViewDelegate {
                 return cellForRequestView
             case .capacityEngine:
                 cellForPhoneNumber.changeTextField(text: adsConfigure.capacity == 0 ? "" : String(adsConfigure.capacity))
-                cellForPhoneNumber.targetTextField = TargetTextField.capacity
+                cellForPhoneNumber.targetTextField = TargetStateCell.capacity
                 cellForPhoneNumber.prepareForReuse()
                 return cellForPhoneNumber
             case .mileage:
                 cellForPhoneNumber.changeTextField(text: adsConfigure.mileage == 0 ? "" : String(adsConfigure.mileage))
-                cellForPhoneNumber.targetTextField = TargetTextField.mileage
+                cellForPhoneNumber.targetTextField = TargetStateCell.mileage
                 cellForPhoneNumber.prepareForReuse()
                 return cellForPhoneNumber
             case .condition:
@@ -316,7 +316,7 @@ extension AddAdsVC: UITableViewDataSource, UITableViewDelegate {
             }
         case .cost:
             cellForPhoneNumber.changeTextField(text: adsConfigure.cost == 0 ? "" : String(adsConfigure.cost))
-            cellForPhoneNumber.targetTextField = TargetTextField.cost
+            cellForPhoneNumber.targetTextField = TargetStateCell.cost
             cellForPhoneNumber.prepareForReuse()
             return cellForPhoneNumber
         case .specification:
@@ -324,7 +324,7 @@ extension AddAdsVC: UITableViewDataSource, UITableViewDelegate {
             return cellForDescription
         case .phoneNumber:
             cellForPhoneNumber.changeTextField(text: adsConfigure.phoneNumber == 0 ? "" : String(adsConfigure.phoneNumber))
-            cellForPhoneNumber.targetTextField = TargetTextField.phoneNumber
+            cellForPhoneNumber.targetTextField = TargetStateCell.phoneNumber
             cellForPhoneNumber.prepareForReuse()
             return cellForPhoneNumber
         case .photo:

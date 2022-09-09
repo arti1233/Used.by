@@ -53,7 +53,7 @@ class MyAdsViewController: BaseViewController {
         userData = realmServise.getUserData()
         userDataResults = realmServise.getUsersRealmModel()
         getUserAds(userId: userData.userID)
-        changeTextButton()
+        changeTextButton(isUserSignIn: userData.isUserSingIn)
         tableView.refreshControl = refreshControl
         
         guard let items = userDataResults.first else { return }
@@ -68,7 +68,7 @@ class MyAdsViewController: BaseViewController {
                         self.tableView.reloadData()
                     }
                 }
-                self.changeTextButton()
+                self.changeTextButton(isUserSignIn: self.userData.isUserSingIn)
                 self.view.reloadInputViews()
             default:
                 break
@@ -142,8 +142,8 @@ class MyAdsViewController: BaseViewController {
         }
     }
     
-    private func changeTextButton() {
-        userData.isUserSingIn ? loginButton.setTitle("Add new ads", for: .normal) : loginButton.setTitle("Log in...", for: .normal)
+    private func changeTextButton(isUserSignIn: Bool) {
+        isUserSignIn ? loginButton.setTitle("Add new ads", for: .normal) : loginButton.setTitle("Log in...", for: .normal)
     }
     
     private func addLoginButton() {
@@ -181,8 +181,7 @@ extension MyAdsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = AdsVC()
-        let info = allAdsInfo[indexPath.row]
-        vc.adsInfo = info
+        vc.adsInfo = allAdsInfo[indexPath.row]
         vc.modalPresentationStyle = .fullScreen
         navigationController?.pushViewController(vc, animated: true)
     }

@@ -41,21 +41,15 @@ class ProfileViewController: BaseViewController {
 // MARK: Actions
     
         @objc private func loginButtonPressed(sender: UIButton) {
+            GIDSignIn.sharedInstance.signOut()
             firebase.signOutFirebase() { [weak self] result in
                 guard let self = self else { return }
                 if result {
                     self.realmService.addUserData(isAuthFirebase: false)
                     self.realmService.addUserData(isUserSignIn: false)
                     self.realmService.addUserData(ID: "")
-                    print("\(result) log out")
-                } else {
-                    print("\(result) log out")
                 }
             }
-            GIDSignIn.sharedInstance.signOut()
-            self.realmService.addUserData(isAuthFirebase: false)
-            self.realmService.addUserData(isUserSignIn: false)
-            self.realmService.addUserData(ID: "")
         }
     
 // MARK: Metods

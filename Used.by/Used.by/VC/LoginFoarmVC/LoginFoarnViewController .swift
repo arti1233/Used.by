@@ -190,8 +190,9 @@ final class LoginFormViewController: UIViewController {
 // Google SigIn button
     @objc fileprivate func signIn() {
         GIDSignIn.sharedInstance.signIn(with: signInConfig, presenting: self) { [weak self] user, error in
-            guard let self = self, error == nil, let user = user, let userProfile = user.profile, let userId = user.userID else {
-                self!.showAlertController()
+            guard let self = self else { return }
+            guard error == nil, let user = user, let userProfile = user.profile, let userId = user.userID else {
+                self.showAlertController()
                 return
             }
             self.fireBase.addNewUserForGoogle(name: userProfile.name, email: userProfile.email, userIdGoogle: userId)

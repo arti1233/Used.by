@@ -46,7 +46,6 @@ class AdsVC: BaseViewController {
     }()
 
     var adsInfo: AdsInfo?
-    private var notificationToken: NotificationToken?
     private var realmServise: RealmServiceProtocol!
     private var userData = UserRealmModel()
     private var firebase: FireBaseProtocol!
@@ -58,10 +57,14 @@ class AdsVC: BaseViewController {
         firebase = FireBaseService()
         userData = realmServise.getUserData()
         guard let adsInfo = adsInfo else { return }
-        firebase.chekSaveAdsOrNot(userId: userData.userID, adsId: adsInfo.id, complition: { [weak self] result in
-            guard let self = self else { return }
-            self.changeSaveButton(isAdsSave: result)
-        })
+        if userData.userID != "" {
+            firebase.chekSaveAdsOrNot(userId: userData.userID, adsId: adsInfo.id, complition: { [weak self] result in
+                guard let self = self else { return }
+                self.changeSaveButton(isAdsSave: result)
+            })
+        } else {
+            saveAdsButton.isEnabled = false 
+        }
     }
     
     override func updateViewConstraints() {
@@ -72,11 +75,6 @@ class AdsVC: BaseViewController {
         }
     }
     
-    deinit {
-        guard let token = notificationToken else { return }
-        token.invalidate()
-    }
-
 //MARK: Actions
     @objc private func callButtonPressed(sender: UIButton) {
         
@@ -93,13 +91,8 @@ class AdsVC: BaseViewController {
 //MARK: Metods
     
     func changeSaveButton(isAdsSave: Bool) {
-        if isAdsSave {
-            saveAdsButton.setImage(UIImage(systemName: "bookmark.fill"), for: .normal)
-            saveAdsButton.tintColor = .yellow
-        } else {
-            saveAdsButton.setImage(UIImage(systemName: "bookmark"), for: .normal)
-            saveAdsButton.tintColor = .white
-        }
+        isAdsSave ? saveAdsButton.setImage(UIImage(systemName: "bookmark.fill"), for: .normal) : saveAdsButton.setImage(UIImage(systemName: "bookmark"), for: .normal)
+        isAdsSave ? (saveAdsButton.tintColor = .yellow) : (saveAdsButton.tintColor = .white)
     }
     
     

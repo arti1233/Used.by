@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 
 // Enum for change target text field 
-enum TargetTextField: CaseIterable {
+enum TargetStateCell: CaseIterable {
     case year
     case capacity
     case cost
@@ -22,7 +22,7 @@ class CellForTextField: UITableViewCell, UITextFieldDelegate {
 
     static let key = "CellForTextField"
     private var realmServise: RealmServiceProtocol!
-    var targetTextField: TargetTextField!
+    var targetTextField: TargetStateCell!
     private var adsConfigure = AdsConfigure()
     
     
@@ -84,7 +84,7 @@ class CellForTextField: UITableViewCell, UITextFieldDelegate {
         customTextField.text = text
     }
     
-    private func changeTargetTextField(target: TargetTextField) {
+    private func changeTargetTextField(target: TargetStateCell) {
         switch target {
         case .year:
             nameCellLabel.text = "Year"
@@ -113,20 +113,16 @@ class CellForTextField: UITableViewCell, UITextFieldDelegate {
         switch target {
         case .year:
             realmServise.addAdsParams(year: textInt)
-            return true
         case .capacity:
             realmServise.addAdsParams(capacity: textInt)
-            return true
         case .cost:
             realmServise.addAdsParams(cost: textInt)
-            return true
         case .phoneNumber:
             realmServise.addAdsParams(phone: textInt)
-            return true
         case .mileage:
             realmServise.addAdsParams(mileage: textInt)
-            return true
         }
+        return true
     }
     
 //MARK: Consteint
