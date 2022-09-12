@@ -12,10 +12,11 @@ import RealmSwift
 import GoogleSignInSwift
 import GoogleSignIn
 
+// Enum for help made table view
 enum ProfileSection: CaseIterable {
     case profile
     case ads
-    
+
     var title: String {
         switch self {
         case .profile:
@@ -59,14 +60,17 @@ class ProfileViewController: BaseViewController {
         return spiner
     }()
     
+    //Realm object
     private var notificationToken: NotificationToken?
-    private var firebase: FireBaseProtocol!
     private var realmServise: RealmServiceProtocol!
     private var userDataResults: Results<UserRealmModel>!
     private var userData = UserRealmModel()
-    private var allAdsInfo: [AdsInfo] = []
-    private var alamofire: RestAPIProviderProtocol!
     private var userInfo: Users!
+    //Firebase
+    private var firebase: FireBaseProtocol!
+    //Alamofire
+    private var alamofire: RestAPIProviderProtocol!
+    private var allAdsInfo: [AdsInfo] = []
     private var nameUser = "Please log in apps"
     private var email = ""
     
@@ -81,9 +85,9 @@ class ProfileViewController: BaseViewController {
         userDataResults = realmServise.getUsersRealmModel()
         getUserInfo(userId: userData.userID)
         changeTextButton(isUserSignIn: userData.isUserSingIn)
-        tableView.refreshControl = refreshControl
         title = "Profile"
     
+        //Notificationt token
         guard let items = userDataResults.first else { return }
         notificationToken = items.observe{ [weak self] change in
             guard let self = self else { return }
@@ -256,6 +260,7 @@ class ProfileViewController: BaseViewController {
         view.addSubview(tableView)
         view.addSubview(loginButton)
         view.addSubview(spinerView)
+        tableView.refreshControl = refreshControl
     }
 }
 
@@ -292,7 +297,6 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             cell.changeSmallDescription(adsInfo: allAdsInfo[indexPath.row])
             return cell
         }
-        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

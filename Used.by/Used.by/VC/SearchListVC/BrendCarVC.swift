@@ -29,16 +29,16 @@ class BrendCarVC: BaseViewController {
         return tableView
     }()
     
+    private var realmServise: RealmServiceProtocol!
+    
     var carBrend: [CarBrend] = []
     var isSearch = true
-    private var realmServise: RealmServiceProtocol!
     var complition: ((CarBrend) -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         realmServise = RealmService()
-        view.addSubview(titleName)
-        view.addSubview(tableView)
+        addElements()
         offLargeTitle()
     }
     
@@ -59,6 +59,11 @@ class BrendCarVC: BaseViewController {
             $0.trailing.leading.equalToSuperview().inset(0)
             $0.top.equalToSuperview().inset(65)
         }
+    }
+    
+    private func addElements() {
+        view.addSubview(titleName)
+        view.addSubview(tableView)
     }
 }
 

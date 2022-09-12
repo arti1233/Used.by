@@ -30,14 +30,12 @@ class CellForUserInfo: UITableViewCell {
     }()
     
     private lazy var emailUser: CustomUILabel = {
-        var label = CustomUILabel()
-        return label
+        return CustomUILabel()
     }()
 
 //MARK: Override functions
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.backgroundColor = .clear
         addElements()
     }
     

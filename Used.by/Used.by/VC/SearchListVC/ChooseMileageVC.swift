@@ -50,9 +50,7 @@ class ChooseMileageVC: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         realmServise = RealmService()
-        view.addSubview(titleName)
-        view.addSubview(tableView)
-        view.addSubview(closeButton)
+        addElements()
         arrayMilegeInt = array.map({$0 * 10})
         arrayMilegeString = arrayMilegeInt.map({"from \($0) thousands km "})
     }
@@ -63,10 +61,12 @@ class ChooseMileageVC: BaseViewController {
     
     override func updateViewConstraints() {
         super.updateViewConstraints()
-        addElementsForView()
+        addConstreint()
     }
     
-    private func addElementsForView() {
+    
+// MARK: Metod for constreint
+    private func addConstreint() {
         titleName.snp.makeConstraints{
             $0.top.trailing.equalToSuperview()
             $0.leading.equalToSuperview().inset(16)
@@ -85,6 +85,12 @@ class ChooseMileageVC: BaseViewController {
             $0.trailing.leading.equalToSuperview().inset(0)
             $0.top.equalToSuperview().inset(65)
         }
+    }
+    
+    private func addElements() {
+        view.addSubview(titleName)
+        view.addSubview(tableView)
+        view.addSubview(closeButton)
     }
     
 //MARK: Metod

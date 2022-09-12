@@ -102,15 +102,6 @@ class CellForAdsPhoto: UITableViewCell {
         }
     }
     
-    // Add elements on the view
-    func addElements() {
-        contentView.addSubview(mainView)
-        mainView.addSubview(nameCellLabel)
-        scrollView.addSubview(stackView)
-        mainView.addSubview(scrollView)
-        mainView.addSubview(chooseButton)
-    }
-    
 //MARK: Constreint
     private func addElementsConstraint() {
         mainView.snp.makeConstraints {
@@ -138,5 +129,14 @@ class CellForAdsPhoto: UITableViewCell {
             $0.top.equalTo(scrollView.snp.bottom).offset(16)
             $0.height.equalTo(50)
         }
+    }
+    
+    // Add elements on the view
+    func addElements() {
+        contentView.addSubview(mainView)
+        mainView.addSubview(nameCellLabel)
+        scrollView.addSubview(stackView)
+        mainView.addSubview(scrollView)
+        mainView.addSubview(chooseButton)
     }
 }

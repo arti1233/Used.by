@@ -71,106 +71,57 @@ class ViewingAdsVC: BaseViewController {
     
 // My search metods
     private func searchForParams(allAds: [AdsInfo], params: SearchSetting) -> [AdsInfo] {
-        var correctArrayAds: [AdsInfo] = []
+        var correctArrayAds: [AdsInfo] = allAds
         
-        if params.carBrend == "" {
-            correctArrayAds = allAds
-        } else {
-            allAds.forEach {
-                if $0.carModel == params.carModel || $0.carBrend == params.carBrend {
-                    correctArrayAds.append($0)
-                }
-            }
+        if params.carBrend != "" {
+            let emptyArray = correctArrayAds.filter({$0.carBrend == params.carBrend})
+            correctArrayAds = emptyArray
         }
         
         
         if params.carModel != "" {
-            var emptyArray: [AdsInfo] = []
-            allAds.forEach {
-                if $0.carModel == params.carModel || $0.carBrend == params.carBrend {
-                    emptyArray.append($0)
-                }
-            }
+            let emptyArray = correctArrayAds.filter({$0.carModel == params.carModel})
             correctArrayAds = emptyArray
         }
         
         if params.yearOfProductionMax != 0 && params.yearOfProductionMin != 0 {
-            var emptyArray: [AdsInfo] = []
-            correctArrayAds.forEach {
-                if (params.yearOfProductionMin...params.yearOfProductionMax).contains($0.year) {
-                    emptyArray.append($0)
-                }
-            }
+            
+            let emptyArray = correctArrayAds.filter({(params.yearOfProductionMin...params.yearOfProductionMax).contains($0.year)})
             correctArrayAds = emptyArray
         }
         
         if params.costMin != 0 && params.costMax != 0 {
-            var emptyArray: [AdsInfo] = []
-            correctArrayAds.forEach {
-                if (params.costMin...params.costMax).contains($0.cost) {
-                    emptyArray.append($0)
-                }
-            }
+            let emptyArray = correctArrayAds.filter({(params.costMin...params.costMax).contains($0.cost)})
             correctArrayAds = emptyArray
         }
         
         if params.engineCapacityMax != 0 && params.engineCapacityMin != 0 {
-            var emptyArray: [AdsInfo] = []
-            correctArrayAds.forEach {
-                if (params.engineCapacityMin * 1000...params.engineCapacityMax * 1000).contains(Double($0.capacity)) {
-                    emptyArray.append($0)
-                }
-            }
+            let emptyArray = correctArrayAds.filter({(params.engineCapacityMin * 1000...params.engineCapacityMax * 1000).contains(Double($0.capacity))})
             correctArrayAds = emptyArray
         }
         
         if params.mileage != 0 {
-            var emptyArray: [AdsInfo] = []
-            correctArrayAds.forEach {
-                if (0...params.mileage * 1000).contains($0.mileage) {
-                    emptyArray.append($0)
-                }
-            }
+            let emptyArray = correctArrayAds.filter({(0...params.mileage * 1000).contains($0.mileage)})
             correctArrayAds = emptyArray
         }
         
         if params.gearbox != 0 {
-            var emptyArray: [AdsInfo] = []
-            correctArrayAds.forEach {
-                if GearBoxStruct(rawValue: params.gearbox).contains(GearBoxStruct(rawValue: $0.gearBox)) {
-                    emptyArray.append($0)
-                }
-            }
+            let emptyArray = correctArrayAds.filter({GearBoxStruct(rawValue: params.gearbox).contains(GearBoxStruct(rawValue: $0.gearBox))})
             correctArrayAds = emptyArray
         }
         
         if params.typeEngine != 0 {
-            var emptyArray: [AdsInfo] = []
-            correctArrayAds.forEach {
-                if TypeEngimeStruct(rawValue: params.typeEngine).contains(TypeEngimeStruct(rawValue: $0.typeEngine)) {
-                    emptyArray.append($0)
-                }
-            }
+            let emptyArray = correctArrayAds.filter({TypeEngimeStruct(rawValue: params.typeEngine).contains(TypeEngimeStruct(rawValue: $0.typeEngine))})
             correctArrayAds = emptyArray
         }
         
         if params.typeDrive != 0 {
-            var emptyArray: [AdsInfo] = []
-            correctArrayAds.forEach {
-                if TypeOfDriveStruct(rawValue: params.typeDrive).contains(TypeOfDriveStruct(rawValue: $0.typeDrive)) {
-                    emptyArray.append($0)
-                }
-            }
+            let emptyArray = correctArrayAds.filter({TypeOfDriveStruct(rawValue: params.typeDrive).contains(TypeOfDriveStruct(rawValue: $0.typeDrive))})
             correctArrayAds = emptyArray
         }
         
         if params.conditionAuto != 0 {
-            var emptyArray: [AdsInfo] = []
-            correctArrayAds.forEach {
-                if ConditionStruct(rawValue: params.conditionAuto).contains(ConditionStruct(rawValue: $0.condition)) {
-                    emptyArray.append($0)
-                }
-            }
+            let emptyArray = correctArrayAds.filter({ConditionStruct(rawValue: params.conditionAuto).contains(ConditionStruct(rawValue: $0.condition))})
             correctArrayAds = emptyArray
         }
         

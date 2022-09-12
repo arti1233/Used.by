@@ -60,18 +60,16 @@ class PickerVC: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         realmServise = RealmService()
-        view.addSubview(titleName)
-        view.addSubview(acceptButton)
-        view.addSubview(closeButton)
-        view.addSubview(picker)
+        addElements()
         arrayInt.forEach({arrayCapacity.append(Double($0) / 10)})
     }
 
     override func updateViewConstraints() {
         super.updateViewConstraints()
-        addElements()
+        addConstreint()
     }
-    
+
+// MARK: Actions
     @objc fileprivate func closeVC(_ sender: UIButton) {
         dismiss(animated: true)
     }
@@ -80,6 +78,7 @@ class PickerVC: BaseViewController {
         isCapacityPicker ?  addCapacityRange(first: firstResultCapacity, second: secondResultCapacity) : addYearRange(first: firstYear, second: secondYear)
         dismiss(animated: true)
     }
+    
 // MARK: Metods
     func changeTitleName(name: String) {
         titleName.text = name
@@ -96,7 +95,7 @@ class PickerVC: BaseViewController {
         realmServise.addObjectInSearchSetting(engineCapacityMax: description.max(first, second))
     }
     
-    private func addElements() {
+    private func addConstreint() {
     
         titleName.snp.makeConstraints{
             $0.top.trailing.equalToSuperview()
@@ -122,7 +121,13 @@ class PickerVC: BaseViewController {
             $0.top.equalTo(titleName.snp.bottom).inset(16)
             $0.height.equalTo(300)
         }
-        
+    }
+    
+    private func addElements() {
+        view.addSubview(titleName)
+        view.addSubview(acceptButton)
+        view.addSubview(closeButton)
+        view.addSubview(picker)
     }
 }
 

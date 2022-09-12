@@ -22,8 +22,8 @@ class CellForTextField: UITableViewCell, UITextFieldDelegate {
     private var realmServise: RealmServiceProtocol!
     var targetTextField: TargetStateCell!
     private var adsConfigure = AdsConfigure()
-    private var limitSymbols = 0
-    
+    private var maxlimitSymbols = 0
+
     private lazy var mainView: UIView = {
         var view = UIView()
         view.backgroundColor = .myColorForCell
@@ -52,7 +52,6 @@ class CellForTextField: UITableViewCell, UITextFieldDelegate {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         realmServise = RealmService()
         addElements()
-        
     }
     
     required init?(coder: NSCoder) {
@@ -89,7 +88,7 @@ class CellForTextField: UITableViewCell, UITextFieldDelegate {
         
         let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
         
-        return updatedText.count <= limitSymbols
+        return updatedText.count <= maxlimitSymbols
     }
     
 //MARK: Metods
@@ -103,16 +102,16 @@ class CellForTextField: UITableViewCell, UITextFieldDelegate {
         case .phoneNumber:
             nameCellLabel.text = "+375"
             customTextField.placeholder = "Phone number"
-            limitSymbols = 9
+            maxlimitSymbols = 9
         case .cost:
             nameCellLabel.text = "USD"
             customTextField.placeholder = "Cost"
-            limitSymbols = 7
+            maxlimitSymbols = 7
         case .mileage:
             nameCellLabel.text = "km"
             nameCellLabel.font = UIFont.systemFont(ofSize: 21)
             customTextField.placeholder = "Mileage"
-            limitSymbols = 7
+            maxlimitSymbols = 7
         }
     }
     
@@ -130,8 +129,6 @@ class CellForTextField: UITableViewCell, UITextFieldDelegate {
         }
         return true
     }
-    
-
     
 //MARK: Consteint
     

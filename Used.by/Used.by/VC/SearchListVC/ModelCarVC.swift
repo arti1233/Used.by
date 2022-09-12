@@ -37,8 +37,7 @@ class ModelCarVC: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         realmServise = RealmService()
-        view.addSubview(titleName)
-        view.addSubview(tableView)
+        addElements()
         offLargeTitle()
         if isSearch {
             navigationItem.rightBarButtonItems = [UIBarButtonItem(title: "Accept", style: .plain, target: self, action: #selector(resetButtonPressed(sender:)))]
@@ -48,10 +47,12 @@ class ModelCarVC: BaseViewController {
     
     override func updateViewConstraints() {
         super.updateViewConstraints()
-        addElementsForView()
+        addConstreint()
     }
+
+//MARK: Metod for constreint
     
-    private func addElementsForView() {
+    private func addConstreint() {
         titleName.snp.makeConstraints{
             $0.top.trailing.equalToSuperview()
             $0.leading.equalToSuperview()
@@ -64,6 +65,12 @@ class ModelCarVC: BaseViewController {
             $0.top.equalToSuperview().inset(65)
         }
     }
+    
+    private func addElements() {
+        view.addSubview(titleName)
+        view.addSubview(tableView)
+    }
+    
     
 //MARK: Metod
     @objc private func resetButtonPressed(sender: UIBarButtonItem) {

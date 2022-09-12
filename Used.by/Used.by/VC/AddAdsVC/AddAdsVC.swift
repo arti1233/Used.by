@@ -415,6 +415,7 @@ extension AddAdsVC: UITableViewDataSource, UITableViewDelegate {
         guard let header = view as? UITableViewHeaderFooterView,
               let headerText = header.textLabel  else { return }
         headerText.textColor = .myCustomPurple
+        headerText.font = UIFont.systemFont(ofSize: 17, weight: .heavy)
         let viewForBackground = UIView()
         header.clipsToBounds = true
         header.layer.cornerRadius = 10

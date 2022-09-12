@@ -44,28 +44,29 @@ class SaveAdsViewController: BaseViewController {
         return refresh
     }()
     
+    //Realm objects
     private var notificationToken: NotificationToken?
     private var realmServise: RealmServiceProtocol!
     private var userData = UserRealmModel()
     private var userDataResults: Results<UserRealmModel>!
+    //Alamofire
     private var alamofire: RestAPIProviderProtocol!
-    private var allAdsInfo: [AdsInfo] = []
     
+    private var allAdsInfo: [AdsInfo] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        addElements()
         realmServise = RealmService()
         alamofire = AlamofireProvider()
         userData = realmServise.getUserData()
         userDataResults = realmServise.getUsersRealmModel()
-        view.addSubview(tableView)
-        view.addSubview(loginButton)
-        view.addSubview(spinerView)
         showLoginButton(isShow: userData.isUserSingIn)
         getSaveUserAds(userId: userData.userID)
-        tableView.refreshControl = refreshControl
+        
         title = "Save ads"
         
+        // Notification token
         guard let items = userDataResults.first else { return }
         notificationToken = items.observe{ [weak self] change in
             guard let self = self else { return }
@@ -85,7 +86,6 @@ class SaveAdsViewController: BaseViewController {
                 break
             }
         }
-
     }
     
     override func updateViewConstraints() {
@@ -154,7 +154,8 @@ class SaveAdsViewController: BaseViewController {
     private func showLoginButton(isShow: Bool) {
         loginButton.isHidden = isShow
     }
-    
+
+//MARK: Metods for constreint
     private func addConstreint() {
         tableView.snp.makeConstraints {
             $0.bottom.equalToSuperview()
@@ -174,6 +175,13 @@ class SaveAdsViewController: BaseViewController {
             $0.trailing.leading.equalToSuperview()
             $0.top.equalTo(view.safeAreaInsets.top)
         }
+    }
+    
+    private func addElements() {
+        view.addSubview(tableView)
+        view.addSubview(loginButton)
+        view.addSubview(spinerView)
+        tableView.refreshControl = refreshControl
     }
 }
 

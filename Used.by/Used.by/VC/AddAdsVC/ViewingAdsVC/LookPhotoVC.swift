@@ -16,7 +16,6 @@ class LookPhotoVC: BaseViewController, UIScrollViewDelegate {
     private lazy var myScrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.backgroundColor = .mainBackgroundColor
-        scrollView.frame = view.bounds
         scrollView.delegate = self
         scrollView.isPagingEnabled = true
         scrollView.bounces = true
@@ -39,7 +38,7 @@ class LookPhotoVC: BaseViewController, UIScrollViewDelegate {
   
     override func viewDidLoad() {
         super.viewDidLoad()
-        offLargeTitle()
+        
         navigationItem.leftBarButtonItems = [UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(backButtonPressed(sender:)))]
         title = titleName
         view.addSubview(myScrollView)
@@ -50,14 +49,14 @@ class LookPhotoVC: BaseViewController, UIScrollViewDelegate {
             stackView.addArrangedSubview(newScroll)
             newScroll.snp.makeConstraints {
                 $0.width.equalTo(view.snp.width)
-                $0.height.equalTo(view.snp.height)
+                $0.height.equalTo(view.safeAreaLayoutGuide.snp.height)
             }
             
             newView = UIView()
             newScroll.addSubview(newView)
             newView.snp.makeConstraints {
                 $0.width.equalTo(view.snp.width)
-                $0.height.equalTo(view.snp.height)
+                $0.height.equalTo(view.safeAreaLayoutGuide.snp.height)
             }
             
             imageView = UIImageView()
@@ -66,7 +65,7 @@ class LookPhotoVC: BaseViewController, UIScrollViewDelegate {
             newView.addSubview(imageView)
             imageView.snp.makeConstraints {
                 $0.width.equalTo(view.snp.width)
-                $0.height.equalTo(view.snp.height)
+                $0.height.equalTo(view.safeAreaLayoutGuide.snp.height)
             }
             
             imageView.tag = index + 1
@@ -83,6 +82,11 @@ class LookPhotoVC: BaseViewController, UIScrollViewDelegate {
     override func updateViewConstraints() {
         super.updateViewConstraints()
     
+        myScrollView.snp.makeConstraints {
+            $0.trailing.leading.bottom.equalToSuperview()
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+        }
+        
         stackView.snp.makeConstraints {
             $0.trailing.leading.bottom.top.equalToSuperview()
         }

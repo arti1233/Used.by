@@ -62,11 +62,7 @@ class  ChooseCostVC: BaseViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         realmServise = RealmService()
-        view.addSubview(titleName)
-        view.addSubview(minCostTextField)
-        view.addSubview(maxCostTextField)
-        view.addSubview(acceptButton)
-        view.addSubview(closeButton)
+        addElements()
     }
     
     
@@ -74,7 +70,8 @@ class  ChooseCostVC: BaseViewController, UITextFieldDelegate {
         super.updateViewConstraints()
         addConstreit()
     }
-    
+
+//MARK: Actions
     @objc fileprivate func closeVC(_ sender: UIButton) {
         dismiss(animated: true)
     }
@@ -92,7 +89,7 @@ class  ChooseCostVC: BaseViewController, UITextFieldDelegate {
         dismiss(animated: true)
         
     }
-    
+//MARK: Metods 
     func changeTitleName(name: String) {
         titleName.text = name
     }
@@ -106,8 +103,9 @@ class  ChooseCostVC: BaseViewController, UITextFieldDelegate {
         let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
         return updatedText.count <= 7
     }
-    
-    fileprivate func addConstreit() {
+
+//MARK: Metods for constreint
+    private func addConstreit() {
 
         titleName.snp.makeConstraints{
             $0.top.trailing.equalToSuperview().inset(16)
@@ -139,5 +137,13 @@ class  ChooseCostVC: BaseViewController, UITextFieldDelegate {
             $0.centerY.equalTo(titleName.snp.centerY)
             closeButton.layer.cornerRadius = 40 / 2
         }
+    }
+    
+    private func addElements() {
+        view.addSubview(titleName)
+        view.addSubview(minCostTextField)
+        view.addSubview(maxCostTextField)
+        view.addSubview(acceptButton)
+        view.addSubview(closeButton)
     }
 }

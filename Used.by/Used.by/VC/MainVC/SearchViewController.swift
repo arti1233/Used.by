@@ -52,7 +52,6 @@ class SearchViewController: BaseViewController {
         title = "USED.BY"
         tableView.refreshControl = refreshControl
         getAllAdsId()
-        
     }
 
     override func updateViewConstraints() {
@@ -66,12 +65,14 @@ class SearchViewController: BaseViewController {
     }
     
 //MARK: Metods
-        
+ 
+    // Tap to search Button
     @objc private func searchButtonPressed(sender: UIButton) {
         let vc = ListSearchParametrVC()
         navigationController?.pushViewController(vc, animated: true)
     }
     
+    // Previosly I get all ads id
     private func getAllAdsId() {
         alamofireServise.getAllAdsId { [weak self] result in
             guard let self = self else { return }
@@ -85,6 +86,7 @@ class SearchViewController: BaseViewController {
         }
     }
     
+    // I get information on asd 
     private func getInfoAllAds(adsId: [String]) {
         let group = DispatchGroup()
         spinerView.startAnimating()

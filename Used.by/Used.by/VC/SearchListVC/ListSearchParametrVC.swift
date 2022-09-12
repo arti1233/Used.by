@@ -13,25 +13,6 @@ import RealmSwift
 
 class ListSearchParametrVC: BaseViewController {
 
-    private var realmServise: RealmServiceProtocol!
-    private var alamofireProvider: RestAPIProviderProtocol!
-    private var searchSettinmgItems: Results<SearchSetting>!
-    private var notificationToken: NotificationToken?
-    private var carBrend: [CarBrend] = []
-    private var carModelForCell: CarBrend?
-    
-    private var typeEngineStruct = TypeEngimeStruct()
-    private var typeDriveStruct = TypeOfDriveStruct()
-    private var gearBoxStruct = GearBoxStruct()
-    private var conditionsStruct = ConditionStruct()
-    private let section = CreateSections.allCases
-    private let modelCars = ModelCars.allCases
-    private let parametrs = Parametrs.allCases
-    private let typeEngine = TypeEngime.allCases
-    private let typeDrive = TypeOfDrive.allCases
-    private let gearBox = GearBox.allCases
-    private let conditions = Conditions.allCases
-
     private lazy var tableView: UITableView = {
         var tableView = UITableView()
         tableView = UITableView(frame: .zero, style: .grouped)
@@ -53,23 +34,45 @@ class ListSearchParametrVC: BaseViewController {
         return button
     }()
     
+    //Realm object
+    private var realmServise: RealmServiceProtocol!
+    private var searchSettinmgItems: Results<SearchSetting>!
+    private var notificationToken: NotificationToken?
+    //Alamofire
+    private var alamofireProvider: RestAPIProviderProtocol!
+   
+    private var carBrend: [CarBrend] = []
+    private var carModelForCell: CarBrend?
+    
+    private var typeEngineStruct = TypeEngimeStruct()
+    private var typeDriveStruct = TypeOfDriveStruct()
+    private var gearBoxStruct = GearBoxStruct()
+    private var conditionsStruct = ConditionStruct()
+    private let section = CreateSections.allCases
+    private let modelCars = ModelCars.allCases
+    private let parametrs = Parametrs.allCases
+    private let typeEngine = TypeEngime.allCases
+    private let typeDrive = TypeOfDrive.allCases
+    private let gearBox = GearBox.allCases
+    private let conditions = Conditions.allCases
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         offLargeTitle()
         realmServise = RealmService()
         alamofireProvider = AlamofireProvider()
-        view.addSubview(tableView)
-        view.addSubview(searchButton)
+        addElements()
         title = "Parametrs"
-        print(Realm.Configuration.defaultConfiguration.fileURL!)
         getCarbrend()
         navigationItem.rightBarButtonItems = [UIBarButtonItem(title: "Reset", style: .plain, target: self, action: #selector(resetButtonPressed(sender:)))]
         realmServise.addObjectInSearchSetting(carModel: "")
         searchSettinmgItems = realmServise.getListSearchSetting()
+        
         if searchSettinmgItems.first == nil {
             realmServise.resetSearchSetting()
             searchSettinmgItems = realmServise.getListSearchSetting()
         }
+        
         guard let items = searchSettinmgItems.first else { return }
         typeEngineStruct.rawValue = items.typeEngine
         typeDriveStruct.rawValue = items.typeDrive
@@ -103,6 +106,8 @@ class ListSearchParametrVC: BaseViewController {
         token.invalidate()
     }
 
+//MARK: Ections
+
     @objc private func searchButtonPressed(sender: UIButton) {
         let vc = ViewingAdsVC()
         vc.isSearch = true
@@ -132,19 +137,21 @@ class ListSearchParametrVC: BaseViewController {
         }
     }
     
+    private func addElements() {
+        view.addSubview(tableView)
+        view.addSubview(searchButton)
+    }
+    
 // MARK: Metods
     private func presentPickerVC(isCapacity: Bool) {
         let vc = PickerVC()
         vc.isCapacityPicker = isCapacity
         vc.isCapacityPicker ? vc.changeTitleName(name: "Capacity engine") : vc.changeTitleName(name: "Year of prodaction")
-        
         if let presentationConroller = vc.presentationController as? UISheetPresentationController {
             presentationConroller.detents = [.medium()]
         }
-        
         present(vc, animated: true)
     }
-    
     
     private func getCarbrend() {
         alamofireProvider.getCarBrendInfo { [weak self] result in
@@ -152,8 +159,8 @@ class ListSearchParametrVC: BaseViewController {
             switch result {
             case .success(let result):
                 self.carBrend = result
-            case .failure:
-                print("ERROR")
+            default:
+                break
             }
         }
     }
@@ -232,7 +239,7 @@ extension ListSearchParametrVC: UITableViewDelegate, UITableViewDataSource {
             switch conditions[indexPath.row] {
             case .mileage:
                 cellForRequestView.changeFieldName(name: conditions[indexPath.row].title)
-                if items.mileage != 0{
+                if items.mileage != 0 {
                     cellForRequestView.changeResultLabel(name: "from \(items.mileage) thousands km ")
                 }
                 return cellForRequestView

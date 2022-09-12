@@ -63,10 +63,11 @@ class AdsCell: UITableViewCell {
         spiner.hidesWhenStopped = true
         return spiner
     }()
-    
+
     var complition: (([UIImage]) -> Void)?
     var isTransitionOnLookPhoto = false
     var isSmallCell = true
+    var arrayImage: [UIImage] = []
     
 //MARK: Override functions
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -85,6 +86,20 @@ class AdsCell: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+    }
+    
+//MARK: Actions
+    
+    @objc private func tapOnStackViewPressed(_ sender: UITapGestureRecognizer) {
+        if isTransitionOnLookPhoto {
+            print("OK")
+            guard let complition = complition else { return }
+            complition(arrayImage)
+        }
     }
 
 // MARK: Metods
@@ -124,35 +139,21 @@ class AdsCell: UITableViewCell {
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             guard let self = self else { return }
             urlPhoto.forEach({arrayImage.append($0.image)})
+            self.arrayImage = arrayImage
             DispatchQueue.main.async {
                 arrayImage.forEach({self.stackView.addArrangedSubview(UIImageView(image: $0))})
-                if self.isTransitionOnLookPhoto {
-                    guard let complition = self.complition else { return }
-                    complition(arrayImage)
-                }
-                if self.stackView.arrangedSubviews.count == 1 {
-                    for image in self.stackView.arrangedSubviews {
-                        image.contentMode = .scaleAspectFit
-                        image.snp.makeConstraints {
-                            $0.height.equalTo(self.scrollView.frame.height)
-                            $0.trailing.leading.equalTo(self.viewForContent).inset(16)
+                for image in self.stackView.arrangedSubviews {
+                    image.contentMode = .scaleAspectFill
+                    image.snp.makeConstraints {
+                        $0.height.equalTo(self.scrollView.frame.height)
+                        if self.isSmallCell {
+                            $0.width.equalTo(self.scrollView.frame.height)
+                        } else {
+                            $0.width.equalTo(self.viewForContent.frame.width - 32)
                         }
                     }
-                    self.spinerView.stopAnimating()
-                } else {
-                    for image in self.stackView.arrangedSubviews {
-                        image.contentMode = .scaleAspectFit
-                        image.snp.makeConstraints {
-                            $0.height.equalTo(self.scrollView.frame.height)
-                            if self.isSmallCell {
-                                $0.width.equalTo(self.scrollView.frame.height)
-                            } else {
-                                $0.width.equalTo(self.viewForContent.frame.width - 32)
-                            }
-                        }
-                    }
-                    self.spinerView.stopAnimating()
                 }
+                self.spinerView.stopAnimating()
             }
         }
     }
@@ -208,6 +209,9 @@ class AdsCell: UITableViewCell {
         viewForContent.addSubview(titleCell)
         viewForContent.addSubview(costLabel)
         scrollView.addSubview(stackView)
+        scrollView.isUserInteractionEnabled = true
+        scrollView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapOnStackViewPressed(_:)))
+        )
         scrollView.addSubview(spinerView)
         viewForContent.addSubview(scrollView)
         viewForContent.addSubview(smallDescription)

@@ -21,5 +21,4 @@ struct Constants {
     static var getUserInfoURl: String {
         return baseURL.appending("users/")
     }
-    
 }

@@ -79,9 +79,7 @@ class ChooseParamsVC: BaseViewController {
         super.updateViewConstraints()
         addConstreint()
     }
-    
 
-    
 //MARK: Metod
     func changeTitleName(name: String) {
         titleName.text = name

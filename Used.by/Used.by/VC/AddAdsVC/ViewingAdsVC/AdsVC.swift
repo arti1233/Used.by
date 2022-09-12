@@ -116,6 +116,15 @@ class AdsVC: BaseViewController {
         saveAdsButton.tintColor = isAdsSave ? .yellow : .white
     }
     
+    private func presentLookPhotoVC(arrayImage: [UIImage]) {
+        let vc = LookPhotoVC()
+        vc.arrayImages = arrayImage
+        guard let info = adsInfo else { return }
+        vc.titleName = "\(info.carBrend) \(info.carModel)"
+        let navVC = UINavigationController(rootViewController: vc)
+        present(navVC, animated: true)
+    }
+    
 // MARK: AlertController
         private func showAlertController() {
             guard let adsInfo = adsInfo else { return }
@@ -195,6 +204,9 @@ extension AdsVC: UITableViewDataSource, UITableViewDelegate {
             cellForAds.complition = { [weak self] result in
                 guard let self = self else { return }
                 self.arrayImage = result
+                if !self.arrayImage.isEmpty {
+                    self.presentLookPhotoVC(arrayImage: self.arrayImage)
+                }
             }
             cellForAds.updateConstraints()
             return cellForAds
@@ -204,20 +216,6 @@ extension AdsVC: UITableViewDataSource, UITableViewDelegate {
             return cellForSpec
         default:
             return UITableViewCell()
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch indexPath.row {
-        case 0:
-            let vc = LookPhotoVC()
-            vc.arrayImages = arrayImage
-            guard let info = adsInfo else { return }
-            vc.titleName = "\(info.carBrend) \(info.carModel)"
-            let navVC = UINavigationController(rootViewController: vc)
-            present(navVC, animated: true)
-        default:
-            break
         }
     }
 }
