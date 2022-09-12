@@ -90,6 +90,7 @@ class AdsCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        stackView.subviews.forEach({$0.removeFromSuperview()})
     }
     
 //MARK: Actions
