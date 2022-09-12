@@ -19,14 +19,12 @@ class MainTabBarController: UITabBarController {
     
     private func generateTabBar() {
         
-        let myAdsViewController = UINavigationController(rootViewController: MyAdsViewController())
         let saveAdsViewController = UINavigationController(rootViewController:  SaveAdsViewController())
         let settingViewController = UINavigationController(rootViewController: ProfileViewController())
         let searchViewController = UINavigationController(rootViewController: SearchViewController())
           
         viewControllers = [
             generateVC(viewController: searchViewController, title: "Search", image: UIImage(systemName: "magnifyingglass")),
-            generateVC(viewController: myAdsViewController, title: "My ads", image: UIImage(systemName: "list.bullet.rectangle")),
             generateVC(viewController: saveAdsViewController, title: "Save", image: UIImage(systemName: "bookmark")),
             generateVC(viewController: settingViewController, title: "Profile", image: UIImage(systemName: "person.fill"))
         ]
@@ -41,8 +39,8 @@ class MainTabBarController: UITabBarController {
     }
     
     private func setTabBarAppearance() {
-        tabBar.backgroundColor = UIColor.mainWhite
-        tabBar.tintColor = .myCustomPurple
-        tabBar.unselectedItemTintColor = .tabBarItemLight
+        tabBar.backgroundColor = .tabBarColor
+        tabBar.tintColor = .tabBarItemLight
+        tabBar.unselectedItemTintColor = .lightGray
     }
 }

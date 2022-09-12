@@ -18,7 +18,7 @@ class AdsConfigure: Object {
     @Persisted var typeEngine: Int = 0
     @Persisted var gearbox: Int = 0
     @Persisted var typeDrive: Int = 0
-    @Persisted var capacity: Int = 0
+    @Persisted var capacity: Double = 0
     @Persisted var mileage: Int = 0
     @Persisted var descriptionCar: String = ""
     @Persisted var phoneNumber: Int = 0

@@ -11,7 +11,6 @@ import UIKit
 
 protocol RestAPIProviderProtocol {
     
-    func getAllUsersInfo(completion: @escaping(Result<[Users], Error>) -> Void)
     func getUserInfo(id: String, completion: @escaping(Result<Users, Error>) -> Void)
     func getCarBrendInfo(completion: @escaping(Result<[CarBrend], Error>) -> Void)
     func getAllAdsId(completion: @escaping(Result<AllAdsId, Error>) -> Void)
@@ -22,17 +21,6 @@ protocol RestAPIProviderProtocol {
 }
 
 class AlamofireProvider: RestAPIProviderProtocol {
-    
-    func getAllUsersInfo(completion: @escaping (Result<[Users], Error>) -> Void) {
-        AF.request(Constants.getAllUserInfoURl, method: .get).responseDecodable(of: [Users].self) { response in
-            switch response.result {
-            case .success(let result):
-                return completion(.success(result))
-            case .failure(let error):
-                return completion(.failure(error))
-            }
-        }
-    }
     
     func getUserInfo(id: String, completion: @escaping (Result<Users, Error>) -> Void) {
         AF.request(Constants.getUserInfoURl.appending("\(id).json"), method: .get).responseDecodable(of: Users.self) { response in

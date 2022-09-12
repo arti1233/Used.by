@@ -13,6 +13,13 @@ class CellForDescription: UITableViewCell {
 
     static let key = "CellForDescription"
     
+    private lazy var mainView: UIView = {
+        var view = UIView()
+        view.backgroundColor = .myColorForCell
+        view.layer.cornerRadius = 10
+        return view
+    }()
+    
     private lazy var nameCellLabel: CustomUILabel = {
         var label = CustomUILabel()
         label.text = "Description"
@@ -54,6 +61,12 @@ class CellForDescription: UITableViewCell {
 //MARK: Metotds for constreint
     
     private func addConstreint() {
+        
+        mainView.snp.makeConstraints {
+            $0.top.bottom.equalToSuperview().inset(4)
+            $0.leading.trailing.equalToSuperview()
+        }
+        
         nameCellLabel.snp.makeConstraints {
             $0.trailing.leading.equalToSuperview().inset(16)
             $0.top.equalToSuperview().inset(16)
@@ -67,8 +80,9 @@ class CellForDescription: UITableViewCell {
     }
     
     private func addElements() {
-        contentView.addSubview(nameCellLabel)
-        contentView.addSubview(descriptionTextLabel)
+        contentView.addSubview(mainView)
+        mainView.addSubview(nameCellLabel)
+        mainView.addSubview(descriptionTextLabel)
     }
 
 }

@@ -15,8 +15,15 @@ class SaveAdsViewController: BaseViewController {
     private var loginButton: CustomButton = {
         var button = CustomButton()
         button.setTitle("Log in...", for: .normal)
+        button.backgroundColor = .logInColor
         button.addTarget(self, action: #selector(loginButtonPressed), for: .touchUpInside)
         return button
+    }()
+    
+    private lazy var spinerView: UIActivityIndicatorView = {
+        var spiner = UIActivityIndicatorView()
+        spiner.hidesWhenStopped = true
+        return spiner
     }()
     
     private lazy var tableView: UITableView = {
@@ -29,6 +36,7 @@ class SaveAdsViewController: BaseViewController {
         tableView.backgroundColor = .clear
         return tableView
     }()
+    
     
     private lazy var refreshControl: UIRefreshControl = {
         let refresh = UIRefreshControl()
@@ -52,10 +60,11 @@ class SaveAdsViewController: BaseViewController {
         userDataResults = realmServise.getUsersRealmModel()
         view.addSubview(tableView)
         view.addSubview(loginButton)
+        view.addSubview(spinerView)
         showLoginButton(isShow: userData.isUserSingIn)
         getSaveUserAds(userId: userData.userID)
         tableView.refreshControl = refreshControl
-        title = "Save"
+        title = "Save ads"
         
         guard let items = userDataResults.first else { return }
         notificationToken = items.observe{ [weak self] change in
@@ -64,6 +73,7 @@ class SaveAdsViewController: BaseViewController {
             case .change(_, let properties):
                 for property in properties {
                     if property.name == "userID" {
+                        self.allAdsInfo = []
                         self.userData = self.realmServise.getUserData()
                         self.getSaveUserAds(userId: self.userData.userID)
                         self.tableView.reloadData()
@@ -102,15 +112,17 @@ class SaveAdsViewController: BaseViewController {
     }
     
 // MARK: Metods
-
+    
     private func getSaveUserAds(userId: String) {
         alamofire.getSaveUserAds(id: userId) { [weak self] result in
             guard let self = self else { return }
+            self.spinerView.startAnimating()
             switch result {
             case .success(let info):
                 self.getInfoAllAds(adsId: info.saveAds)
             case .failure:
                 self.allAdsInfo = []
+                self.spinerView.stopAnimating()
             }
         }
     }
@@ -128,11 +140,13 @@ class SaveAdsViewController: BaseViewController {
                     group.leave()
                 case .failure:
                     self.allAdsInfo = []
+                    self.spinerView.stopAnimating()
                 }
             }
         }
         group.notify(queue: .main) { [weak self] in
             guard let self = self else { return }
+            self.spinerView.stopAnimating()
             self.tableView.reloadData()
         }
     }
@@ -142,15 +156,20 @@ class SaveAdsViewController: BaseViewController {
     }
     
     private func addConstreint() {
+        tableView.snp.makeConstraints {
+            $0.bottom.equalToSuperview()
+            $0.trailing.leading.equalToSuperview()
+            $0.top.equalTo(view.safeAreaInsets.top)
+        }
+        
         loginButton.snp.makeConstraints {
-            guard let tabBar = tabBarController?.tabBar.frame.height else { return }
-            $0.bottom.equalToSuperview().inset(tabBar + 16)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(16)
             $0.centerX.equalTo(view.snp.centerX).inset(0)
             $0.height.equalTo(50)
             $0.trailing.leading.equalToSuperview().inset(16)
         }
         
-        tableView.snp.makeConstraints {
+        spinerView.snp.makeConstraints {
             $0.bottom.equalToSuperview()
             $0.trailing.leading.equalToSuperview()
             $0.top.equalTo(view.safeAreaInsets.top)
@@ -164,12 +183,11 @@ extension SaveAdsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: AdsCell.key) as? AdsCell else { return UITableViewCell() }
-        let info = allAdsInfo[indexPath.row]
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: AdsCell.key) as? AdsCell,
+              !allAdsInfo.isEmpty  else { return UITableViewCell() }
         cell.selectionStyle = .none
         cell.backgroundColor = .clear
-        cell.changeTitleCell(adsInfo: info)
-        cell.changeSmallDescription(adsInfo: info)
+        cell.changeSmallDescription(adsInfo: allAdsInfo[indexPath.row])
         cell.updateConstraints()
         return cell
     }

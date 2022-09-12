@@ -13,7 +13,6 @@ protocol RealmServiceProtocol {
 //Metods for UserData
     func resertUserData()
     func addUserData(ID: String)
-    func addUserData(isAuthFirebase: Bool)
     func addUserData(isUserSignIn: Bool)
     
 //Metods for add ads params
@@ -24,7 +23,7 @@ protocol RealmServiceProtocol {
     func addAdsParams(typeEngine: Int)
     func addAdsParams(gearbox: Int)
     func addAdsParams(typeDrive: Int)
-    func addAdsParams(capacity: Int)
+    func addAdsParams(capacity: Double)
     func addAdsParams(mileage: Int)
     func addAdsParams(descriptionCar: String)
     func addAdsParams(phone: Int)
@@ -106,6 +105,7 @@ class RealmService: RealmServiceProtocol {
             adsConfigure.descriptionCar = ""
             adsConfigure.phoneNumber = 0
             adsConfigure.cost = 0
+            adsConfigure.condition = 0
             realm.add(adsConfigure, update: .modified)
         }
     }
@@ -114,7 +114,6 @@ class RealmService: RealmServiceProtocol {
         try! realm.write {
             userData.userID = ""
             userData.isUserSingIn = false
-            userData.isAuthFirebase = false
             realm.add(userData)
         }
     }
@@ -278,7 +277,7 @@ class RealmService: RealmServiceProtocol {
         }
     }
     
-    func addAdsParams(capacity: Int) {
+    func addAdsParams(capacity: Double) {
         try! realm.write{
             adsConfigure.capacity = capacity
             realm.add(adsConfigure, update: .modified)
@@ -323,13 +322,6 @@ class RealmService: RealmServiceProtocol {
     func addUserData(ID: String) {
         try! realm.write{
             userData.userID = ID
-            realm.add(userData, update: .modified)
-        }
-    }
-    
-    func addUserData(isAuthFirebase: Bool){
-        try! realm.write{
-            userData.isAuthFirebase = isAuthFirebase
             realm.add(userData, update: .modified)
         }
     }

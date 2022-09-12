@@ -26,7 +26,6 @@
 		AE0BE89328A2403A00C0E116 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE0BE89128A2403A00C0E116 /* LaunchScreen.storyboard */; };
 		AE0BE89B28A245B100C0E116 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0BE89A28A245B100C0E116 /* MainTabBarController.swift */; };
 		AE0BE89D28A2473A00C0E116 /* SaveAdsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0BE89C28A2473A00C0E116 /* SaveAdsViewController.swift */; };
-		AE0BE89F28A2475100C0E116 /* MyAdsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0BE89E28A2475100C0E116 /* MyAdsViewController.swift */; };
 		AE0BE8A128A247A500C0E116 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0BE8A028A247A500C0E116 /* ProfileViewController.swift */; };
 		AE0BE8A528A24FD600C0E116 /* UIColor+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0BE8A428A24FD600C0E116 /* UIColor+extension.swift */; };
 		AE0BE8A828A25A2A00C0E116 /* LoginFoarnViewController .swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0BE8A728A25A2A00C0E116 /* LoginFoarnViewController .swift */; };
@@ -34,7 +33,6 @@
 		AE0BE8AF28A2B3E700C0E116 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0BE8AE28A2B3E700C0E116 /* CustomTextField.swift */; };
 		AE0BE8B128A2B56100C0E116 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0BE8B028A2B56100C0E116 /* CustomButton.swift */; };
 		AE0BE8B328A3ACD500C0E116 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AE0BE8B228A3ACD500C0E116 /* GoogleService-Info.plist */; };
-		AE0BE8F228A3E53200C0E116 /* ProfileCellForSettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0BE8F128A3E53200C0E116 /* ProfileCellForSettingVC.swift */; };
 		AE343CAF28BE3D5A00B677A9 /* ViewingAdsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE343CAE28BE3D5900B677A9 /* ViewingAdsVC.swift */; };
 		AE343CB328BE42BB00B677A9 /* AdsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE343CB228BE42BB00B677A9 /* AdsCell.swift */; };
 		AE343CB528BF90F600B677A9 /* AdsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE343CB428BF90F600B677A9 /* AdsVC.swift */; };
@@ -50,6 +48,9 @@
 		AE345AD028BB9033003C09CD /* RealmModelForSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE345ACF28BB9033003C09CD /* RealmModelForSearch.swift */; };
 		AE345AD228BB9047003C09CD /* RealmModelForAds.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE345AD128BB9046003C09CD /* RealmModelForAds.swift */; };
 		AE39BD2D28A647FC0080DB52 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE39BD2C28A647FB0080DB52 /* BaseViewController.swift */; };
+		AE5C34A028CE3FFE00722B69 /* LookPhotoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5C349F28CE3FFE00722B69 /* LookPhotoVC.swift */; };
+		AE5C34A228CEB02500722B69 /* PickerForAddAdsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5C34A128CEB02500722B69 /* PickerForAddAdsVC.swift */; };
+		AE6B5AFF28CD2F7C00C5606E /* CellForUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6B5AFE28CD2F7C00C5606E /* CellForUserInfo.swift */; };
 		AEA43D7B28AEB79D002BF0C0 /* CellForMileage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA43D7A28AEB79D002BF0C0 /* CellForMileage.swift */; };
 		AEA43D7E28AFB6C4002BF0C0 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = AEA43D7D28AFB6C4002BF0C0 /* Alamofire */; };
 		AEA43D8128AFB6FA002BF0C0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA43D8028AFB6FA002BF0C0 /* Constants.swift */; };
@@ -84,14 +85,12 @@
 		AE0BE89428A2403A00C0E116 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AE0BE89A28A245B100C0E116 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		AE0BE89C28A2473A00C0E116 /* SaveAdsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveAdsViewController.swift; sourceTree = "<group>"; };
-		AE0BE89E28A2475100C0E116 /* MyAdsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAdsViewController.swift; sourceTree = "<group>"; };
 		AE0BE8A028A247A500C0E116 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		AE0BE8A428A24FD600C0E116 /* UIColor+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+extension.swift"; sourceTree = "<group>"; };
 		AE0BE8A728A25A2A00C0E116 /* LoginFoarnViewController .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginFoarnViewController .swift"; sourceTree = "<group>"; };
 		AE0BE8AE28A2B3E700C0E116 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		AE0BE8B028A2B56100C0E116 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		AE0BE8B228A3ACD500C0E116 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		AE0BE8F128A3E53200C0E116 /* ProfileCellForSettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCellForSettingVC.swift; sourceTree = "<group>"; };
 		AE343CAE28BE3D5900B677A9 /* ViewingAdsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewingAdsVC.swift; sourceTree = "<group>"; };
 		AE343CB228BE42BB00B677A9 /* AdsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsCell.swift; sourceTree = "<group>"; };
 		AE343CB428BF90F600B677A9 /* AdsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsVC.swift; sourceTree = "<group>"; };
@@ -107,6 +106,9 @@
 		AE345ACF28BB9033003C09CD /* RealmModelForSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmModelForSearch.swift; sourceTree = "<group>"; };
 		AE345AD128BB9046003C09CD /* RealmModelForAds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmModelForAds.swift; sourceTree = "<group>"; };
 		AE39BD2C28A647FB0080DB52 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		AE5C349F28CE3FFE00722B69 /* LookPhotoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookPhotoVC.swift; sourceTree = "<group>"; };
+		AE5C34A128CEB02500722B69 /* PickerForAddAdsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerForAddAdsVC.swift; sourceTree = "<group>"; };
+		AE6B5AFE28CD2F7C00C5606E /* CellForUserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellForUserInfo.swift; sourceTree = "<group>"; };
 		AEA43D7A28AEB79D002BF0C0 /* CellForMileage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellForMileage.swift; sourceTree = "<group>"; };
 		AEA43D8028AFB6FA002BF0C0 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		AEA43D8228AFB721002BF0C0 /* AlamofireProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireProvider.swift; sourceTree = "<group>"; };
@@ -201,7 +203,6 @@
 				AE0BE8A328A2481D00C0E116 /* Delegate */,
 				AED205AC28B77E7400EC8C83 /* TabBarController */,
 				AE0BE88F28A2403A00C0E116 /* Assets.xcassets */,
-				AE0BE8F328A3E54000C0E116 /* CellForSettingVC */,
 				AE0BE89128A2403A00C0E116 /* LaunchScreen.storyboard */,
 				AE0BE89428A2403A00C0E116 /* Info.plist */,
 				AE0BE8B228A3ACD500C0E116 /* GoogleService-Info.plist */,
@@ -213,10 +214,8 @@
 			isa = PBXGroup;
 			children = (
 				AED205AD28B77E8C00EC8C83 /* MainVC */,
-				AED205AE28B77E9600EC8C83 /* LoginFoarmVC */,
 				AED205AF28B77EA700EC8C83 /* SearchListVC */,
 				AED205B228B8DB2000EC8C83 /* AddAdsVC */,
-				AE343CB028BE3D6100B677A9 /* ViewingAdsVC */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -234,21 +233,13 @@
 			isa = PBXGroup;
 			children = (
 				AE0BE8A428A24FD600C0E116 /* UIColor+extension.swift */,
+				AE343CC028C7442F00B677A9 /* String+extension.swift */,
 				AE0BE8AE28A2B3E700C0E116 /* CustomTextField.swift */,
 				AE0BE8B028A2B56100C0E116 /* CustomButton.swift */,
 				AE39BD2C28A647FB0080DB52 /* BaseViewController.swift */,
 				AE04219E28A95D5D00034C2F /* CustomUILabel.swift */,
-				AE343CC028C7442F00B677A9 /* String+extension.swift */,
 			);
 			path = Extension;
-			sourceTree = "<group>";
-		};
-		AE0BE8F328A3E54000C0E116 /* CellForSettingVC */ = {
-			isa = PBXGroup;
-			children = (
-				AE0BE8F128A3E53200C0E116 /* ProfileCellForSettingVC.swift */,
-			);
-			path = CellForSettingVC;
 			sourceTree = "<group>";
 		};
 		AE343CB028BE3D6100B677A9 /* ViewingAdsVC */ = {
@@ -256,6 +247,7 @@
 			children = (
 				AE343CAE28BE3D5900B677A9 /* ViewingAdsVC.swift */,
 				AE343CB428BF90F600B677A9 /* AdsVC.swift */,
+				AE5C349F28CE3FFE00722B69 /* LookPhotoVC.swift */,
 			);
 			path = ViewingAdsVC;
 			sourceTree = "<group>";
@@ -265,6 +257,7 @@
 			children = (
 				AE343CB228BE42BB00B677A9 /* AdsCell.swift */,
 				AE343CB628BFD75A00B677A9 /* CellForSpecification.swift */,
+				AE6B5AFE28CD2F7C00C5606E /* CellForUserInfo.swift */,
 			);
 			name = CellForAds;
 			sourceTree = "<group>";
@@ -318,7 +311,6 @@
 			isa = PBXGroup;
 			children = (
 				AE0BE88A28A2403700C0E116 /* SearchViewController.swift */,
-				AE0BE89E28A2475100C0E116 /* MyAdsViewController.swift */,
 				AE0BE89C28A2473A00C0E116 /* SaveAdsViewController.swift */,
 				AE0BE8A028A247A500C0E116 /* ProfileViewController.swift */,
 			);
@@ -352,6 +344,9 @@
 				AED205B028B8DB0C00EC8C83 /* AddAdsVC.swift */,
 				AE343CB828C0FA1600B677A9 /* ChooseParamsVC.swift */,
 				AE343CBA28C1EE8C00B677A9 /* TextViewVC.swift */,
+				AE5C34A128CEB02500722B69 /* PickerForAddAdsVC.swift */,
+				AE343CB028BE3D6100B677A9 /* ViewingAdsVC */,
+				AED205AE28B77E9600EC8C83 /* LoginFoarmVC */,
 			);
 			path = AddAdsVC;
 			sourceTree = "<group>";
@@ -457,15 +452,16 @@
 				AED205B128B8DB0C00EC8C83 /* AddAdsVC.swift in Sources */,
 				AE04219D28A95CD900034C2F /* CellForTouch.swift in Sources */,
 				AE345AC928BB7C9F003C09CD /* CellForTextField.swift in Sources */,
+				AE6B5AFF28CD2F7C00C5606E /* CellForUserInfo.swift in Sources */,
 				AE345ACB28BB829D003C09CD /* CellForDescription.swift in Sources */,
 				AE343CAF28BE3D5A00B677A9 /* ViewingAdsVC.swift in Sources */,
 				AE0BE88B28A2403700C0E116 /* SearchViewController.swift in Sources */,
 				AE0BE8A528A24FD600C0E116 /* UIColor+extension.swift in Sources */,
 				AE343CBB28C1EE8C00B677A9 /* TextViewVC.swift in Sources */,
 				AEA43D9328B370F9002BF0C0 /* PickerVC.swift in Sources */,
+				AE5C34A228CEB02500722B69 /* PickerForAddAdsVC.swift in Sources */,
 				AE04219F28A95D5D00034C2F /* CustomUILabel.swift in Sources */,
 				AE345AD028BB9033003C09CD /* RealmModelForSearch.swift in Sources */,
-				AE0BE89F28A2475100C0E116 /* MyAdsViewController.swift in Sources */,
 				AE0BE88728A2403700C0E116 /* AppDelegate.swift in Sources */,
 				AED205A628B4D39D00EC8C83 /* RealmServise .swift in Sources */,
 				AEBB439928AD5A070037E5B1 /* LogInFireBaseService .swift in Sources */,
@@ -478,6 +474,7 @@
 				AE343CC128C7443200B677A9 /* String+extension.swift in Sources */,
 				AE343CB528BF90F600B677A9 /* AdsVC.swift in Sources */,
 				AED205A828B614F300EC8C83 /* ChooseCostVC.swift in Sources */,
+				AE5C34A028CE3FFE00722B69 /* LookPhotoVC.swift in Sources */,
 				AE0BE8A128A247A500C0E116 /* ProfileViewController.swift in Sources */,
 				AE0BE8A828A25A2A00C0E116 /* LoginFoarnViewController .swift in Sources */,
 				AEA43D8C28B15844002BF0C0 /* ChooseMileageVC.swift in Sources */,
@@ -489,7 +486,6 @@
 				AE39BD2D28A647FC0080DB52 /* BaseViewController.swift in Sources */,
 				AEC70F8228AB9B6B00C84BB6 /* CellForRequestView.swift in Sources */,
 				AE0BE88928A2403700C0E116 /* SceneDelegate.swift in Sources */,
-				AE0BE8F228A3E53200C0E116 /* ProfileCellForSettingVC.swift in Sources */,
 				AEA43D7B28AEB79D002BF0C0 /* CellForMileage.swift in Sources */,
 				AEA43D8728B0DDB8002BF0C0 /* ModelCarVC.swift in Sources */,
 				AE343CB328BE42BB00B677A9 /* AdsCell.swift in Sources */,

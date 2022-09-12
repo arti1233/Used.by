@@ -18,6 +18,7 @@ class ListSearchParametrVC: BaseViewController {
     private var searchSettinmgItems: Results<SearchSetting>!
     private var notificationToken: NotificationToken?
     private var carBrend: [CarBrend] = []
+    private var carModelForCell: CarBrend?
     
     private var typeEngineStruct = TypeEngimeStruct()
     private var typeDriveStruct = TypeOfDriveStruct()
@@ -33,11 +34,14 @@ class ListSearchParametrVC: BaseViewController {
 
     private lazy var tableView: UITableView = {
         var tableView = UITableView()
+        tableView = UITableView(frame: .zero, style: .grouped)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(CellForTouch.self, forCellReuseIdentifier: CellForTouch.key)
         tableView.register(CellForRequestView.self, forCellReuseIdentifier: CellForRequestView.key)
         tableView.allowsMultipleSelection = true
+        tableView.backgroundColor = .clear
+        tableView.separatorStyle = .none
         return tableView
     }()
     
@@ -45,11 +49,13 @@ class ListSearchParametrVC: BaseViewController {
         var button = CustomButton()
         button.setTitle("Search", for: .normal)
         button.addTarget(self, action: #selector(searchButtonPressed), for: .touchUpInside)
+        button.backgroundColor = .myGreenColor
         return button
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        offLargeTitle()
         realmServise = RealmService()
         alamofireProvider = AlamofireProvider()
         view.addSubview(tableView)
@@ -57,15 +63,13 @@ class ListSearchParametrVC: BaseViewController {
         title = "Parametrs"
         print(Realm.Configuration.defaultConfiguration.fileURL!)
         getCarbrend()
-        
+        navigationItem.rightBarButtonItems = [UIBarButtonItem(title: "Reset", style: .plain, target: self, action: #selector(resetButtonPressed(sender:)))]
+        realmServise.addObjectInSearchSetting(carModel: "")
         searchSettinmgItems = realmServise.getListSearchSetting()
-        print(searchSettinmgItems)
-        
         if searchSettinmgItems.first == nil {
             realmServise.resetSearchSetting()
             searchSettinmgItems = realmServise.getListSearchSetting()
         }
-    
         guard let items = searchSettinmgItems.first else { return }
         typeEngineStruct.rawValue = items.typeEngine
         typeDriveStruct.rawValue = items.typeDrive
@@ -76,6 +80,11 @@ class ListSearchParametrVC: BaseViewController {
             switch change {
             case .change(_, _):
                 self.searchSettinmgItems = self.realmServise.getListSearchSetting()
+                guard let itemsNew = self.searchSettinmgItems.first else { return }
+                self.typeEngineStruct.rawValue = itemsNew.typeEngine
+                self.typeDriveStruct.rawValue = itemsNew.typeDrive
+                self.gearBoxStruct.rawValue = itemsNew.gearbox
+                self.conditionsStruct.rawValue = itemsNew.conditionAuto
                 self.tableView.reloadData()
             default:
                 break
@@ -96,8 +105,14 @@ class ListSearchParametrVC: BaseViewController {
 
     @objc private func searchButtonPressed(sender: UIButton) {
         let vc = ViewingAdsVC()
+        vc.isSearch = true
         navigationController?.pushViewController(vc, animated: true)
     }
+    
+    @objc private func resetButtonPressed(sender: UIBarButtonItem) {
+        realmServise.resetSearchSetting()
+    }
+    
     
 // MARK: Metods for constreint
     
@@ -105,7 +120,7 @@ class ListSearchParametrVC: BaseViewController {
         
         tableView.snp.makeConstraints {
             $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
-            $0.trailing.leading.equalToSuperview().inset(0)
+            $0.trailing.leading.equalToSuperview().inset(8)
             $0.top.equalTo(view.safeAreaInsets.top)
         }
 
@@ -163,7 +178,8 @@ extension ListSearchParametrVC: UITableViewDelegate, UITableViewDataSource {
         cellForRequestView.updateConstraints()
         cellForTouch.selectionStyle = .none
         cellForRequestView.selectionStyle = .none
-        
+        cellForRequestView.backgroundColor = .clear
+        cellForTouch.backgroundColor = .clear
         
         let section = section[indexPath.section]
         
@@ -238,9 +254,19 @@ extension ListSearchParametrVC: UITableViewDelegate, UITableViewDataSource {
                 let vc = BrendCarVC()
                 vc.carBrend = carBrend
                 let navVC = UINavigationController(rootViewController: vc)
+                vc.complition = { [weak self] result in
+                    guard let self = self else { return }
+                    self.carModelForCell = result
+                }
                 present(navVC, animated: true)
             case .carModel:
-                print("OK")
+                if let model = carModelForCell {
+                    let vc = ModelCarVC()
+                    vc.carModel = model.modelSeries
+                    vc.changeTitleName(name: model.name)
+                    let navVC = UINavigationController(rootViewController: vc)
+                    present(navVC, animated: true)
+                }
             }
         case .parametrs:
             switch parametrs[indexPath.row] {
@@ -286,6 +312,7 @@ extension ListSearchParametrVC: UITableViewDelegate, UITableViewDataSource {
                 realmServise.addObjectInSearchSetting(carBrend: "")
             case .carModel:
                 realmServise.addObjectInSearchSetting(carModel: "")
+                carModelForCell = nil
             }
         case .parametrs:
             switch parametrs[indexPath.row] {
@@ -322,4 +349,21 @@ extension ListSearchParametrVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         CreateSections.allCases[section].title
     }
+    
+    
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        guard let header = view as? UITableViewHeaderFooterView,
+              let headerText = header.textLabel  else { return }
+        headerText.textColor = .myCustomPurple
+        headerText.font = UIFont.systemFont(ofSize: 17, weight: .heavy)
+        let viewForBackground = UIView()
+        header.clipsToBounds = true
+        header.layer.cornerRadius = 10
+        header.addSubview(viewForBackground)
+        viewForBackground.frame = header.bounds
+        viewForBackground.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        viewForBackground.backgroundColor = .clear
+        header.backgroundView = viewForBackground
+    }
+    
 }

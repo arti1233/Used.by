@@ -31,12 +31,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if let user = userFirebase {
           // User is signed in.
-            changeUserStatus(userId: user.uid, isAuthFirebase: true, isUserSignIn: true)
+            changeUserStatus(userId: user.uid, isUserSignIn: true)
             userData = realmServise.getUserData()
             print("чел авторизован Firebase")
         } else {
           // No user is signed in.
-            changeUserStatus(userId: "", isAuthFirebase: false, isUserSignIn: false)
+            changeUserStatus(userId: "", isUserSignIn: false)
             userData = realmServise.getUserData()
             print("чел не авторизован Firebase")
         }
@@ -45,11 +45,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             GIDSignIn.sharedInstance.restorePreviousSignIn { [weak self] user, error in
                 guard let self = self else { return }
                 if error != nil || user == nil {
-                    self.changeUserStatus(userId: "", isAuthFirebase: false, isUserSignIn: false)
+                    self.changeUserStatus(userId: "", isUserSignIn: false)
                     print("чел не авторизован Google")
                 } else {
                     guard let userId = user?.userID else { return }
-                    self.changeUserStatus(userId: userId, isAuthFirebase: true, isUserSignIn: true)
+                    self.changeUserStatus(userId: userId, isUserSignIn: true)
                     print("чел авторизован Google")
                 }
             }
@@ -68,9 +68,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
     }
     
-    func changeUserStatus(userId: String, isAuthFirebase: Bool, isUserSignIn: Bool) {
+    func changeUserStatus(userId: String, isUserSignIn: Bool) {
         realmServise.addUserData(ID: userId)
-        realmServise.addUserData(isAuthFirebase: isAuthFirebase)
         realmServise.addUserData(isUserSignIn: isUserSignIn)
     }
 }

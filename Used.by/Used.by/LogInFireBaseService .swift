@@ -24,7 +24,7 @@ protocol FireBaseProtocol {
     func addNewUserForGoogle(name: String, email: String, userIdGoogle: String)
     
 // Create new ads
-    func createNewAds(userId: String, carBrend: String, carModel: String, year: Int, typeEngine: Int, gearBox: Int, typeDrive: Int, capacity: Int, mileage: Int, cost: Int, description: String, photo: [UIImage], phoneNumber: Int, condition: Int)
+    func createNewAds(userId: String, carBrend: String, carModel: String, year: Int, typeEngine: Int, gearBox: Int, typeDrive: Int, capacity: Double, mileage: Int, cost: Int, description: String, photo: [UIImage], phoneNumber: Int, condition: Int)
     
 // Upload photo cars in ads
     func uploadPhoto(photo: UIImage, comletion: @escaping(Result<URL, Error>) -> Void)
@@ -62,7 +62,7 @@ class FireBaseService: FireBaseProtocol {
     }
     
     func addNewUserForGoogle(name: String, email: String, userIdGoogle: String) {
-        referenceUsers.child(userIdGoogle).updateChildValues(["name" : name, "email": email, "ads": [], "saveAds" : []])
+        referenceUsers.child(userIdGoogle).updateChildValues(["name" : name, "email": email, "ads": []])
     }
     
     
@@ -104,7 +104,7 @@ class FireBaseService: FireBaseProtocol {
     }
     
     
-    func createNewAds(userId: String, carBrend: String, carModel: String, year: Int, typeEngine: Int, gearBox: Int, typeDrive: Int, capacity: Int, mileage: Int, cost: Int, description: String, photo: [UIImage], phoneNumber: Int, condition: Int) {
+    func createNewAds(userId: String, carBrend: String, carModel: String, year: Int, typeEngine: Int, gearBox: Int, typeDrive: Int, capacity: Double, mileage: Int, cost: Int, description: String, photo: [UIImage], phoneNumber: Int, condition: Int) {
         guard let adsId = refAds.childByAutoId().key else { return }
         var arrayUrl: [URL] = []
         let group = DispatchGroup()

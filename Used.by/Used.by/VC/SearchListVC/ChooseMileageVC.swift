@@ -14,7 +14,7 @@ class ChooseMileageVC: BaseViewController {
 
     private lazy var tableView: UITableView = {
         var tableView = UITableView()
-        tableView.backgroundColor = .purple
+        tableView.backgroundColor = .clear
         tableView.allowsMultipleSelection = true
         tableView.delegate = self
         tableView.dataSource = self
@@ -45,6 +45,7 @@ class ChooseMileageVC: BaseViewController {
     private var arrayMilegeInt: [Int] = []
     private var arrayMilegeString: [String] = []
     private var realmServise: RealmServiceProtocol!
+    var isSearch = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -105,7 +106,11 @@ extension ChooseMileageVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        realmServise.addObjectInSearchSetting(mileage: arrayMilegeInt[indexPath.row])
+        if isSearch {
+            realmServise.addObjectInSearchSetting(mileage: arrayMilegeInt[indexPath.row])
+        } else {
+            realmServise.addAdsParams(mileage: arrayMilegeInt[indexPath.row])
+        }
         dismiss(animated: true)
     }
 

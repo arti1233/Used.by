@@ -24,13 +24,14 @@ class AddAdsVC: BaseViewController {
     private lazy var createAdsButton: UIButton = {
         var button = UIButton()
         button.setTitle("Create", for: .normal)
-        button.setTitleColor(UIColor.blue, for: .normal)
+        button.setTitleColor(UIColor.myCustomPurple, for: .normal)
         button.addTarget(self, action: #selector(createAdsButtonPressed), for: .touchUpInside)
         return button
     }()
     
     private lazy var tableView: UITableView = {
         var tableView = UITableView()
+        tableView = UITableView(frame: .zero, style: .grouped)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(CellForTextField.self, forCellReuseIdentifier: CellForTextField.key)
@@ -38,6 +39,8 @@ class AddAdsVC: BaseViewController {
         tableView.register(CellForDescription.self, forCellReuseIdentifier: CellForDescription.key)
         tableView.register(CellForAdsPhoto.self, forCellReuseIdentifier: CellForAdsPhoto.key)
         tableView.allowsMultipleSelection = true
+        tableView.backgroundColor = .clear
+        tableView.separatorStyle = .none
         return tableView
     }()
     
@@ -102,7 +105,7 @@ class AddAdsVC: BaseViewController {
         
         tableView.snp.makeConstraints {
             $0.bottom.equalToSuperview()
-            $0.trailing.leading.equalToSuperview().inset(0)
+            $0.trailing.leading.equalToSuperview().inset(8)
             $0.top.equalToSuperview().inset(65)
         }
         
@@ -135,8 +138,6 @@ class AddAdsVC: BaseViewController {
         tableView.scrollIndicatorInsets = .zero
     }
     
-// MARK: Metods
-    
     @objc private func createAdsButtonPressed(sender: UIButton) {
         guard adsConfigure.carBrendName != "",
               adsConfigure.carModelName != "",
@@ -150,8 +151,9 @@ class AddAdsVC: BaseViewController {
               adsConfigure.phoneNumber != 0,
               adsConfigure.cost != 0,
               adsConfigure.condition != 0,
-              !catalogImage.isEmpty else {
-                  print("No elements")
+              catalogImage.count >= 4,
+              catalogImage.count <= 6 else {
+                  showAlertController(text: "Check all text fields")
             return
         }
         fireBase.createNewAds(userId: userData.userID,
@@ -170,7 +172,29 @@ class AddAdsVC: BaseViewController {
                               condition: adsConfigure.condition)
         dismiss(animated: true)
     }
-
+    
+// MARK: Metods
+    
+    private func presentPickerForAdsVC(isCapacity: Bool) {
+        let vc = PickerForAddAdsVC()
+        vc.isCapacityPicker = isCapacity
+        vc.isCapacityPicker ? vc.changeTitleName(name: "Capacity engine") : vc.changeTitleName(name: "Year of prodaction")
+        
+        if let presentationConroller = vc.presentationController as? UISheetPresentationController {
+            presentationConroller.detents = [.medium()]
+        }
+        
+        present(vc, animated: true)
+    }
+    
+    fileprivate func showAlertController(text: String) {
+        let alertController = UIAlertController(title: "Please", message: text, preferredStyle: .alert)
+        let closeButton = UIAlertAction(title: "Close", style: .cancel)
+        
+        alertController.addAction(closeButton)
+        present(alertController, animated: true)
+    }
+    
     private func getCarbrend() {
         alamofireProvider.getCarBrendInfo { [weak self] result in
             guard let self = self else { return }
@@ -239,6 +263,11 @@ extension AddAdsVC: UITableViewDataSource, UITableViewDelegate {
         cellForDescription.updateConstraints()
         cellForPhoto.updateConstraints()
         
+        cellForRequestView.backgroundColor = .clear
+        cellForPhoneNumber.backgroundColor = .clear
+        cellForDescription.backgroundColor = .clear
+        cellForPhoto.backgroundColor = .clear
+        
         cellForRequestView.selectionStyle = .none
         cellForPhoneNumber.selectionStyle = .none
         cellForDescription.selectionStyle = .none
@@ -259,10 +288,9 @@ extension AddAdsVC: UITableViewDataSource, UITableViewDelegate {
         case .parametrs:
             switch ParametrsForAds.allCases[indexPath.row] {
             case .year:
-                cellForPhoneNumber.changeTextField(text: adsConfigure.year == 0 ? "" : String(adsConfigure.year))
-                cellForPhoneNumber.targetTextField = TargetStateCell.year
-                cellForPhoneNumber.prepareForReuse()
-                return cellForPhoneNumber
+                cellForRequestView.changeFieldName(name: "Year of production")
+                cellForRequestView.changeResultLabel(name: adsConfigure.year == 0 ? "" : String(adsConfigure.year))
+                return cellForRequestView
             case .typeEngine:
                 cellForRequestView.changeFieldName(name: ParametrsForAds.allCases[indexPath.row].title)
                 var text = ""
@@ -277,7 +305,7 @@ extension AddAdsVC: UITableViewDataSource, UITableViewDelegate {
                 cellForRequestView.changeFieldName(name: ParametrsForAds.allCases[indexPath.row].title)
                 var text = ""
                 GearBox.allCases.forEach {
-                    if GearBoxStruct(rawValue: adsConfigure.typeEngine).contains($0.options) {
+                    if GearBoxStruct(rawValue: adsConfigure.gearbox).contains($0.options) {
                         text = "\($0.title)"
                     }
                 }
@@ -287,17 +315,16 @@ extension AddAdsVC: UITableViewDataSource, UITableViewDelegate {
                 cellForRequestView.changeFieldName(name: ParametrsForAds.allCases[indexPath.row].title)
                 var text = ""
                 TypeOfDrive.allCases.forEach {
-                    if TypeOfDriveStruct(rawValue: adsConfigure.typeEngine).contains($0.options) {
+                    if TypeOfDriveStruct(rawValue: adsConfigure.typeDrive).contains($0.options) {
                         text = "\($0.title)"
                     }
                 }
                 cellForRequestView.changeResultLabel(name: text)
                 return cellForRequestView
             case .capacityEngine:
-                cellForPhoneNumber.changeTextField(text: adsConfigure.capacity == 0 ? "" : String(adsConfigure.capacity))
-                cellForPhoneNumber.targetTextField = TargetStateCell.capacity
-                cellForPhoneNumber.prepareForReuse()
-                return cellForPhoneNumber
+                cellForRequestView.changeFieldName(name: "Capacity engine")
+                cellForRequestView.changeResultLabel(name: adsConfigure.capacity == 0 ? "" : String(adsConfigure.capacity))
+                return cellForRequestView
             case .mileage:
                 cellForPhoneNumber.changeTextField(text: adsConfigure.mileage == 0 ? "" : String(adsConfigure.mileage))
                 cellForPhoneNumber.targetTextField = TargetStateCell.mileage
@@ -307,7 +334,7 @@ extension AddAdsVC: UITableViewDataSource, UITableViewDelegate {
                 cellForRequestView.changeFieldName(name: ParametrsForAds.allCases[indexPath.row].title)
                 var text = ""
                 ConditionsForAddAds.allCases.forEach {
-                    if ConditionStruct(rawValue: adsConfigure.typeEngine).contains($0.options) {
+                    if ConditionStruct(rawValue: adsConfigure.condition).contains($0.options) {
                         text = "\($0.title)"
                     }
                 }
@@ -329,7 +356,12 @@ extension AddAdsVC: UITableViewDataSource, UITableViewDelegate {
             return cellForPhoneNumber
         case .photo:
             cellForPhoto.addPhotoInScroll(photo: catalogImage)
-            cellForPhoto.comletion = { self.imagePickerForAllerController() }
+            cellForPhoto.comletion = {
+                if self.catalogImage.count <= 6 {
+                    self.imagePickerForAllerController()
+                }
+            }
+            cellForPhoto.prepareForReuse()
             return cellForPhoto
         }
     }
@@ -359,6 +391,10 @@ extension AddAdsVC: UITableViewDataSource, UITableViewDelegate {
                 presentChooseParamsVC(target: ChooseParamsEnum.typeDrive)
             case .condition:
                 presentChooseParamsVC(target: ChooseParamsEnum.condition)
+            case .year:
+                presentPickerForAdsVC(isCapacity: false)
+            case .capacityEngine:
+                presentPickerForAdsVC(isCapacity: true)
             default:
                 break
             }
@@ -372,6 +408,21 @@ extension AddAdsVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         CreateSectionForCreateAds.allCases[section].title
+    }
+    
+    
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        guard let header = view as? UITableViewHeaderFooterView,
+              let headerText = header.textLabel  else { return }
+        headerText.textColor = .myCustomPurple
+        let viewForBackground = UIView()
+        header.clipsToBounds = true
+        header.layer.cornerRadius = 10
+        header.addSubview(viewForBackground)
+        viewForBackground.frame = header.bounds
+        viewForBackground.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        viewForBackground.backgroundColor = .clear
+        header.backgroundView = viewForBackground
     }
 }
 

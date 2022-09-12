@@ -10,8 +10,6 @@ import Foundation
 struct Users: Codable {
     let email: String
     let name: String
-    let adsID: [String]?
-    let saveAds: [String]?
 }
 
 struct AllAdsId: Codable {
@@ -23,7 +21,7 @@ struct AllAdsId: Codable {
 }
 
 struct AdsInfo: Codable {
-    let capacity: Int
+    let capacity: Double
     let carBrend, carModel: String
     let condition, cost: Int
     let responseDescription: String

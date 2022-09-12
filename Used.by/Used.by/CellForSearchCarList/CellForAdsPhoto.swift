@@ -15,8 +15,16 @@ class CellForAdsPhoto: UITableViewCell {
     
     private lazy var nameCellLabel: CustomUILabel = {
         var label = CustomUILabel()
-        label.text = "Add photo in ads"
+        label.text = "Add photo in ads. From 4 to 8 photos"
+        label.numberOfLines = 2
         return label
+    }()
+    
+    private lazy var mainView: UIView = {
+        var view = UIView()
+        view.backgroundColor = .myColorForCell
+        view.layer.cornerRadius = 10
+        return view
     }()
     
     private lazy var scrollView: UIScrollView = {
@@ -54,6 +62,7 @@ class CellForAdsPhoto: UITableViewCell {
         super.updateConstraints()
         addElementsConstraint()
     }
+    
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -95,18 +104,25 @@ class CellForAdsPhoto: UITableViewCell {
     
     // Add elements on the view
     func addElements() {
-        contentView.addSubview(nameCellLabel)
+        contentView.addSubview(mainView)
+        mainView.addSubview(nameCellLabel)
         scrollView.addSubview(stackView)
-        contentView.addSubview(scrollView)
-        contentView.addSubview(chooseButton)
+        mainView.addSubview(scrollView)
+        mainView.addSubview(chooseButton)
     }
     
 //MARK: Constreint
     private func addElementsConstraint() {
-        nameCellLabel.snp.makeConstraints {
-            $0.trailing.leading.top.equalToSuperview().inset(16)
+        mainView.snp.makeConstraints {
+            $0.top.bottom.equalToSuperview().inset(4)
+            $0.leading.trailing.equalToSuperview()
         }
         
+        nameCellLabel.snp.makeConstraints {
+            $0.leading.top.equalToSuperview().inset(16)
+            $0.trailing.equalTo(mainView.snp.centerX)
+        }
+    
         scrollView.snp.makeConstraints {
             $0.top.equalTo(nameCellLabel.snp.bottom).offset(16)
             $0.height.equalTo(150)

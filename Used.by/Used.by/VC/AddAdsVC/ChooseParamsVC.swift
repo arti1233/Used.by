@@ -58,7 +58,6 @@ class ChooseParamsVC: BaseViewController {
         super.viewDidLoad()
         realmServise = RealmService()
         addElements()
-        
         titleName.text = parametrs.title
         switch parametrs {
         case .typeEngine:
@@ -92,16 +91,16 @@ class ChooseParamsVC: BaseViewController {
         return 1 << index
     }
     
-    func addResultInRealm(params: ChooseParamsEnum, indexPath: IndexPath) {
+    func addResultInRealm(params: ChooseParamsEnum, indexPath: Int) {
         switch params {
         case .typeEngine:
-            realmServise.addAdsParams(typeEngine: convertingIndexToElement(index: arrayElements[indexPath.row].index))
+            realmServise.addAdsParams(typeEngine: convertingIndexToElement(index: indexPath))
         case .typeDrive:
-            realmServise.addAdsParams(typeDrive: convertingIndexToElement(index: arrayElements[indexPath.row].index))
+            realmServise.addAdsParams(typeDrive: convertingIndexToElement(index: indexPath))
         case .gearbox:
-            realmServise.addAdsParams(gearbox: convertingIndexToElement(index: arrayElements[indexPath.row].index))
+            realmServise.addAdsParams(gearbox: convertingIndexToElement(index: indexPath))
         case .condition:
-            realmServise.addAdsParams(condition: convertingIndexToElement(index: arrayElements[indexPath.row].index))
+            realmServise.addAdsParams(condition: convertingIndexToElement(index: indexPath))
         }
     }
      
@@ -140,7 +139,7 @@ extension ChooseParamsVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        addResultInRealm(params: parametrs, indexPath: indexPath)
+        addResultInRealm(params: parametrs, indexPath: indexPath.row)
         dismiss(animated: true)
     }
 }

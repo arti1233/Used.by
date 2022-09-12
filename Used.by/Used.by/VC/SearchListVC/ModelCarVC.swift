@@ -14,7 +14,7 @@ class ModelCarVC: BaseViewController {
 
     private lazy var tableView: UITableView = {
         var tableView = UITableView()
-        tableView.backgroundColor = .purple
+        tableView.backgroundColor = .clear
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(BrendCarCell.self, forCellReuseIdentifier: BrendCarCell.key)
@@ -30,7 +30,7 @@ class ModelCarVC: BaseViewController {
         return titleName
     }()
     
-    var carModel: CarBrend!
+    var carModel: [BrendModel] = []
     private var realmServise: RealmServiceProtocol!
     var isSearch = true
     
@@ -39,6 +39,11 @@ class ModelCarVC: BaseViewController {
         realmServise = RealmService()
         view.addSubview(titleName)
         view.addSubview(tableView)
+        offLargeTitle()
+        if isSearch {
+            navigationItem.rightBarButtonItems = [UIBarButtonItem(title: "Accept", style: .plain, target: self, action: #selector(resetButtonPressed(sender:)))]
+        }
+        
     }
     
     override func updateViewConstraints() {
@@ -61,6 +66,10 @@ class ModelCarVC: BaseViewController {
     }
     
 //MARK: Metod
+    @objc private func resetButtonPressed(sender: UIBarButtonItem) {
+        dismiss(animated: true)
+    }
+    
     func changeTitleName(name: String) {
         titleName.text = name
     }
@@ -68,26 +77,21 @@ class ModelCarVC: BaseViewController {
 
 extension ModelCarVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let carModel = carModel else { return 0 }
-        return carModel.modelSeries.count
+        return carModel.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: BrendCarCell.key) as? BrendCarCell,
-              let carModel = carModel else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: BrendCarCell.key) as? BrendCarCell else { return UITableViewCell() }
         cell.updateConstraints()
-        cell.changeNameCell(name: carModel.modelSeries[indexPath.row].name)
+        cell.changeNameCell(name: carModel[indexPath.row].name)
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let carModel = carModel else { return }
         if isSearch {
-            realmServise.addObjectInSearchSetting(carBrend: carModel.name)
-            realmServise.addObjectInSearchSetting(carModel: carModel.modelSeries[indexPath.row].name)
+            realmServise.addObjectInSearchSetting(carModel: carModel[indexPath.row].name)
         } else {
-            realmServise.addAdsParams(carBrendName: carModel.name)
-            realmServise.addAdsParams(carModelName: carModel.modelSeries[indexPath.row].name)
+            realmServise.addAdsParams(carModelName: carModel[indexPath.row].name)
         }
         dismiss(animated: true)
     }

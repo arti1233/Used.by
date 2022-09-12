@@ -9,13 +9,6 @@ import Foundation
 import UIKit
 import SnapKit
 import RealmSwift
-import FirebaseCore
-import FirebaseFirestore
-import FirebaseAuth
-import Firebase
-import FirebaseDatabaseSwift
-import FirebaseDatabase
-import FirebaseStorage
 
 class AdsVC: BaseViewController {
     
@@ -49,21 +42,42 @@ class AdsVC: BaseViewController {
     private var realmServise: RealmServiceProtocol!
     private var userData = UserRealmModel()
     private var firebase: FireBaseProtocol!
+    private var notificationToken: NotificationToken?
+    
+    var isUserAds = false
+    private var arrayImage: [UIImage] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        offLargeTitle()
         addElements()
         realmServise = RealmService()
         firebase = FireBaseService()
         userData = realmServise.getUserData()
         guard let adsInfo = adsInfo else { return }
+        
+        notificationToken = userData.observe{ [weak self] change in
+            guard let self = self else { return }
+            switch change {
+            case .change(_, _):
+                self.userData = self.realmServise.getUserData()
+                self.saveAdsButton.isEnabled = self.userData.isUserSingIn
+            default:
+                break
+            }
+        }
+        
         if userData.userID != "" {
             firebase.chekSaveAdsOrNot(userId: userData.userID, adsId: adsInfo.id, complition: { [weak self] result in
                 guard let self = self else { return }
                 self.changeSaveButton(isAdsSave: result)
             })
         } else {
-            saveAdsButton.isEnabled = false 
+            saveAdsButton.isEnabled = false
+        }
+        if isUserAds {
+            callButton.isEnabled = false
+            saveAdsButton.isEnabled = false
         }
     }
     
@@ -75,9 +89,14 @@ class AdsVC: BaseViewController {
         }
     }
     
+    deinit {
+        guard let token = notificationToken else { return }
+        token.invalidate()
+    }
+    
 //MARK: Actions
     @objc private func callButtonPressed(sender: UIButton) {
-        
+        showAlertController()
     }
     
     @objc private func saveAdsPressed(sender: UIButton) {
@@ -88,12 +107,35 @@ class AdsVC: BaseViewController {
         }
     }
     
+    
+    
 //MARK: Metods
     
-    func changeSaveButton(isAdsSave: Bool) {
-        isAdsSave ? saveAdsButton.setImage(UIImage(systemName: "bookmark.fill"), for: .normal) : saveAdsButton.setImage(UIImage(systemName: "bookmark"), for: .normal)
-        isAdsSave ? (saveAdsButton.tintColor = .yellow) : (saveAdsButton.tintColor = .white)
+    private func changeSaveButton(isAdsSave: Bool) {
+        saveAdsButton.setImage(UIImage(systemName: isAdsSave ? "bookmark.fill" : "bookmark"), for: .normal)
+        saveAdsButton.tintColor = isAdsSave ? .yellow : .white
     }
+    
+// MARK: AlertController
+        private func showAlertController() {
+            guard let adsInfo = adsInfo else { return }
+
+            let alertController = UIAlertController(title: "Phone number", message: "", preferredStyle: .actionSheet)
+            let phoneNumber = UIAlertAction(title: "+375 29 \(adsInfo.phoneNumber)", style: .default) { _ in
+                if let phoneCallURL = URL(string: "tel://+375\(adsInfo.phoneNumber)") {
+                    let application:UIApplication = UIApplication.shared
+                    if (application.canOpenURL(phoneCallURL)) {
+                        application.open(phoneCallURL, options: [:], completionHandler: nil)
+                    }
+                  }
+            }
+            let closeButton = UIAlertAction(title: "Close", style: .cancel)
+        
+            alertController.addAction(closeButton)
+            alertController.addAction(phoneNumber)
+            present(alertController, animated: true)
+        }
+        
     
     
 // MARK: Metods for constreint
@@ -140,7 +182,6 @@ extension AdsVC: UITableViewDataSource, UITableViewDelegate {
               let cellForSpec = tableView.dequeueReusableCell(withIdentifier: CellForSpecification.key) as? CellForSpecification,
               let info = adsInfo else { return UITableViewCell() }
             
-        cellForAds.updateConstraints()
         cellForSpec.updateConstraints()
         cellForAds.selectionStyle = .none
         cellForSpec.selectionStyle = .none
@@ -148,8 +189,14 @@ extension AdsVC: UITableViewDataSource, UITableViewDelegate {
         switch indexPath.row {
         case 0:
             cellForAds.changeSmallDescription(adsInfo: info)
-            cellForAds.changeTitleCell(adsInfo: info)
             cellForAds.backgroundColor = .clear
+            cellForAds.isSmallCell = false
+            cellForAds.isTransitionOnLookPhoto = true
+            cellForAds.complition = { [weak self] result in
+                guard let self = self else { return }
+                self.arrayImage = result
+            }
+            cellForAds.updateConstraints()
             return cellForAds
         case 1:
             cellForSpec.changeDiscription(adsInfo: info.responseDescription)
@@ -157,6 +204,20 @@ extension AdsVC: UITableViewDataSource, UITableViewDelegate {
             return cellForSpec
         default:
             return UITableViewCell()
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath.row {
+        case 0:
+            let vc = LookPhotoVC()
+            vc.arrayImages = arrayImage
+            guard let info = adsInfo else { return }
+            vc.titleName = "\(info.carBrend) \(info.carModel)"
+            let navVC = UINavigationController(rootViewController: vc)
+            present(navVC, animated: true)
+        default:
+            break
         }
     }
 }

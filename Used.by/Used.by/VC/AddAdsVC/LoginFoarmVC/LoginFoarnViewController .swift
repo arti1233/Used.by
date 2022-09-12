@@ -10,12 +10,6 @@ import UIKit
 import SnapKit
 import GoogleSignInSwift
 import GoogleSignIn
-import FirebaseCore
-import FirebaseFirestore
-import FirebaseAuth
-import Firebase
-import FirebaseDatabaseSwift
-import FirebaseDatabase
 import RealmSwift
 
 final class LoginFormViewController: UIViewController {
@@ -71,6 +65,7 @@ final class LoginFormViewController: UIViewController {
     private lazy var passwordForEntryTextField: CustomTextField = {
         var textlabel = CustomTextField()
         textlabel.placeholder = "  Password"
+        textlabel.isSecureTextEntry = true
         return textlabel
     }()
     
@@ -103,6 +98,7 @@ final class LoginFormViewController: UIViewController {
     private lazy var passwordForRegisterTextField: CustomTextField = {
         var textlabel = CustomTextField()
         textlabel.placeholder = "  Password"
+        textlabel.isSecureTextEntry = true
         return textlabel
     }()
     
@@ -122,25 +118,28 @@ final class LoginFormViewController: UIViewController {
         guard let clientId = Bundle.main.object(forInfoDictionaryKey: "CLIENT_ID") as? String else { return }
         signInConfig = GIDConfiguration(clientID: clientId)
         changeViewForIndexSegment(index: segmentController.selectedSegmentIndex)
-        view.backgroundColor = UIColor.colorForHeaderLoginFoarm
+        view.backgroundColor = UIColor.tabBarColor
         userDataResults = realmServise.getUsersRealmModel()
         userData = realmServise.getUserData()
         
         fireBase = FireBaseService()
-//        loginNameForRegisterTextField.delegate = self
-//        emailForRegisterTextField.delegate = self
-//        passwordForRegisterTextField.delegate = self
+        loginNameForRegisterTextField.delegate = self
+        emailForRegisterTextField.delegate = self
+        passwordForRegisterTextField.delegate = self
+        emailForEntryTextField.delegate = self
+        passwordForEntryTextField.delegate = self
     }
+    
     
 // MARK: UpdateViewConstraints
     override func updateViewConstraints() {
         super.updateViewConstraints()
         addMainElements()
-        addViewEnterUser()
+        addViewEnterUser(value: 0)
         addViewRegisterUser()
     }
     
-    // MARK: Actions
+// MARK: Actions
     
     // Actions for segment controller
     @objc fileprivate func changeView(_ sender: UISegmentedControl) {
@@ -157,11 +156,10 @@ final class LoginFormViewController: UIViewController {
             guard let self = self else { return }
             if result {
                 self.realmServise.addUserData(ID: userId)
-                self.realmServise.addUserData(isAuthFirebase: true)
                 self.realmServise.addUserData(isUserSignIn: true)
                 self.dismiss(animated: true)
             } else {
-                self.showAlertController()
+                self.showAlertController(textError: "Invalid username or password")
             }
         }
     }
@@ -173,16 +171,18 @@ final class LoginFormViewController: UIViewController {
               let password = passwordForRegisterTextField.text,
               !name.isEmpty,
               !email.isEmpty,
-              !password.isEmpty else { return }
+              !password.isEmpty else { self.showAlertController(textError: "Fill in all the fields")
+                return }
+        guard password.count >= 6 else { self.showAlertController(textError: "the password must contain at least 6 characters")
+            return }
         fireBase.createNewUser(email: email, password: password, name: name) { [weak self] result, userId in
             guard let self = self else { return }
             if result {
                 self.realmServise.addUserData(ID: userId)
-                self.realmServise.addUserData(isAuthFirebase: true)
                 self.realmServise.addUserData(isUserSignIn: true)
                 self.dismiss(animated: true)
             } else {
-                self.showAlertController()
+                self.showAlertController(textError: "Wrong email adress")
             }
         }
     }
@@ -190,22 +190,18 @@ final class LoginFormViewController: UIViewController {
 // Google SigIn button
     @objc fileprivate func signIn() {
         GIDSignIn.sharedInstance.signIn(with: signInConfig, presenting: self) { [weak self] user, error in
-            guard let self = self else { return }
-            guard error == nil, let user = user, let userProfile = user.profile, let userId = user.userID else {
-                self.showAlertController()
-                return
-            }
+            
+            guard let self = self, error == nil, let user = user, let userProfile = user.profile, let userId = user.userID else { return }
             self.fireBase.addNewUserForGoogle(name: userProfile.name, email: userProfile.email, userIdGoogle: userId)
             self.realmServise.addUserData(ID: userId)
-            self.realmServise.addUserData(isAuthFirebase: false)
             self.realmServise.addUserData(isUserSignIn: true)
             self.dismiss(animated: true)
         }
     }
     
 // MARK: AlertController
-    fileprivate func showAlertController() {
-        let alertController = UIAlertController(title: "Error", message: "atuth", preferredStyle: .alert)
+    private func showAlertController(textError: String) {
+        let alertController = UIAlertController(title: "Error", message: textError, preferredStyle: .alert)
         let closeButton = UIAlertAction(title: "Close", style: .cancel)
         
         alertController.addAction(closeButton)
@@ -213,6 +209,8 @@ final class LoginFormViewController: UIViewController {
     }
     
 // MARK: Metods
+    
+  
     // Метод измения с входа на регистрацию
     private func changeViewForIndexSegment(index: Int) {
         viewForEntryUser.isHidden = index == 1
@@ -234,14 +232,14 @@ final class LoginFormViewController: UIViewController {
     }
     
     // Добавление вью с авторизацией
-    private func addViewEnterUser() {
+    private func addViewEnterUser(value: Int) {
         viewForEntryUser.snp.makeConstraints {
             $0.bottom.leading.trailing.equalToSuperview().inset(0)
             $0.top.equalTo(segmentController.snp.bottom).offset(16)
         }
         
         emailForEntryTextField.snp.makeConstraints {
-            $0.top.equalTo(viewForEntryUser.snp.top).inset(48)
+            $0.top.equalTo(viewForEntryUser.snp.top).inset(16)
             $0.leading.trailing.equalTo(viewForEntryUser).inset(16)
             $0.height.equalTo(70)
         }
@@ -273,7 +271,7 @@ final class LoginFormViewController: UIViewController {
         }
         
         loginNameForRegisterTextField.snp.makeConstraints {
-            $0.top.equalTo(viewForRegisterUser.snp.top).inset(48)
+            $0.top.equalTo(viewForRegisterUser.snp.top).inset(16)
             $0.leading.trailing.equalTo(viewForRegisterUser).inset(16)
             $0.height.equalTo(70)
         }
@@ -315,16 +313,30 @@ final class LoginFormViewController: UIViewController {
 }
 
 
-//extension LoginFormViewController: UITextFieldDelegate {
-//
-//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-//        let name = loginNameForRegisterTextField.text
-//        let email = emailForRegisterTextField.text
-//        let password = passwordForRegisterTextField.text
-//
-//        loginNameForRegisterTextField.becomeFirstResponder()
-//
-//        return true
-//
-//    }
+extension LoginFormViewController: UITextFieldDelegate {
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+
+        switch textField {
+        case emailForEntryTextField:
+            passwordForEntryTextField.becomeFirstResponder()
+        default:
+            textField.resignFirstResponder()
+        }
+        
+        switch textField {
+        case loginNameForRegisterTextField:
+            emailForRegisterTextField.becomeFirstResponder()
+        case emailForRegisterTextField:
+            passwordForRegisterTextField.becomeFirstResponder()
+        default:
+            textField.resignFirstResponder()
+        }
+
+        return false
+
+    }
+    
+    
+}
     

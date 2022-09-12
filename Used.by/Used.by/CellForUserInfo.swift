@@ -1,8 +1,8 @@
 //
-//  CellForReqestPicker.swift
+//  CellForUserInfo.swift
 //  Used.by
 //
-//  Created by Artsiom Korenko on 16.08.22.
+//  Created by Artsiom Korenko on 10.09.22.
 //
 
 import Foundation
@@ -10,9 +10,9 @@ import SnapKit
 import UIKit
 
 
-class CellForRequestView: UITableViewCell {
+class CellForUserInfo: UITableViewCell {
     
-    static let key = "CellForRequestView"
+    static let key = "CellForUserInfo"
     
     private lazy var mainView: UIView = {
         var view = UIView()
@@ -21,17 +21,20 @@ class CellForRequestView: UITableViewCell {
         return view
     }()
     
-    private lazy var fieldNameLabel: CustomUILabel = {
-        var label = CustomUILabel()
+    private lazy var nameUser: UILabel = {
+        var label = UILabel()
+        label.textColor = .myCustomPurple
+        label.textAlignment = .left
+        label.font = UIFont.systemFont(ofSize: 24, weight: .heavy)
         return label
     }()
     
-    private lazy var resultChoiceLabel: CustomUILabel = {
+    private lazy var emailUser: CustomUILabel = {
         var label = CustomUILabel()
         return label
     }()
 
-//MARK: Override functions 
+//MARK: Override functions
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.backgroundColor = .clear
@@ -49,34 +52,31 @@ class CellForRequestView: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        resultChoiceLabel.text = ""
+        emailUser.text = ""
+        nameUser.text = "" 
     }
 
 //MARK: Metods
-    func changeFieldName(name: String) {
-        fieldNameLabel.text = name
+    func changeName(name: String, email: String) {
+        nameUser.text = name
+        emailUser.text = email
     }
     
-    func changeResultLabel(name: String) {
-        resultChoiceLabel.text = name
-    }
-
 //MARK: Metods for Constreint
     private func addConstreint() {
         mainView.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview()
-            $0.top.bottom.equalToSuperview().inset(4)
+            $0.leading.trailing.equalToSuperview().inset(16)
+            $0.top.bottom.equalToSuperview().inset(8)
         }
         
-        resultChoiceLabel.snp.makeConstraints {
+        emailUser.snp.makeConstraints {
             $0.centerX.equalTo(mainView.snp.centerX)
             $0.trailing.leading.equalToSuperview().inset(16)
             $0.bottom.equalToSuperview().inset(16)
         }
         
-        fieldNameLabel.snp.makeConstraints {
-            fieldNameLabel.font = UIFont.systemFont(ofSize: 17)
-            $0.bottom.equalTo(resultChoiceLabel.snp.top)
+        nameUser.snp.makeConstraints {
+            $0.bottom.equalTo(emailUser.snp.top)
             $0.trailing.leading.equalToSuperview().inset(16)
             $0.top.equalToSuperview().inset(16)
         }
@@ -84,9 +84,7 @@ class CellForRequestView: UITableViewCell {
     
     private func addElements() {
         contentView.addSubview(mainView)
-        mainView.addSubview(fieldNameLabel)
-        mainView.addSubview(resultChoiceLabel)
+        mainView.addSubview(nameUser)
+        mainView.addSubview(emailUser)
     }
 }
-    
-    

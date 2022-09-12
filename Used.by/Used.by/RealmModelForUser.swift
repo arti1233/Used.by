@@ -12,6 +12,5 @@ import UIKit
 class UserRealmModel: Object {
     @Persisted(primaryKey: true) var id = 0
     @Persisted var userID: String = "" 
-    @Persisted var isAuthFirebase: Bool = true
     @Persisted var isUserSingIn: Bool = false 
 }

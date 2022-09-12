@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 
 
-class  ChooseCostVC: BaseViewController {
+class  ChooseCostVC: BaseViewController, UITextFieldDelegate {
     static let key = "ChooseCostViewController"
     
     private lazy var titleName: UILabel = {
@@ -32,10 +32,20 @@ class  ChooseCostVC: BaseViewController {
         return button
     }()
     
+    private lazy var closeButton: UIButton = {
+        var button = UIButton()
+        button.backgroundColor = .myCustomPurple
+        button.tintColor = .white
+        button.setImage(UIImage(systemName: "xmark"), for: .normal)
+        button.addTarget(self, action: #selector(closeVC), for: .touchUpInside)
+        return button
+    }()
+    
     private lazy var minCostTextField: CustomTextField = {
         var textlabel = CustomTextField()
         textlabel.placeholder = " from"
         textlabel.keyboardType = .numberPad
+        textlabel.delegate = self
         return textlabel
     }()
     
@@ -43,6 +53,7 @@ class  ChooseCostVC: BaseViewController {
         var textlabel = CustomTextField()
         textlabel.placeholder = " to"
         textlabel.keyboardType = .numberPad
+        textlabel.delegate = self
         return textlabel
     }()
     
@@ -55,12 +66,17 @@ class  ChooseCostVC: BaseViewController {
         view.addSubview(minCostTextField)
         view.addSubview(maxCostTextField)
         view.addSubview(acceptButton)
+        view.addSubview(closeButton)
     }
     
     
     override func updateViewConstraints() {
         super.updateViewConstraints()
         addConstreit()
+    }
+    
+    @objc fileprivate func closeVC(_ sender: UIButton) {
+        dismiss(animated: true)
     }
     
     @objc private func acceptWithChoise(sender: UIButton) {
@@ -79,6 +95,16 @@ class  ChooseCostVC: BaseViewController {
     
     func changeTitleName(name: String) {
         titleName.text = name
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        guard CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: string)),
+              let currentText = textField.text,
+              let stringRange = Range(range, in: currentText)  else { return false }
+        
+        let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
+        return updatedText.count <= 7
     }
     
     fileprivate func addConstreit() {
@@ -105,6 +131,13 @@ class  ChooseCostVC: BaseViewController {
             $0.top.equalTo(maxCostTextField.snp.bottom).offset(32)
             $0.leading.trailing.equalToSuperview().inset(16)
             $0.height.equalTo(50)
+        }
+        
+        closeButton.snp.makeConstraints {
+            $0.trailing.equalToSuperview().inset(16)
+            $0.height.width.equalTo(40)
+            $0.centerY.equalTo(titleName.snp.centerY)
+            closeButton.layer.cornerRadius = 40 / 2
         }
     }
 }

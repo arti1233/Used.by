@@ -1,8 +1,8 @@
 //
-//  PickerCapacityViewController.swift
+//  PickerForAddAdsVC.swift
 //  Used.by
 //
-//  Created by Artsiom Korenko on 22.08.22.
+//  Created by Artsiom Korenko on 12.09.22.
 //
 
 import Foundation
@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import SwiftUI
 
-class PickerVC: BaseViewController {
+class PickerForAddAdsVC: BaseViewController {
     
     private lazy var titleName: UILabel = {
         var titleName = UILabel()
@@ -48,14 +48,12 @@ class PickerVC: BaseViewController {
     }()
     
     private var realmServise: RealmServiceProtocol!
-    var isCapacityPicker = true
     private var arrayInt = [Int] (10...90)
     private var arrayCapacity: [Double] = []
     private var arrayYear = [Int] (1970...2022)
-    private var firstResultCapacity: Double = 1.0
-    private var secondResultCapacity: Double = 1.0
-    private var firstYear: Int = 1970
-    private var secondYear: Int = 1970
+    private var capacityResult: Double = 1.0
+    private var year: Int = 1970
+    var isCapacityPicker = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,7 +67,7 @@ class PickerVC: BaseViewController {
 
     override func updateViewConstraints() {
         super.updateViewConstraints()
-        addElements()
+        addConstreint()
     }
     
     @objc fileprivate func closeVC(_ sender: UIButton) {
@@ -77,7 +75,7 @@ class PickerVC: BaseViewController {
     }
     
     @objc fileprivate func acceptWithChoise(_ sender: UIButton) {
-        isCapacityPicker ?  addCapacityRange(first: firstResultCapacity, second: secondResultCapacity) : addYearRange(first: firstYear, second: secondYear)
+        isCapacityPicker ?  addCapacity(capacity: capacityResult) : addYear(year: year)
         dismiss(animated: true)
     }
 // MARK: Metods
@@ -85,18 +83,15 @@ class PickerVC: BaseViewController {
         titleName.text = name
     }
     
-    private func addYearRange(first: Int, second: Int) {
-        realmServise.addObjectInSearchSetting(yearOfProductionMin: description.min(first, second))
-        realmServise.addObjectInSearchSetting(yearOfProductionMax: description.max(first, second))
-       
+    private func addYear(year: Int) {
+        realmServise.addAdsParams(year: year)
     }
     
-    private func addCapacityRange(first: Double, second: Double) {
-        realmServise.addObjectInSearchSetting(engineCapacityMin: description.min(first, second))
-        realmServise.addObjectInSearchSetting(engineCapacityMax: description.max(first, second))
+    private func addCapacity(capacity: Double) {
+        realmServise.addAdsParams(capacity: capacity)
     }
     
-    private func addElements() {
+    private func addConstreint() {
     
         titleName.snp.makeConstraints{
             $0.top.trailing.equalToSuperview()
@@ -126,9 +121,9 @@ class PickerVC: BaseViewController {
     }
 }
 
-extension PickerVC: UIPickerViewDelegate, UIPickerViewDataSource {
+extension PickerForAddAdsVC: UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 2
+        1
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
@@ -136,25 +131,14 @@ extension PickerVC: UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        isCapacityPicker ? "\(arrayCapacity[row]) L" : "\(arrayYear[row])"
+        isCapacityPicker ?  "\(arrayCapacity[row]) L" : "\(arrayYear[row])"
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if isCapacityPicker {
-            if component == 0 {
-                firstResultCapacity = arrayCapacity[row]
-            } else {
-                secondResultCapacity = arrayCapacity[row]
-            }
+            capacityResult = arrayCapacity[row]
         } else {
-            if component == 0 {
-                firstYear = arrayYear[row]
-            } else {
-                secondYear = arrayYear[row]
-            }
+            year = arrayYear[row]
         }
     }
-    
 }
-
-

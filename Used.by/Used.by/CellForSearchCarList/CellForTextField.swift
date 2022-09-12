@@ -11,8 +11,6 @@ import SnapKit
 
 // Enum for change target text field 
 enum TargetStateCell: CaseIterable {
-    case year
-    case capacity
     case cost
     case phoneNumber
     case mileage
@@ -24,6 +22,14 @@ class CellForTextField: UITableViewCell, UITextFieldDelegate {
     private var realmServise: RealmServiceProtocol!
     var targetTextField: TargetStateCell!
     private var adsConfigure = AdsConfigure()
+    private var limitSymbols = 0
+    
+    private lazy var mainView: UIView = {
+        var view = UIView()
+        view.backgroundColor = .myColorForCell
+        view.layer.cornerRadius = 10
+        return view
+    }()
     
     
     private lazy var nameCellLabel: CustomUILabel = {
@@ -36,6 +42,7 @@ class CellForTextField: UITableViewCell, UITextFieldDelegate {
         var field = CustomTextField()
         field.font = UIFont.systemFont(ofSize: 21)
         field.keyboardType = .default
+        field.backgroundColor = .myColorForCell
         field.delegate = self
         return field
     }()
@@ -57,6 +64,7 @@ class CellForTextField: UITableViewCell, UITextFieldDelegate {
         if let target = targetTextField {
             changeTargetTextField(target: target)
         }
+        addConstreint()
     }
 
     override func updateConstraints() {
@@ -74,8 +82,14 @@ class CellForTextField: UITableViewCell, UITextFieldDelegate {
 // UITextFieldDelegate
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        guard CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: string)) else { return false }
-        return true
+        
+        guard CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: string)),
+              let currentText = textField.text,
+              let stringRange = Range(range, in: currentText)  else { return false }
+        
+        let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
+        
+        return updatedText.count <= limitSymbols
     }
     
 //MARK: Metods
@@ -86,23 +100,19 @@ class CellForTextField: UITableViewCell, UITextFieldDelegate {
     
     private func changeTargetTextField(target: TargetStateCell) {
         switch target {
-        case .year:
-            nameCellLabel.text = "Year"
-            customTextField.placeholder = "Year of productions"
-        case .capacity:
-            nameCellLabel.text = "Capacity cm"
-            nameCellLabel.font = UIFont.systemFont(ofSize: 17)
-            customTextField.placeholder = "Engine capacity"
         case .phoneNumber:
-            nameCellLabel.text = "+375 "
+            nameCellLabel.text = "+375"
             customTextField.placeholder = "Phone number"
+            limitSymbols = 9
         case .cost:
-            nameCellLabel.text = "Cost"
-            customTextField.placeholder = "USD"
+            nameCellLabel.text = "USD"
+            customTextField.placeholder = "Cost"
+            limitSymbols = 7
         case .mileage:
-            nameCellLabel.text = "Mileage"
-            nameCellLabel.font = UIFont.systemFont(ofSize: 17)
-            customTextField.placeholder = "km"
+            nameCellLabel.text = "km"
+            nameCellLabel.font = UIFont.systemFont(ofSize: 21)
+            customTextField.placeholder = "Mileage"
+            limitSymbols = 7
         }
     }
     
@@ -111,10 +121,6 @@ class CellForTextField: UITableViewCell, UITextFieldDelegate {
               let text = customTextField.text,
               let textInt = Int(text) else { return false }
         switch target {
-        case .year:
-            realmServise.addAdsParams(year: textInt)
-        case .capacity:
-            realmServise.addAdsParams(capacity: textInt)
         case .cost:
             realmServise.addAdsParams(cost: textInt)
         case .phoneNumber:
@@ -125,23 +131,33 @@ class CellForTextField: UITableViewCell, UITextFieldDelegate {
         return true
     }
     
+
+    
 //MARK: Consteint
+    
     private func addConstreint() {
+        mainView.snp.makeConstraints {
+            $0.top.bottom.equalToSuperview().inset(4)
+            $0.leading.trailing.equalToSuperview()
+        }
+        
         nameCellLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(8)
+            $0.leading.equalToSuperview().inset(16)
             $0.bottom.top.equalToSuperview().inset(16)
-            $0.width.equalTo(contentView.frame.width * 0.35)
+            $0.width.equalTo(contentView.frame.width * 0.2)
         }
         
         customTextField.snp.makeConstraints {
-            $0.trailing.top.bottom.equalToSuperview()
-            $0.leading.equalTo(nameCellLabel.snp.trailing)
-            $0.width.equalTo(contentView.frame.width * 0.65)
+            $0.top.bottom.equalToSuperview().inset(8)
+            $0.trailing.equalToSuperview().inset(16)
+            $0.height.equalTo(50)
+            $0.leading.equalTo(nameCellLabel.snp.trailing).offset(16)
         }
     }
     
     private func addElements() {
-        contentView.addSubview(nameCellLabel)
-        contentView.addSubview(customTextField)
+        contentView.addSubview(mainView)
+        mainView.addSubview(nameCellLabel)
+        mainView.addSubview(customTextField)
     }
 }

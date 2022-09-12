@@ -38,7 +38,7 @@ class AdsCell: UITableViewCell {
     private lazy var scrollView: UIScrollView = {
         var scroll = UIScrollView()
         scroll.backgroundColor = .clear
-        scroll.layer.cornerRadius = 20
+        scroll.layer.cornerRadius = 10
         return scroll
     }()
     
@@ -56,7 +56,18 @@ class AdsCell: UITableViewCell {
         label.numberOfLines = 2
         return label
     }()
- 
+    
+    private lazy var spinerView: UIActivityIndicatorView = {
+        let spiner = UIActivityIndicatorView()
+        spiner.backgroundColor = .mainBackgroundColor
+        spiner.hidesWhenStopped = true
+        return spiner
+    }()
+    
+    var complition: (([UIImage]) -> Void)?
+    var isTransitionOnLookPhoto = false
+    var isSmallCell = true
+    
 //MARK: Override functions
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -69,23 +80,17 @@ class AdsCell: UITableViewCell {
 
     override func updateConstraints() {
         super.updateConstraints()
-        addConstraint()
+        addConstraint(isSmallCell: isSmallCell)
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-    
+
 // MARK: Metods
     
-    
-    
-    func changeTitleCell(adsInfo: AdsInfo) {
-        titleCell.text = "\(adsInfo.carBrend) \(adsInfo.carModel)"
-        costLabel.text = "\(adsInfo.cost) $"
-    }
-    
     func changeSmallDescription(adsInfo: AdsInfo) {
+        spinerView.startAnimating()
         let year = adsInfo.year
         var gearBox = ""
         let capacity = adsInfo.capacity
@@ -112,17 +117,41 @@ class AdsCell: UITableViewCell {
             condition = text.title
         }
         
-        self.smallDescription.text = "\(year) year, gearbox: \(gearBox), \(capacity) cm, \(typeEngine), \(typeDrive), \(mileage) km, \(condition)"
+        smallDescription.text = "\(year) year, gearbox: \(gearBox), \(capacity) l, \(typeEngine), \(typeDrive), \(mileage) km, \(condition)"
+        titleCell.text = "\(adsInfo.carBrend) \(adsInfo.carModel)"
+        costLabel.text = "\(adsInfo.cost) $"
         
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             guard let self = self else { return }
             urlPhoto.forEach({arrayImage.append($0.image)})
             DispatchQueue.main.async {
                 arrayImage.forEach({self.stackView.addArrangedSubview(UIImageView(image: $0))})
-                for image in self.stackView.arrangedSubviews {
-                    image.snp.makeConstraints {
-                        $0.width.height.equalTo(250)
+                if self.isTransitionOnLookPhoto {
+                    guard let complition = self.complition else { return }
+                    complition(arrayImage)
+                }
+                if self.stackView.arrangedSubviews.count == 1 {
+                    for image in self.stackView.arrangedSubviews {
+                        image.contentMode = .scaleAspectFit
+                        image.snp.makeConstraints {
+                            $0.height.equalTo(self.scrollView.frame.height)
+                            $0.trailing.leading.equalTo(self.viewForContent).inset(16)
+                        }
                     }
+                    self.spinerView.stopAnimating()
+                } else {
+                    for image in self.stackView.arrangedSubviews {
+                        image.contentMode = .scaleAspectFit
+                        image.snp.makeConstraints {
+                            $0.height.equalTo(self.scrollView.frame.height)
+                            if self.isSmallCell {
+                                $0.width.equalTo(self.scrollView.frame.height)
+                            } else {
+                                $0.width.equalTo(self.viewForContent.frame.width - 32)
+                            }
+                        }
+                    }
+                    self.spinerView.stopAnimating()
                 }
             }
         }
@@ -130,7 +159,7 @@ class AdsCell: UITableViewCell {
     
 // MARK: Metods for consteint
     
-    private func addConstraint() {
+    private func addConstraint(isSmallCell: Bool) {
         viewForContent.snp.makeConstraints {
             $0.trailing.leading.top.bottom.equalToSuperview().inset(16)
         }
@@ -144,10 +173,23 @@ class AdsCell: UITableViewCell {
             $0.top.equalTo(titleCell.snp.bottom).offset(8)
         }
     
-        scrollView.snp.makeConstraints {
-            $0.top.equalTo(costLabel.snp.bottom).offset(16)
-            $0.trailing.leading.equalTo(viewForContent).inset(16)
-            $0.height.equalTo(250)
+        if isSmallCell {
+            scrollView.snp.makeConstraints {
+                $0.top.equalTo(costLabel.snp.bottom).offset(16)
+                $0.trailing.leading.equalTo(viewForContent).inset(16)
+                $0.height.equalTo(100)
+            }
+        } else {
+            scrollView.snp.makeConstraints {
+                $0.top.equalTo(costLabel.snp.bottom).offset(16)
+                $0.trailing.leading.equalTo(viewForContent).inset(16)
+                $0.height.equalTo(250)
+            }
+        }
+        
+        spinerView.snp.makeConstraints {
+            $0.height.equalTo(scrollView.snp.height)
+            $0.width.equalTo(scrollView.snp.width)
         }
         
         stackView.snp.makeConstraints {
@@ -166,6 +208,7 @@ class AdsCell: UITableViewCell {
         viewForContent.addSubview(titleCell)
         viewForContent.addSubview(costLabel)
         scrollView.addSubview(stackView)
+        scrollView.addSubview(spinerView)
         viewForContent.addSubview(scrollView)
         viewForContent.addSubview(smallDescription)
     }

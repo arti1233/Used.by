@@ -63,9 +63,9 @@ class MyAdsViewController: BaseViewController {
             case .change(_, let properties):
                 for property in properties {
                     if property.name == "userID" {
+                        self.allAdsInfo = [] 
                         self.userData = self.realmServise.getUserData()
                         self.getUserAds(userId: self.userData.userID)
-                        self.tableView.reloadData()
                     }
                 }
                 self.changeTextButton(isUserSignIn: self.userData.isUserSingIn)
@@ -94,6 +94,9 @@ class MyAdsViewController: BaseViewController {
             present(vc, animated: true)
         } else {
             let vc = LoginFormViewController()
+            if let presentationConroller = vc.presentationController as? UISheetPresentationController {
+                presentationConroller.detents = [.large()]
+            }
             present(vc, animated: true)
      
         }
@@ -101,9 +104,11 @@ class MyAdsViewController: BaseViewController {
     
     @objc private func rehresh(sender: UIRefreshControl) {
         userData = realmServise.getUserData()
-        getUserAds(userId: userData.userID)
-        tableView.reloadData()
-        sender.endRefreshing()
+        if userData.isUserSingIn  {
+            getUserAds(userId: userData.userID)
+        } else {
+            sender.endRefreshing()
+        }
     }
     
 // MARK: Metods
@@ -116,6 +121,7 @@ class MyAdsViewController: BaseViewController {
                 self.getInfoAllAds(adsId: info.adsId)
             case .failure:
                 self.allAdsInfo = []
+                self.tableView.reloadData()
             }
         }
     }
@@ -138,12 +144,14 @@ class MyAdsViewController: BaseViewController {
         }
         group.notify(queue: .main) { [weak self] in
             guard let self = self else { return }
+            self.refreshControl.endRefreshing()
             self.tableView.reloadData()
         }
     }
     
     private func changeTextButton(isUserSignIn: Bool) {
         isUserSignIn ? loginButton.setTitle("Add new ads", for: .normal) : loginButton.setTitle("Log in...", for: .normal)
+        isUserSignIn ? (loginButton.backgroundColor = .myCustomPurple) : (loginButton.backgroundColor = .logInColor)
     }
     
     private func addLoginButton() {
@@ -169,18 +177,18 @@ extension MyAdsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: AdsCell.key) as? AdsCell else { return UITableViewCell() }
-        let info = allAdsInfo[indexPath.row]
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: AdsCell.key) as? AdsCell,
+              !allAdsInfo.isEmpty else { return UITableViewCell() }
         cell.selectionStyle = .none
         cell.backgroundColor = .clear
-        cell.changeTitleCell(adsInfo: info)
-        cell.changeSmallDescription(adsInfo: info)
+        cell.changeSmallDescription(adsInfo: allAdsInfo[indexPath.row])
         cell.updateConstraints()
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = AdsVC()
+        vc.isUserAds = true
         vc.adsInfo = allAdsInfo[indexPath.row]
         vc.modalPresentationStyle = .fullScreen
         navigationController?.pushViewController(vc, animated: true)
