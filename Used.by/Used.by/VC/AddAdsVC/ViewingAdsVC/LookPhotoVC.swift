@@ -35,10 +35,9 @@ class LookPhotoVC: BaseViewController, UIScrollViewDelegate {
     private var imageView = UIImageView()
     var arrayImages: [UIImage] = []
     var titleName = ""
-  
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         navigationItem.leftBarButtonItems = [UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(backButtonPressed(sender:)))]
         title = titleName
         view.addSubview(myScrollView)
@@ -95,7 +94,7 @@ class LookPhotoVC: BaseViewController, UIScrollViewDelegate {
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         let page = Int(myScrollView.contentOffset.x / myScrollView.frame.size.width) + 1
         let image = view.viewWithTag(page)
-        title = "\(titleName)  \(page) in \(arrayImages.count)"
+        title = "Photo \(page) in \(arrayImages.count)"
         return image
     }
         
@@ -108,6 +107,5 @@ class LookPhotoVC: BaseViewController, UIScrollViewDelegate {
             scrollView.zoomScale = 1
         }
     }
-        
 }
 

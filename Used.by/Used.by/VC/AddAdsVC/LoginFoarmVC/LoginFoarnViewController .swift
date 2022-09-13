@@ -65,7 +65,7 @@ final class LoginFormViewController: UIViewController {
     private lazy var passwordForEntryTextField: CustomTextField = {
         var textlabel = CustomTextField()
         textlabel.placeholder = "  Password"
-        textlabel.isSecureTextEntry = true
+        textlabel.textContentType = .password
         return textlabel
     }()
     
@@ -98,7 +98,7 @@ final class LoginFormViewController: UIViewController {
     private lazy var passwordForRegisterTextField: CustomTextField = {
         var textlabel = CustomTextField()
         textlabel.placeholder = "  Password"
-        textlabel.isSecureTextEntry = true
+        textlabel.textContentType = .password
         return textlabel
     }()
     

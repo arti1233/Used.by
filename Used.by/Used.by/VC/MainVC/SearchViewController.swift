@@ -118,7 +118,7 @@ class SearchViewController: BaseViewController {
     private func addConsteint() {
         
         tableView.snp.makeConstraints {
-            $0.bottom.equalToSuperview()
+            $0.bottom.equalTo(searchButton.snp.top)
             $0.trailing.leading.equalToSuperview()
             $0.top.equalTo(view.safeAreaInsets.top)
         }
@@ -152,7 +152,6 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: AdsCell.key) as? AdsCell else { return UITableViewCell() }
-        cell.prepareForReuse()
         cell.selectionStyle = .none
         cell.backgroundColor = .clear
         cell.changeSmallDescription(adsInfo: allAdsInfo[indexPath.row])

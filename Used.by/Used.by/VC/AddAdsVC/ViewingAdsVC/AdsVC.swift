@@ -129,7 +129,7 @@ class AdsVC: BaseViewController {
         private func showAlertController() {
             guard let adsInfo = adsInfo else { return }
 
-            let alertController = UIAlertController(title: "Phone number", message: "", preferredStyle: .actionSheet)
+            let alertController = UIAlertController(title: nil, message: "Seller's phone number", preferredStyle: .actionSheet)
             let phoneNumber = UIAlertAction(title: "+375 29 \(adsInfo.phoneNumber)", style: .default) { _ in
                 if let phoneCallURL = URL(string: "tel://+375\(adsInfo.phoneNumber)") {
                     let application:UIApplication = UIApplication.shared

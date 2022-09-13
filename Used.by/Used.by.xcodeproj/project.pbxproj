@@ -33,6 +33,7 @@
 		AE0BE8AF28A2B3E700C0E116 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0BE8AE28A2B3E700C0E116 /* CustomTextField.swift */; };
 		AE0BE8B128A2B56100C0E116 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0BE8B028A2B56100C0E116 /* CustomButton.swift */; };
 		AE0BE8B328A3ACD500C0E116 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AE0BE8B228A3ACD500C0E116 /* GoogleService-Info.plist */; };
+		AE30A82028D0CD7800279502 /* CollectionCellForPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE30A81F28D0CD7800279502 /* CollectionCellForPhoto.swift */; };
 		AE343CAF28BE3D5A00B677A9 /* ViewingAdsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE343CAE28BE3D5900B677A9 /* ViewingAdsVC.swift */; };
 		AE343CB328BE42BB00B677A9 /* AdsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE343CB228BE42BB00B677A9 /* AdsCell.swift */; };
 		AE343CB528BF90F600B677A9 /* AdsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE343CB428BF90F600B677A9 /* AdsVC.swift */; };
@@ -91,6 +92,7 @@
 		AE0BE8AE28A2B3E700C0E116 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		AE0BE8B028A2B56100C0E116 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		AE0BE8B228A3ACD500C0E116 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		AE30A81F28D0CD7800279502 /* CollectionCellForPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCellForPhoto.swift; sourceTree = "<group>"; };
 		AE343CAE28BE3D5900B677A9 /* ViewingAdsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewingAdsVC.swift; sourceTree = "<group>"; };
 		AE343CB228BE42BB00B677A9 /* AdsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsCell.swift; sourceTree = "<group>"; };
 		AE343CB428BF90F600B677A9 /* AdsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsVC.swift; sourceTree = "<group>"; };
@@ -258,6 +260,7 @@
 				AE343CB228BE42BB00B677A9 /* AdsCell.swift */,
 				AE343CB628BFD75A00B677A9 /* CellForSpecification.swift */,
 				AE6B5AFE28CD2F7C00C5606E /* CellForUserInfo.swift */,
+				AE30A81F28D0CD7800279502 /* CollectionCellForPhoto.swift */,
 			);
 			name = CellForAds;
 			sourceTree = "<group>";
@@ -447,6 +450,7 @@
 				AE04219728A935FF00034C2F /* ListSearchParametrVC.swift in Sources */,
 				AE343CBD28C1FE5600B677A9 /* CellForAdsPhoto.swift in Sources */,
 				AE0BE8B128A2B56100C0E116 /* CustomButton.swift in Sources */,
+				AE30A82028D0CD7800279502 /* CollectionCellForPhoto.swift in Sources */,
 				AE343CB928C0FA1600B677A9 /* ChooseParamsVC.swift in Sources */,
 				AEBB439428AD259E0037E5B1 /* BrendCarVC.swift in Sources */,
 				AED205B128B8DB0C00EC8C83 /* AddAdsVC.swift in Sources */,

@@ -25,7 +25,7 @@ class MainTabBarController: UITabBarController {
           
         viewControllers = [
             generateVC(viewController: searchViewController, title: "Search", image: UIImage(systemName: "magnifyingglass")),
-            generateVC(viewController: saveAdsViewController, title: "Save", image: UIImage(systemName: "bookmark")),
+            generateVC(viewController: saveAdsViewController, title: "Save ads", image: UIImage(systemName: "bookmark")),
             generateVC(viewController: settingViewController, title: "Profile", image: UIImage(systemName: "person.fill"))
         ]
         
