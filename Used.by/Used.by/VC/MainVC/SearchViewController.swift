@@ -61,6 +61,7 @@ class SearchViewController: BaseViewController {
     
     @objc private func rehresh(sender: UIRefreshControl) {
         allAdsInfo = []
+        tableView.reloadData()
         getAllAdsId()
     }
     
@@ -151,6 +152,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: AdsCell.key) as? AdsCell else { return UITableViewCell() }
+        cell.prepareForReuse()
         cell.selectionStyle = .none
         cell.backgroundColor = .clear
         cell.changeSmallDescription(adsInfo: allAdsInfo[indexPath.row])
