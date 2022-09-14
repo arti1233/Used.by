@@ -42,7 +42,7 @@ class LookPhotoVC: BaseViewController, UIScrollViewDelegate {
         title = titleName
         view.addSubview(myScrollView)
         myScrollView.addSubview(stackView)
-        
+        offLargeTitle()
         for (index, element) in arrayImages.enumerated() {
             newScroll = UIScrollView()
             stackView.addArrangedSubview(newScroll)

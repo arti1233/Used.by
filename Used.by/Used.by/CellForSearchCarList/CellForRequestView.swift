@@ -49,6 +49,7 @@ class CellForRequestView: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        mainView.backgroundColor = .myColorForCell
         resultChoiceLabel.text = ""
     }
 
@@ -59,6 +60,10 @@ class CellForRequestView: UITableViewCell {
     
     func changeResultLabel(name: String) {
         resultChoiceLabel.text = name
+    }
+    
+    func changeColorView() {
+        mainView.backgroundColor = .myLightGray
     }
 
 //MARK: Metods for Constreint

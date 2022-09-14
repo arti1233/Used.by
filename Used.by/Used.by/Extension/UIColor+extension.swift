@@ -50,4 +50,8 @@ extension UIColor {
     static var logInColor: UIColor {
         #colorLiteral(red: 0.8912548423, green: 0.1655315161, blue: 0.3378754854, alpha: 1)
     }
+    
+    static var myLightGray: UIColor {
+        #colorLiteral(red: 0.8473976254, green: 0.8673192859, blue: 0.8927561641, alpha: 1)
+    }
 }

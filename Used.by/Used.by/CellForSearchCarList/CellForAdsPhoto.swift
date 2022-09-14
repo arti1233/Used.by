@@ -15,7 +15,7 @@ class CellForAdsPhoto: UITableViewCell {
     
     private lazy var nameCellLabel: CustomUILabel = {
         var label = CustomUILabel()
-        label.text = "Add photo in ads. From 4 to 8 photos"
+        label.text = "Add photo in ads.\nFrom 4 to 8 photos"
         label.numberOfLines = 2
         return label
     }()
@@ -111,7 +111,7 @@ class CellForAdsPhoto: UITableViewCell {
         
         nameCellLabel.snp.makeConstraints {
             $0.leading.top.equalToSuperview().inset(16)
-            $0.trailing.equalTo(mainView.snp.centerX)
+            $0.trailing.equalToSuperview().inset(16)
         }
     
         scrollView.snp.makeConstraints {

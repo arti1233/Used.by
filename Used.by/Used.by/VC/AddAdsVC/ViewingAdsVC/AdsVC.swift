@@ -61,7 +61,6 @@ class AdsVC: BaseViewController {
             switch change {
             case .change(_, _):
                 self.userData = self.realmServise.getUserData()
-                self.saveAdsButton.isEnabled = self.userData.isUserSingIn
             default:
                 break
             }
@@ -72,9 +71,8 @@ class AdsVC: BaseViewController {
                 guard let self = self else { return }
                 self.changeSaveButton(isAdsSave: result)
             })
-        } else {
-            saveAdsButton.isEnabled = false
         }
+        
         if isUserAds {
             callButton.isEnabled = false
             saveAdsButton.isEnabled = false
@@ -100,11 +98,16 @@ class AdsVC: BaseViewController {
     }
     
     @objc private func saveAdsPressed(sender: UIButton) {
-        guard let adsInfo = adsInfo else { return }
-        firebase.addSaveUserAds(userId: userData.userID, adsId: adsInfo.id) { [weak self] result in
-            guard let self = self else { return }
-            self.changeSaveButton(isAdsSave: result)
+        if userData.isUserSingIn {
+            guard let adsInfo = adsInfo else { return }
+            firebase.addSaveUserAds(userId: userData.userID, adsId: adsInfo.id) { [weak self] result in
+                guard let self = self else { return }
+                self.changeSaveButton(isAdsSave: result)
+            }
+        } else {
+            alertForSaveButton()
         }
+        
     }
     
     
@@ -126,25 +129,38 @@ class AdsVC: BaseViewController {
     }
     
 // MARK: AlertController
-        private func showAlertController() {
-            guard let adsInfo = adsInfo else { return }
-
-            let alertController = UIAlertController(title: nil, message: "Seller's phone number", preferredStyle: .actionSheet)
-            let phoneNumber = UIAlertAction(title: "+375 29 \(adsInfo.phoneNumber)", style: .default) { _ in
-                if let phoneCallURL = URL(string: "tel://+375\(adsInfo.phoneNumber)") {
-                    let application:UIApplication = UIApplication.shared
-                    if (application.canOpenURL(phoneCallURL)) {
-                        application.open(phoneCallURL, options: [:], completionHandler: nil)
-                    }
-                  }
+    private func showAlertController() {
+        guard let adsInfo = adsInfo else { return }
+        
+        let alertController = UIAlertController(title: nil, message: "Seller's phone number", preferredStyle: .actionSheet)
+        let phoneNumber = UIAlertAction(title: "+375 29 \(adsInfo.phoneNumber)", style: .default) { _ in
+            if let phoneCallURL = URL(string: "tel://+375\(adsInfo.phoneNumber)") {
+                let application:UIApplication = UIApplication.shared
+                if (application.canOpenURL(phoneCallURL)) {
+                    application.open(phoneCallURL, options: [:], completionHandler: nil)
+                }
             }
-            let closeButton = UIAlertAction(title: "Close", style: .cancel)
-        
-            alertController.addAction(closeButton)
-            alertController.addAction(phoneNumber)
-            present(alertController, animated: true)
         }
+        let closeButton = UIAlertAction(title: "Close", style: .cancel)
         
+        alertController.addAction(closeButton)
+        alertController.addAction(phoneNumber)
+        present(alertController, animated: true)
+    }
+    
+    private func alertForSaveButton() {
+        let alertController = UIAlertController(title: "Attention", message: "In order to save the ad, log in to your account", preferredStyle: .alert)
+        let phoneNumber = UIAlertAction(title: "Log in", style: .cancel) { [weak self] _ in
+            guard let self = self else { return }
+            let vc = LoginFormViewController()
+            self.present(vc, animated: true)
+        }
+        let closeButton = UIAlertAction(title: "Close", style: .destructive)
+        
+        alertController.addAction(closeButton)
+        alertController.addAction(phoneNumber)
+        present(alertController, animated: true)
+    }
     
     
 // MARK: Metods for constreint
@@ -160,15 +176,14 @@ class AdsVC: BaseViewController {
         callButton.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(16)
             $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(16)
-            $0.width.equalTo(view.frame.width * 0.7)
+            $0.trailing.equalTo(saveAdsButton.snp.leading).offset(-8)
             $0.height.equalTo(50)
         }
         
         saveAdsButton.snp.makeConstraints {
             $0.trailing.equalToSuperview().inset(16)
             $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(16)
-            $0.width.equalTo(view.frame.width * 0.2)
-            $0.height.equalTo(50)
+            $0.height.width.equalTo(50)
         }
         
     }

@@ -38,6 +38,7 @@ class ListSearchParametrVC: BaseViewController {
     private var realmServise: RealmServiceProtocol!
     private var searchSettinmgItems: Results<SearchSetting>!
     private var notificationToken: NotificationToken?
+    private var searchParams = SearchSetting()
     //Alamofire
     private var alamofireProvider: RestAPIProviderProtocol!
    
@@ -63,7 +64,6 @@ class ListSearchParametrVC: BaseViewController {
         alamofireProvider = AlamofireProvider()
         addElements()
         title = "Parametrs"
-        getCarbrend()
         navigationItem.rightBarButtonItems = [UIBarButtonItem(title: "Reset", style: .plain, target: self, action: #selector(resetButtonPressed(sender:)))]
         realmServise.addObjectInSearchSetting(carModel: "")
         searchSettinmgItems = realmServise.getListSearchSetting()
@@ -72,22 +72,28 @@ class ListSearchParametrVC: BaseViewController {
             realmServise.resetSearchSetting()
             searchSettinmgItems = realmServise.getListSearchSetting()
         }
+        getCarbrend()
+        print(Realm.Configuration.defaultConfiguration.fileURL)
         
         guard let items = searchSettinmgItems.first else { return }
+        searchParams = items
         typeEngineStruct.rawValue = items.typeEngine
         typeDriveStruct.rawValue = items.typeDrive
         gearBoxStruct.rawValue = items.gearbox
         conditionsStruct.rawValue = items.conditionAuto
+       
         notificationToken = items.observe{ [weak self] change in
             guard let self = self else { return }
             switch change {
             case .change(_, _):
                 self.searchSettinmgItems = self.realmServise.getListSearchSetting()
                 guard let itemsNew = self.searchSettinmgItems.first else { return }
+                self.searchParams = itemsNew
                 self.typeEngineStruct.rawValue = itemsNew.typeEngine
                 self.typeDriveStruct.rawValue = itemsNew.typeDrive
                 self.gearBoxStruct.rawValue = itemsNew.gearbox
                 self.conditionsStruct.rawValue = itemsNew.conditionAuto
+                self.carModelForCell = self.carBrend.first(where: {$0.name == itemsNew.carBrend})
                 self.tableView.reloadData()
             default:
                 break
@@ -124,7 +130,7 @@ class ListSearchParametrVC: BaseViewController {
     private func addConstreint() {
         
         tableView.snp.makeConstraints {
-            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
+            $0.bottom.equalTo(searchButton.snp.top)
             $0.trailing.leading.equalToSuperview().inset(8)
             $0.top.equalTo(view.safeAreaInsets.top)
         }
@@ -133,7 +139,7 @@ class ListSearchParametrVC: BaseViewController {
             $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(16)
             $0.centerX.equalTo(view.snp.centerX).inset(0)
             $0.height.equalTo(50)
-            $0.trailing.leading.equalToSuperview().inset(16)
+            $0.trailing.leading.equalToSuperview().inset(8)
         }
     }
     
@@ -159,6 +165,8 @@ class ListSearchParametrVC: BaseViewController {
             switch result {
             case .success(let result):
                 self.carBrend = result
+                self.carModelForCell = result.first(where: {$0.name == self.searchParams.carBrend})
+                self.tableView.reloadData()
             default:
                 break
             }
@@ -200,6 +208,9 @@ extension ListSearchParametrVC: UITableViewDelegate, UITableViewDataSource {
             case .carModel:
                 cellForRequestView.changeFieldName(name: modelCars[indexPath.row].title)
                 cellForRequestView.changeResultLabel(name: items.carModel)
+                if carModelForCell == nil {
+                    cellForRequestView.changeColorView()
+                }
                 return cellForRequestView
             }
         case .parametrs:
@@ -225,15 +236,27 @@ extension ListSearchParametrVC: UITableViewDelegate, UITableViewDataSource {
             }
         case .typeEngine:
             cellForTouch.changeNameCell(name: typeEngine[indexPath.row].title)
-            cellForTouch.setSelectedAttribute(isSelected: TypeEngimeStruct(rawValue: items.typeEngine).contains(TypeEngime.allCases[indexPath.row].options))
+            if TypeEngimeStruct(rawValue: items.typeEngine).contains(TypeEngime.allCases[indexPath.row].options) {
+                tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+            } else {
+                tableView.deselectRow(at: indexPath, animated: false)
+            }
             return cellForTouch
         case .typeDrive:
             cellForTouch.changeNameCell(name: typeDrive[indexPath.row].title)
-            cellForTouch.setSelectedAttribute(isSelected: TypeOfDriveStruct(rawValue: items.typeDrive).contains(TypeOfDrive.allCases[indexPath.row].options))
+            if TypeOfDriveStruct(rawValue: items.typeDrive).contains(TypeOfDrive.allCases[indexPath.row].options) {
+                tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+            } else {
+                tableView.deselectRow(at: indexPath, animated: false)
+            }
             return cellForTouch
         case .gearbox:
             cellForTouch.changeNameCell(name: gearBox[indexPath.row].title)
-            cellForTouch.setSelectedAttribute(isSelected: GearBoxStruct(rawValue: items.gearbox).contains(GearBox.allCases[indexPath.row].options))
+            if  GearBoxStruct(rawValue: items.gearbox).contains(GearBox.allCases[indexPath.row].options) {
+                tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+            } else {
+                tableView.deselectRow(at: indexPath, animated: false)
+            }
             return cellForTouch
         case .conditions:
             switch conditions[indexPath.row] {
@@ -245,7 +268,11 @@ extension ListSearchParametrVC: UITableViewDelegate, UITableViewDataSource {
                 return cellForRequestView
             default:
                 cellForTouch.changeNameCell(name: conditions[indexPath.row].title)
-                cellForTouch.setSelectedAttribute(isSelected: ConditionStruct(rawValue: items.conditionAuto).contains(Conditions.allCases[indexPath.row].options))
+                if ConditionStruct(rawValue: items.conditionAuto).contains(Conditions.allCases[indexPath.row].options) {
+                    tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+                } else {
+                    tableView.deselectRow(at: indexPath, animated: false)
+                }
                 return cellForTouch
             }
         }
@@ -261,10 +288,6 @@ extension ListSearchParametrVC: UITableViewDelegate, UITableViewDataSource {
                 let vc = BrendCarVC()
                 vc.carBrend = carBrend
                 let navVC = UINavigationController(rootViewController: vc)
-                vc.complition = { [weak self] result in
-                    guard let self = self else { return }
-                    self.carModelForCell = result
-                }
                 present(navVC, animated: true)
             case .carModel:
                 if let model = carModelForCell {
@@ -313,14 +336,6 @@ extension ListSearchParametrVC: UITableViewDelegate, UITableViewDataSource {
         let section = section[indexPath.section]
         
         switch section {
-        case .modelCars:
-            switch modelCars[indexPath.row] {
-            case .carBrend:
-                realmServise.addObjectInSearchSetting(carBrend: "")
-            case .carModel:
-                realmServise.addObjectInSearchSetting(carModel: "")
-                carModelForCell = nil
-            }
         case .parametrs:
             switch parametrs[indexPath.row] {
             case .yearOfProduction:
@@ -350,6 +365,8 @@ extension ListSearchParametrVC: UITableViewDelegate, UITableViewDataSource {
                 conditionsStruct.remove(conditions[indexPath.row].options)
                 realmServise.addObjectInSearchSetting(conditionAuto: conditionsStruct.rawValue)
             }
+        default:
+            break
         }
     }
     

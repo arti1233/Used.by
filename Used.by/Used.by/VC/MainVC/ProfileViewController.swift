@@ -78,6 +78,7 @@ class ProfileViewController: BaseViewController {
         super.viewDidLoad()
         navigationItem.rightBarButtonItems = [UIBarButtonItem(image: UIImage(systemName: "plus.app"), style: .plain, target: self, action: #selector(addAds(sender:)))]
         addElements()
+        offLargeTitle()
         firebase = FireBaseService()
         realmServise = RealmService()
         alamofire = AlamofireProvider()

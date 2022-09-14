@@ -9,7 +9,11 @@ import Foundation
 import UIKit
 import SnapKit
 
-// Enum for change target text field 
+import Foundation
+import UIKit
+import SnapKit
+
+// Enum for change target text field
 enum TargetStateCell: CaseIterable {
     case cost
     case phoneNumber
@@ -43,6 +47,7 @@ class CellForTextField: UITableViewCell, UITextFieldDelegate {
         field.font = UIFont.systemFont(ofSize: 21)
         field.keyboardType = .default
         field.backgroundColor = .myColorForCell
+        field.textContentType = .flightNumber
         field.delegate = self
         return field
     }()
@@ -78,17 +83,36 @@ class CellForTextField: UITableViewCell, UITextFieldDelegate {
         super.setSelected(selected, animated: animated)
     }
     
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        guard let target = targetTextField,
+              let text = textField.text else { return }
+     
+             switch target {
+             case .cost:
+                 realmServise.addAdsParams(cost: Int(text) ?? 0)
+             case .phoneNumber:
+                 realmServise.addAdsParams(phone: Int(text) ?? 0)
+             case .mileage:
+                 realmServise.addAdsParams(mileage: Int(text) ?? 0)
+             }
+    }
 // UITextFieldDelegate
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        
+
         guard CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: string)),
               let currentText = textField.text,
-              let stringRange = Range(range, in: currentText)  else { return false }
-        
+              let stringRange = Range(range, in: currentText),
+              let target = targetTextField else { return false }
+
         let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
         
         return updatedText.count <= maxlimitSymbols
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        contentView.endEditing(true)
+        return false
     }
     
 //MARK: Metods
@@ -113,21 +137,6 @@ class CellForTextField: UITableViewCell, UITextFieldDelegate {
             customTextField.placeholder = "Mileage"
             maxlimitSymbols = 7
         }
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        guard let target = targetTextField,
-              let text = customTextField.text,
-              let textInt = Int(text) else { return false }
-        switch target {
-        case .cost:
-            realmServise.addAdsParams(cost: textInt)
-        case .phoneNumber:
-            realmServise.addAdsParams(phone: textInt)
-        case .mileage:
-            realmServise.addAdsParams(mileage: textInt)
-        }
-        return true
     }
     
 //MARK: Consteint

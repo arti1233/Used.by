@@ -52,6 +52,7 @@ class AddAdsVC: BaseViewController {
     private var adsResults: Results<AdsConfigure>!
     private let section = CreateSectionForCreateAds.allCases
     private var carBrendModel: [CarBrend] = []
+    private var carModelForCell: CarBrend?
     private var adsConfigure = AdsConfigure()
     private var catalogImage: [UIImage] = []
     
@@ -69,11 +70,13 @@ class AddAdsVC: BaseViewController {
         getCarbrend()
     
         guard let items = adsResults.first else { return }
+        
         notificationToken = items.observe{ [weak self] change in
             guard let self = self else { return }
             switch change {
             case .change(_, _):
                 self.adsConfigure = self.realmServise.getAdsParams()
+                self.getCarbrend()
                 self.tableView.reloadData()
             default:
                 break
@@ -84,7 +87,6 @@ class AddAdsVC: BaseViewController {
     override func updateViewConstraints() {
         super.updateViewConstraints()
         addConstreint()
-        getCarbrend()
     }
     
     deinit {
@@ -201,6 +203,8 @@ class AddAdsVC: BaseViewController {
             switch result {
             case .success(let result):
                 self.carBrendModel = result
+                self.carModelForCell = result.first(where: {$0.name == self.adsConfigure.carBrendName})
+                self.tableView.reloadData()
             case .failure:
                 print("ERROR")
             }
@@ -283,6 +287,9 @@ extension AddAdsVC: UITableViewDataSource, UITableViewDelegate {
             case .carModel:
                 cellForRequestView.changeFieldName(name: ModelCars.allCases[indexPath.row].title)
                 cellForRequestView.changeResultLabel(name: adsConfigure.carModelName)
+                if carModelForCell == nil {
+                    cellForRequestView.changeColorView()
+                }
                 return cellForRequestView
             }
         case .parametrs:
@@ -378,8 +385,14 @@ extension AddAdsVC: UITableViewDataSource, UITableViewDelegate {
                 vc.isSearch = false
                 let navVC = UINavigationController(rootViewController: vc)
                 present(navVC, animated: true)
-            default:
-                break
+            case .carModel:
+                if let model = carModelForCell {
+                    let vc = ModelCarVC()
+                    vc.carModel = model.modelSeries
+                    vc.changeTitleName(name: model.name)
+                    let navVC = UINavigationController(rootViewController: vc)
+                    present(navVC, animated: true)
+                }
             }
         case .parametrs:
             switch ParametrsForAds.allCases[indexPath.row] {

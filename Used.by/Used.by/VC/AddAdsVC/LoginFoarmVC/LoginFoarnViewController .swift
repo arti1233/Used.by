@@ -28,6 +28,12 @@ final class LoginFormViewController: UIViewController {
         return button
     }()
     
+    private lazy var viewForTitle: UIView = {
+        var view = UIView()
+        view.backgroundColor = .white
+        return view
+    }()
+    
     // Назвпние приложения в title
     private lazy var titleName: UILabel = {
         var titleName = UILabel()
@@ -58,14 +64,23 @@ final class LoginFormViewController: UIViewController {
     // TextField почты для входа
     private lazy var emailForEntryTextField: CustomTextField = {
         var textlabel = CustomTextField()
-        textlabel.placeholder = "  Enter email adress"
+        textlabel.placeholder = "Enter email adress"
+        let spacerView = UIView(frame:CGRect(x:0, y:0, width:10, height:10))
+        spacerView.backgroundColor = .clear
+        textlabel.leftViewMode = .always
+        textlabel.leftView = spacerView
         return textlabel
     }()
     // TextField пароля для входа
     private lazy var passwordForEntryTextField: CustomTextField = {
         var textlabel = CustomTextField()
-        textlabel.placeholder = "  Password"
+        textlabel.placeholder = "Password"
         textlabel.textContentType = .password
+        textlabel.isSecureTextEntry = true
+        let spacerView = UIView(frame:CGRect(x:0, y:0, width:10, height:10))
+        spacerView.backgroundColor = .clear
+        textlabel.leftViewMode = .always
+        textlabel.leftView = spacerView
         return textlabel
     }()
     
@@ -85,20 +100,33 @@ final class LoginFormViewController: UIViewController {
     // TextField имени пользователя(ник) для регистрации
     private lazy var loginNameForRegisterTextField: CustomTextField = {
         var textlabel = CustomTextField()
-        textlabel.placeholder = "  Enter your name"
+        textlabel.placeholder = "Enter your name"
+        let spacerView = UIView(frame:CGRect(x:0, y:0, width:10, height:10))
+        spacerView.backgroundColor = .clear
+        textlabel.leftViewMode = .always
+        textlabel.leftView = spacerView
         return textlabel
     }()
     // TextField почты для регистрации
     private lazy var emailForRegisterTextField: CustomTextField = {
         var textlabel = CustomTextField()
-        textlabel.placeholder = "  Enter email adress"
+        textlabel.placeholder = "Enter email adress"
+        let spacerView = UIView(frame:CGRect(x:0, y:0, width:10, height:10))
+        spacerView.backgroundColor = .clear
+        textlabel.leftViewMode = .always
+        textlabel.leftView = spacerView
         return textlabel
     }()
     // TextField пароля для регистрации
     private lazy var passwordForRegisterTextField: CustomTextField = {
         var textlabel = CustomTextField()
-        textlabel.placeholder = "  Password"
+        textlabel.placeholder = "Password"
         textlabel.textContentType = .password
+        textlabel.isSecureTextEntry = true
+        let spacerView = UIView(frame:CGRect(x:0, y:0, width:10, height:10))
+        spacerView.backgroundColor = .clear
+        textlabel.leftViewMode = .always
+        textlabel.leftView = spacerView
         return textlabel
     }()
     
@@ -121,7 +149,7 @@ final class LoginFormViewController: UIViewController {
         view.backgroundColor = UIColor.tabBarColor
         userDataResults = realmServise.getUsersRealmModel()
         userData = realmServise.getUserData()
-        
+        addKeyBoardObserver()
         fireBase = FireBaseService()
         loginNameForRegisterTextField.delegate = self
         emailForRegisterTextField.delegate = self
@@ -130,13 +158,17 @@ final class LoginFormViewController: UIViewController {
         passwordForEntryTextField.delegate = self
     }
     
+    deinit {
+        removeKeyboardObserver()
+    }
+    
     
 // MARK: UpdateViewConstraints
     override func updateViewConstraints() {
         super.updateViewConstraints()
         addMainElements()
         addViewEnterUser(value: 0)
-        addViewRegisterUser()
+        addViewRegisterUser(value: 0)
     }
     
 // MARK: Actions
@@ -210,7 +242,48 @@ final class LoginFormViewController: UIViewController {
     
 // MARK: Metods
     
-  
+    private func addKeyBoardObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIApplication.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIApplication.keyboardWillHideNotification, object: nil)
+    }
+    
+    private func removeKeyboardObserver() {
+        NotificationCenter.default.removeObserver(self)
+    }
+            
+    @objc private func keyboardWillShow(_ notification: NSNotification) {
+        view.frame.origin.y = 0
+        guard let userInfo = notification.userInfo else { return }
+        
+        let duration = (userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0.25
+        
+        guard let keyboard = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
+
+        let height = view.frame.maxY - viewForRegisterUser.frame.minY - passwordForRegisterTextField.frame.maxY
+        let value = keyboard.height - height
+        
+        if value > 0 {
+            view.frame.origin.y = -value - 32
+        }
+        
+        
+    }
+    
+    @objc private func keyboardWillHide(_ notification: NSNotification) {
+        guard let userInfo = notification.userInfo else { return }
+        
+        
+        guard let userInfo = notification.userInfo else { return }
+        
+        let duration = (userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0.25
+        
+        guard let keyboard = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
+   
+        view.frame.origin.y = 0
+
+
+    }
+    
     // Метод измения с входа на регистрацию
     private func changeViewForIndexSegment(index: Int) {
         viewForEntryUser.isHidden = index == 1
@@ -219,6 +292,12 @@ final class LoginFormViewController: UIViewController {
 
     // Добавление элементов которые не зависят от действия (вход или регистрация)
     private func addMainElements() {
+        
+        viewForTitle.snp.makeConstraints {
+            $0.top.trailing.leading.equalToSuperview()
+            $0.height.equalTo(128)
+        }
+        
         titleName.snp.makeConstraints{
             $0.top.leading.trailing.equalToSuperview().inset(16)
             $0.height.equalTo(40)
@@ -235,7 +314,7 @@ final class LoginFormViewController: UIViewController {
     private func addViewEnterUser(value: Int) {
         viewForEntryUser.snp.makeConstraints {
             $0.bottom.leading.trailing.equalToSuperview().inset(0)
-            $0.top.equalTo(segmentController.snp.bottom).offset(16)
+            $0.top.equalTo(128 - value)
         }
         
         emailForEntryTextField.snp.makeConstraints {
@@ -264,10 +343,10 @@ final class LoginFormViewController: UIViewController {
     }
     
     // Добавление вью с регистрацией
-    private func addViewRegisterUser() {
+    private func addViewRegisterUser(value: Int) {
         viewForRegisterUser.snp.makeConstraints {
             $0.bottom.leading.trailing.equalToSuperview().inset(0)
-            $0.top.equalTo(segmentController.snp.bottom).offset(16)
+            $0.top.equalTo(128 - value)
         }
         
         loginNameForRegisterTextField.snp.makeConstraints {
@@ -296,8 +375,6 @@ final class LoginFormViewController: UIViewController {
     }
     
     private func addElementsToSuperview() {
-        view.addSubview(titleName)
-        view.addSubview(segmentController)
         view.addSubview(viewForEntryUser)
         viewForEntryUser.addSubview(emailForEntryTextField)
         viewForEntryUser.addSubview(passwordForEntryTextField)
@@ -308,7 +385,9 @@ final class LoginFormViewController: UIViewController {
         viewForRegisterUser.addSubview(emailForRegisterTextField)
         viewForRegisterUser.addSubview(passwordForRegisterTextField)
         viewForRegisterUser.addSubview(registrationButton)
-        
+        view.addSubview(viewForTitle)
+        viewForTitle.addSubview(titleName)
+        viewForTitle.addSubview(segmentController)
     }
 }
 
@@ -327,6 +406,7 @@ extension LoginFormViewController: UITextFieldDelegate {
         switch textField {
         case loginNameForRegisterTextField:
             emailForRegisterTextField.becomeFirstResponder()
+            
         case emailForRegisterTextField:
             passwordForRegisterTextField.becomeFirstResponder()
         default:

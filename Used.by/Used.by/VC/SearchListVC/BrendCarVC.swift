@@ -33,7 +33,6 @@ class BrendCarVC: BaseViewController {
     
     var carBrend: [CarBrend] = []
     var isSearch = true
-    var complition: ((CarBrend) -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -85,8 +84,7 @@ extension BrendCarVC: UITableViewDelegate, UITableViewDataSource {
         VC.carModel = carModel.modelSeries
         VC.isSearch = isSearch
         if isSearch {
-            guard let complition = complition else { return }
-            complition(carModel)
+            realmServise.addObjectInSearchSetting(carModel: "")
             realmServise.addObjectInSearchSetting(carBrend: carModel.name)
         } else {
             realmServise.addAdsParams(carBrendName: carModel.name)
