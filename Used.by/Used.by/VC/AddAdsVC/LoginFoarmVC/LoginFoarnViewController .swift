@@ -254,9 +254,7 @@ final class LoginFormViewController: UIViewController {
     @objc private func keyboardWillShow(_ notification: NSNotification) {
         view.frame.origin.y = 0
         guard let userInfo = notification.userInfo else { return }
-        
-        let duration = (userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0.25
-        
+    
         guard let keyboard = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
 
         if passwordForRegisterTextField.isEditing {
@@ -272,18 +270,7 @@ final class LoginFormViewController: UIViewController {
     }
     
     @objc private func keyboardWillHide(_ notification: NSNotification) {
-        guard let userInfo = notification.userInfo else { return }
-        
-        
-        guard let userInfo = notification.userInfo else { return }
-        
-        let duration = (userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0.25
-        
-        guard let keyboard = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
-   
         view.frame.origin.y = 0
-
-
     }
     
     // Метод измения с входа на регистрацию

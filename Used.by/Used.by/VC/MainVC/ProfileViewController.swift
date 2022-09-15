@@ -306,7 +306,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             let vc = AdsVC()
             vc.isUserAds = true
             vc.adsInfo = allAdsInfo[indexPath.row]
-            vc.modalPresentationStyle = .fullScreen
+            vc.modalPresentationStyle = .overFullScreen
             navigationController?.pushViewController(vc, animated: true)
         default:
             break
