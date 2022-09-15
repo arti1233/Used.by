@@ -78,6 +78,8 @@ class PickerVC: BaseViewController {
             
             minCapacityFromView = minCapacity.offset
             maxCapacityFromView = maxCapacity.offset
+            firstResultCapacity = minCapacity.element
+            secondResultCapacity = maxCapacity.element
             picker.selectRow(minCapacityFromView, inComponent: 0, animated: false)
             picker.selectRow(maxCapacityFromView, inComponent: 1, animated: false)
         } else {
@@ -85,6 +87,8 @@ class PickerVC: BaseViewController {
                   let maxYear = arrayYear.enumerated().first(where: {$0.element == searchParams.yearOfProductionMax}) else { return }
             minYearFromView = minYear.offset
             maxYearFromView = maxYear.offset
+            firstYear = minYear.element
+            secondYear = maxYear.element
             picker.selectRow(minYearFromView, inComponent: 0, animated: false)
             picker.selectRow(maxYearFromView, inComponent: 1, animated: false)
         }
@@ -111,14 +115,14 @@ class PickerVC: BaseViewController {
     }
     
     private func addYearRange(first: Int, second: Int) {
-        realmServise.addObjectInSearchSetting(yearOfProductionMin: description.min(first, second))
-        realmServise.addObjectInSearchSetting(yearOfProductionMax: description.max(first, second))
+        realmServise.addObjectInSearchSetting(yearOfProductionMin: min(first, second))
+        realmServise.addObjectInSearchSetting(yearOfProductionMax: max(first, second))
        
     }
     
     private func addCapacityRange(first: Double, second: Double) {
-        realmServise.addObjectInSearchSetting(engineCapacityMin: description.min(first, second))
-        realmServise.addObjectInSearchSetting(engineCapacityMax: description.max(first, second))
+        realmServise.addObjectInSearchSetting(engineCapacityMin: min(first, second))
+        realmServise.addObjectInSearchSetting(engineCapacityMax: max(first, second))
     }
     
     private func addConstreint() {
