@@ -14,6 +14,13 @@ class CellForRequestView: UITableViewCell {
     
     static let key = "CellForRequestView"
     
+    private lazy var mainView: UIView = {
+        var view = UIView()
+        view.backgroundColor = .myColorForCell
+        view.layer.cornerRadius = 10
+        return view
+    }()
+    
     private lazy var fieldNameLabel: CustomUILabel = {
         var label = CustomUILabel()
         return label
@@ -24,10 +31,11 @@ class CellForRequestView: UITableViewCell {
         return label
     }()
 
+//MARK: Override functions 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.addSubview(fieldNameLabel)
-        contentView.addSubview(resultChoiceLabel)
+        contentView.backgroundColor = .clear
+        addElements()
     }
     
     required init?(coder: NSCoder) {
@@ -36,14 +44,16 @@ class CellForRequestView: UITableViewCell {
     
     override func updateConstraints() {
         super.updateConstraints()
-        addResultChoiceLabel()
+        addConstreint()
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        mainView.backgroundColor = .myColorForCell
         resultChoiceLabel.text = ""
     }
-    
+
+//MARK: Metods
     func changeFieldName(name: String) {
         fieldNameLabel.text = name
     }
@@ -51,19 +61,20 @@ class CellForRequestView: UITableViewCell {
     func changeResultLabel(name: String) {
         resultChoiceLabel.text = name
     }
-
-    private func addFieldName() {
-        fieldNameLabel.snp.makeConstraints {
-            $0.centerX.equalTo(contentView.snp.centerX)
-            $0.trailing.leading.equalToSuperview().inset(16)
-            $0.top.bottom.equalToSuperview().inset(16)
-        }
-    }
     
-    private func addResultChoiceLabel () {
+    func changeColorView() {
+        mainView.backgroundColor = .myLightGray
+    }
+
+//MARK: Metods for Constreint
+    private func addConstreint() {
+        mainView.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview()
+            $0.top.bottom.equalToSuperview().inset(4)
+        }
         
         resultChoiceLabel.snp.makeConstraints {
-            $0.centerX.equalTo(contentView.snp.centerX)
+            $0.centerX.equalTo(mainView.snp.centerX)
             $0.trailing.leading.equalToSuperview().inset(16)
             $0.bottom.equalToSuperview().inset(16)
         }
@@ -76,6 +87,11 @@ class CellForRequestView: UITableViewCell {
         }
     }
     
+    private func addElements() {
+        contentView.addSubview(mainView)
+        mainView.addSubview(fieldNameLabel)
+        mainView.addSubview(resultChoiceLabel)
+    }
 }
     
     

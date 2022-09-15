@@ -14,7 +14,7 @@ class ChooseMileageVC: BaseViewController {
 
     private lazy var tableView: UITableView = {
         var tableView = UITableView()
-        tableView.backgroundColor = .purple
+        tableView.backgroundColor = .clear
         tableView.allowsMultipleSelection = true
         tableView.delegate = self
         tableView.dataSource = self
@@ -45,13 +45,12 @@ class ChooseMileageVC: BaseViewController {
     private var arrayMilegeInt: [Int] = []
     private var arrayMilegeString: [String] = []
     private var realmServise: RealmServiceProtocol!
+    var isSearch = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
         realmServise = RealmService()
-        view.addSubview(titleName)
-        view.addSubview(tableView)
-        view.addSubview(closeButton)
+        addElements()
         arrayMilegeInt = array.map({$0 * 10})
         arrayMilegeString = arrayMilegeInt.map({"from \($0) thousands km "})
     }
@@ -62,10 +61,12 @@ class ChooseMileageVC: BaseViewController {
     
     override func updateViewConstraints() {
         super.updateViewConstraints()
-        addElementsForView()
+        addConstreint()
     }
     
-    private func addElementsForView() {
+    
+// MARK: Metod for constreint
+    private func addConstreint() {
         titleName.snp.makeConstraints{
             $0.top.trailing.equalToSuperview()
             $0.leading.equalToSuperview().inset(16)
@@ -84,6 +85,12 @@ class ChooseMileageVC: BaseViewController {
             $0.trailing.leading.equalToSuperview().inset(0)
             $0.top.equalToSuperview().inset(65)
         }
+    }
+    
+    private func addElements() {
+        view.addSubview(titleName)
+        view.addSubview(tableView)
+        view.addSubview(closeButton)
     }
     
 //MARK: Metod
@@ -105,7 +112,11 @@ extension ChooseMileageVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        realmServise.addObjectInSearchSetting(mileage: arrayMilegeInt[indexPath.row])
+        if isSearch {
+            realmServise.addObjectInSearchSetting(mileage: arrayMilegeInt[indexPath.row])
+        } else {
+            realmServise.addAdsParams(mileage: arrayMilegeInt[indexPath.row])
+        }
         dismiss(animated: true)
     }
 

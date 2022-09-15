@@ -16,10 +16,10 @@ class CellForMileage: UITableViewCell {
     
     private lazy var nameCellLabel: CustomUILabel = {
         var label = CustomUILabel()
-        label.text = "asd"
         return label
     }()
-    
+
+//MARK: Override functions
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(nameCellLabel)
@@ -39,6 +39,8 @@ class CellForMileage: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
+    
+//MARK: Metods
     
     func changeNameCell(name: String) {
         nameCellLabel.text = name

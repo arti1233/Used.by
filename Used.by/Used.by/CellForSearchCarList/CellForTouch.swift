@@ -13,6 +13,13 @@ class CellForTouch: UITableViewCell {
 
     static let key = "CellForTouch"
     
+    private lazy var mainView: UIView = {
+        var view = UIView()
+        view.backgroundColor = .myColorForCell
+        view.layer.cornerRadius = 10 
+        return view
+    }()
+    
     private lazy var nameCellLabel: CustomUILabel = {
         var label = CustomUILabel()
         label.text = "sdasd"
@@ -26,12 +33,10 @@ class CellForTouch: UITableViewCell {
         return view
     }()
     
-    
+//MARK: Override functions
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.addSubview(nameCellLabel)
-        contentView.addSubview(iconView)
-        contentView.layer.cornerRadius = 10
+        addElements()
     }
     
     required init?(coder: NSCoder) {
@@ -39,13 +44,8 @@ class CellForTouch: UITableViewCell {
     }
     
     override func updateConstraints() {
-        addElementsConstraint()
         super.updateConstraints()
-    }
-        
-
-    func changeNameCell(name: String) {
-        nameCellLabel.text = name
+        addConstraint()
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -53,13 +53,22 @@ class CellForTouch: UITableViewCell {
         iconView.image = UIImage(systemName: selected ? "circle.fill" : "circle" )
     }
     
+//MARK: Metods
+    
     func setSelectedAttribute(isSelected: Bool) {
         iconView.image = UIImage(systemName: isSelected ? "circle.fill" : "circle" )
     }
     
+    func changeNameCell(name: String) {
+        nameCellLabel.text = name
+    }
     
-    
-    private func addElementsConstraint() {
+// MARK: Metods for constreint
+    private func addConstraint() {
+        mainView.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview()
+            $0.top.bottom.equalToSuperview().inset(4)
+        }
         
         nameCellLabel.snp.makeConstraints {
             $0.trailing.leading.bottom.top.equalToSuperview().inset(16)
@@ -68,12 +77,13 @@ class CellForTouch: UITableViewCell {
         iconView.snp.makeConstraints {
             $0.trailing.equalToSuperview().inset(16)
             $0.width.height.equalTo(30)
-            $0.centerY.equalTo(contentView.snp.centerY)
+            $0.centerY.equalTo(mainView.snp.centerY)
         }
     }
     
-    
-    
-    
-    
+    private func addElements() {
+        contentView.addSubview(mainView)
+        mainView.addSubview(nameCellLabel)
+        mainView.addSubview(iconView)
+    }
 }

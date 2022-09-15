@@ -15,4 +15,22 @@ class BaseViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor.mainBackgroundColor
     }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        setupNavigationBar()
+    }
+    
+    private func setupNavigationBar() {
+        guard let navigationBar = navigationController?.navigationBar else { return }
+        navigationBar.tintColor = .myCustomPurple
+        navigationBar.barTintColor = .tabBarColor
+        navigationBar.prefersLargeTitles = true
+        navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.myCustomPurple]
+        navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.myCustomPurple, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 21, weight: .heavy)]
+    }
+    
+    func offLargeTitle() {
+        navigationItem.largeTitleDisplayMode = .never
+    }
 }

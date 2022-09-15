@@ -47,31 +47,55 @@ class PickerVC: BaseViewController {
         return picker
     }()
     
+    var minYearFromView = 0
+    var maxYearFromView = 0
+    var minCapacityFromView = 0
+    var maxCapacityFromView = 0
+    var firstIndex = 0
+    var secondIndex = 0
+    
     private var realmServise: RealmServiceProtocol!
+    private var searchParams = SearchSetting()
     var isCapacityPicker = true
     private var arrayInt = [Int] (10...90)
     private var arrayCapacity: [Double] = []
     private var arrayYear = [Int] (1970...2022)
-    private var firstResultCapacity: Double = 0
-    private var secondResultCapacity: Double = 0
-    private var firstYear: Int = 0
-    private var secondYear: Int = 0
+    private var firstResultCapacity: Double = 1.0
+    private var secondResultCapacity: Double = 1.0
+    private var firstYear: Int = 1970
+    private var secondYear: Int = 1970
     
     override func viewDidLoad() {
         super.viewDidLoad()
         realmServise = RealmService()
-        view.addSubview(titleName)
-        view.addSubview(acceptButton)
-        view.addSubview(closeButton)
-        view.addSubview(picker)
+        searchParams = realmServise.getSearch()
+        addElements()
         arrayInt.forEach({arrayCapacity.append(Double($0) / 10)})
+        
+        if isCapacityPicker {
+            guard  let minCapacity = arrayCapacity.enumerated().first(where: {$0.element == searchParams.engineCapacityMin}),
+                   let maxCapacity = arrayCapacity.enumerated().first(where: {$0.element == searchParams.engineCapacityMax}) else { return }
+            
+            minCapacityFromView = minCapacity.offset
+            maxCapacityFromView = maxCapacity.offset
+            picker.selectRow(minCapacityFromView, inComponent: 0, animated: false)
+            picker.selectRow(maxCapacityFromView, inComponent: 1, animated: false)
+        } else {
+            guard let minYear = arrayYear.enumerated().first(where: {$0.element == searchParams.yearOfProductionMin}),
+                  let maxYear = arrayYear.enumerated().first(where: {$0.element == searchParams.yearOfProductionMax}) else { return }
+            minYearFromView = minYear.offset
+            maxYearFromView = maxYear.offset
+            picker.selectRow(minYearFromView, inComponent: 0, animated: false)
+            picker.selectRow(maxYearFromView, inComponent: 1, animated: false)
+        }
     }
 
     override func updateViewConstraints() {
         super.updateViewConstraints()
-        addElements()
+        addConstreint()
     }
-    
+
+// MARK: Actions
     @objc fileprivate func closeVC(_ sender: UIButton) {
         dismiss(animated: true)
     }
@@ -80,6 +104,7 @@ class PickerVC: BaseViewController {
         isCapacityPicker ?  addCapacityRange(first: firstResultCapacity, second: secondResultCapacity) : addYearRange(first: firstYear, second: secondYear)
         dismiss(animated: true)
     }
+    
 // MARK: Metods
     func changeTitleName(name: String) {
         titleName.text = name
@@ -96,12 +121,13 @@ class PickerVC: BaseViewController {
         realmServise.addObjectInSearchSetting(engineCapacityMax: description.max(first, second))
     }
     
-    private func addElements() {
+    private func addConstreint() {
     
         titleName.snp.makeConstraints{
             $0.top.trailing.equalToSuperview()
             $0.leading.equalToSuperview().inset(16)
             $0.height.equalTo(60)
+            $0.trailing.equalTo(closeButton.snp.leading)
         }
         
         closeButton.snp.makeConstraints {
@@ -120,9 +146,15 @@ class PickerVC: BaseViewController {
         picker.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview()
             $0.top.equalTo(titleName.snp.bottom).inset(16)
-            $0.height.equalTo(300)
+            $0.bottom.equalTo(acceptButton.snp.top)
         }
-        
+    }
+    
+    private func addElements() {
+        view.addSubview(titleName)
+        view.addSubview(acceptButton)
+        view.addSubview(picker)
+        view.addSubview(closeButton)
     }
 }
 

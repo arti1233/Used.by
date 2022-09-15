@@ -13,11 +13,37 @@ import RealmSwift
 
 class ListSearchParametrVC: BaseViewController {
 
-    var realmServise: RealmServiceProtocol!
-    private var alamofireProvider: RestAPIProviderProtocol!
+    private lazy var tableView: UITableView = {
+        var tableView = UITableView()
+        tableView = UITableView(frame: .zero, style: .grouped)
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(CellForTouch.self, forCellReuseIdentifier: CellForTouch.key)
+        tableView.register(CellForRequestView.self, forCellReuseIdentifier: CellForRequestView.key)
+        tableView.allowsMultipleSelection = true
+        tableView.backgroundColor = .clear
+        tableView.separatorStyle = .none
+        return tableView
+    }()
+    
+    private lazy var searchButton: CustomButton = {
+        var button = CustomButton()
+        button.setTitle("Search", for: .normal)
+        button.addTarget(self, action: #selector(searchButtonPressed), for: .touchUpInside)
+        button.backgroundColor = .myGreenColor
+        return button
+    }()
+    
+    //Realm object
+    private var realmServise: RealmServiceProtocol!
     private var searchSettinmgItems: Results<SearchSetting>!
     private var notificationToken: NotificationToken?
+    private var searchParams = SearchSetting()
+    //Alamofire
+    private var alamofireProvider: RestAPIProviderProtocol!
+   
     private var carBrend: [CarBrend] = []
+    private var carModelForCell: CarBrend?
     
     private var typeEngineStruct = TypeEngimeStruct()
     private var typeDriveStruct = TypeOfDriveStruct()
@@ -31,69 +57,48 @@ class ListSearchParametrVC: BaseViewController {
     private let gearBox = GearBox.allCases
     private let conditions = Conditions.allCases
     
-    private lazy var titleName: UILabel = {
-        var titleName = UILabel()
-        titleName.textColor = UIColor.myCustomPurple
-        titleName.textAlignment = .center
-        titleName.text = "Parametrs"
-        titleName.font = UIFont.systemFont(ofSize: 30, weight: .heavy)
-        return titleName
-    }()
-    
-    private lazy var tableView: UITableView = {
-        var tableView = UITableView()
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.register(CellForTouch.self, forCellReuseIdentifier: CellForTouch.key)
-        tableView.register(CellForRequestView.self, forCellReuseIdentifier: CellForRequestView.key)
-        tableView.allowsMultipleSelection = true
-        return tableView
-    }()
-    
-    private lazy var searchButton: CustomButton = {
-        var button = CustomButton()
-        button.setTitle("Search", for: .normal)
-        button.addTarget(self, action: #selector(searchButtonPressed), for: .touchUpInside)
-        return button
-    }()
-
     override func viewDidLoad() {
         super.viewDidLoad()
+        offLargeTitle()
         realmServise = RealmService()
         alamofireProvider = AlamofireProvider()
-        view.addSubview(titleName)
-        view.addSubview(tableView)
-        view.addSubview(searchButton)
-       
-        print(Realm.Configuration.defaultConfiguration.fileURL!)
-        getCarbrend()
-    
+        addElements()
+        title = "Parametrs"
+        navigationItem.rightBarButtonItems = [UIBarButtonItem(title: "Reset", style: .plain, target: self, action: #selector(resetButtonPressed(sender:)))]
+        realmServise.addObjectInSearchSetting(carModel: "")
         searchSettinmgItems = realmServise.getListSearchSetting()
-        print(searchSettinmgItems)
-    
+        
+        if searchSettinmgItems.first == nil {
+            realmServise.resetSearchSetting()
+            searchSettinmgItems = realmServise.getListSearchSetting()
+        }
+        getCarbrend()
+        print(Realm.Configuration.defaultConfiguration.fileURL)
+        
         guard let items = searchSettinmgItems.first else { return }
+        searchParams = items
         typeEngineStruct.rawValue = items.typeEngine
         typeDriveStruct.rawValue = items.typeDrive
         gearBoxStruct.rawValue = items.gearbox
         conditionsStruct.rawValue = items.conditionAuto
+       
         notificationToken = items.observe{ [weak self] change in
             guard let self = self else { return }
             switch change {
             case .change(_, _):
                 self.searchSettinmgItems = self.realmServise.getListSearchSetting()
+                guard let itemsNew = self.searchSettinmgItems.first else { return }
+                self.searchParams = itemsNew
+                self.typeEngineStruct.rawValue = itemsNew.typeEngine
+                self.typeDriveStruct.rawValue = itemsNew.typeDrive
+                self.gearBoxStruct.rawValue = itemsNew.gearbox
+                self.conditionsStruct.rawValue = itemsNew.conditionAuto
+                self.carModelForCell = self.carBrend.first(where: {$0.name == itemsNew.carBrend})
                 self.tableView.reloadData()
             default:
                 break
             }
         }
-        
-//        var arrayName = ""
-//        Headlights.allCases.forEach {
-//            if selectedHead.contains($0.options) {
-//                arrayName.append("\($0.description), ")
-//            }
-//        }
-//        print(arrayName)
     }
     
     override func updateViewConstraints() {
@@ -101,32 +106,46 @@ class ListSearchParametrVC: BaseViewController {
         addConstreint()
         
     }
+    
+    deinit {
+        guard let token = notificationToken else { return }
+        token.invalidate()
+    }
+
+//MARK: Ections
 
     @objc private func searchButtonPressed(sender: UIButton) {
-        
+        let vc = ViewingAdsVC()
+        vc.isSearch = true
+        navigationController?.pushViewController(vc, animated: true)
     }
+    
+    @objc private func resetButtonPressed(sender: UIBarButtonItem) {
+        realmServise.resetSearchSetting()
+    }
+    
     
 // MARK: Metods for constreint
     
     private func addConstreint() {
         
-        titleName.snp.makeConstraints{
-            $0.top.leading.trailing.equalToSuperview()
-            $0.height.equalTo(60)
-        }
-        
         tableView.snp.makeConstraints {
-            $0.bottom.equalToSuperview()
-            $0.trailing.leading.equalToSuperview().inset(0)
-            $0.top.equalToSuperview().inset(65)
+            $0.bottom.equalTo(searchButton.snp.top)
+            $0.trailing.leading.equalToSuperview().inset(8)
+            $0.top.equalTo(view.safeAreaInsets.top)
         }
 
         searchButton.snp.makeConstraints {
-            $0.bottom.equalToSuperview().inset(16)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(16)
             $0.centerX.equalTo(view.snp.centerX).inset(0)
             $0.height.equalTo(50)
-            $0.trailing.leading.equalToSuperview().inset(16)
+            $0.trailing.leading.equalToSuperview().inset(8)
         }
+    }
+    
+    private func addElements() {
+        view.addSubview(tableView)
+        view.addSubview(searchButton)
     }
     
 // MARK: Metods
@@ -134,9 +153,11 @@ class ListSearchParametrVC: BaseViewController {
         let vc = PickerVC()
         vc.isCapacityPicker = isCapacity
         vc.isCapacityPicker ? vc.changeTitleName(name: "Capacity engine") : vc.changeTitleName(name: "Year of prodaction")
+        if let presentationConroller = vc.presentationController as? UISheetPresentationController {
+            presentationConroller.detents = [.medium()]
+        }
         present(vc, animated: true)
     }
-    
     
     private func getCarbrend() {
         alamofireProvider.getCarBrendInfo { [weak self] result in
@@ -144,8 +165,10 @@ class ListSearchParametrVC: BaseViewController {
             switch result {
             case .success(let result):
                 self.carBrend = result
-            case .failure:
-                print("ERROR")
+                self.carModelForCell = result.first(where: {$0.name == self.searchParams.carBrend})
+                self.tableView.reloadData()
+            default:
+                break
             }
         }
     }
@@ -170,9 +193,10 @@ extension ListSearchParametrVC: UITableViewDelegate, UITableViewDataSource {
         cellForRequestView.updateConstraints()
         cellForTouch.selectionStyle = .none
         cellForRequestView.selectionStyle = .none
+        cellForRequestView.backgroundColor = .clear
+        cellForTouch.backgroundColor = .clear
         
         let section = section[indexPath.section]
-        
         
         switch section {
         case .modelCars:
@@ -184,6 +208,9 @@ extension ListSearchParametrVC: UITableViewDelegate, UITableViewDataSource {
             case .carModel:
                 cellForRequestView.changeFieldName(name: modelCars[indexPath.row].title)
                 cellForRequestView.changeResultLabel(name: items.carModel)
+                if carModelForCell == nil {
+                    cellForRequestView.changeColorView()
+                }
                 return cellForRequestView
             }
         case .parametrs:
@@ -209,23 +236,43 @@ extension ListSearchParametrVC: UITableViewDelegate, UITableViewDataSource {
             }
         case .typeEngine:
             cellForTouch.changeNameCell(name: typeEngine[indexPath.row].title)
+            if TypeEngimeStruct(rawValue: items.typeEngine).contains(TypeEngime.allCases[indexPath.row].options) {
+                tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+            } else {
+                tableView.deselectRow(at: indexPath, animated: false)
+            }
             return cellForTouch
         case .typeDrive:
             cellForTouch.changeNameCell(name: typeDrive[indexPath.row].title)
+            if TypeOfDriveStruct(rawValue: items.typeDrive).contains(TypeOfDrive.allCases[indexPath.row].options) {
+                tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+            } else {
+                tableView.deselectRow(at: indexPath, animated: false)
+            }
             return cellForTouch
         case .gearbox:
             cellForTouch.changeNameCell(name: gearBox[indexPath.row].title)
+            if  GearBoxStruct(rawValue: items.gearbox).contains(GearBox.allCases[indexPath.row].options) {
+                tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+            } else {
+                tableView.deselectRow(at: indexPath, animated: false)
+            }
             return cellForTouch
         case .conditions:
             switch conditions[indexPath.row] {
             case .mileage:
                 cellForRequestView.changeFieldName(name: conditions[indexPath.row].title)
-                if items.mileage != 0{
+                if items.mileage != 0 {
                     cellForRequestView.changeResultLabel(name: "from \(items.mileage) thousands km ")
                 }
                 return cellForRequestView
             default:
                 cellForTouch.changeNameCell(name: conditions[indexPath.row].title)
+                if ConditionStruct(rawValue: items.conditionAuto).contains(Conditions.allCases[indexPath.row].options) {
+                    tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+                } else {
+                    tableView.deselectRow(at: indexPath, animated: false)
+                }
                 return cellForTouch
             }
         }
@@ -243,13 +290,22 @@ extension ListSearchParametrVC: UITableViewDelegate, UITableViewDataSource {
                 let navVC = UINavigationController(rootViewController: vc)
                 present(navVC, animated: true)
             case .carModel:
-                print("OK")
+                if let model = carModelForCell {
+                    let vc = ModelCarVC()
+                    vc.carModel = model.modelSeries
+                    vc.changeTitleName(name: model.name)
+                    let navVC = UINavigationController(rootViewController: vc)
+                    present(navVC, animated: true)
+                }
             }
         case .parametrs:
             switch parametrs[indexPath.row] {
             case .cost:
                 let vc = ChooseCostVC()
                 vc.changeTitleName(name: "\(parametrs[indexPath.row].title) USD")
+                if let presentationConroller = vc.presentationController as? UISheetPresentationController {
+                    presentationConroller.detents = [.medium()]
+                }
                 present(vc, animated: true)
             default:
                 presentPickerVC(isCapacity: parametrs[indexPath.row].isCapacity)
@@ -280,13 +336,6 @@ extension ListSearchParametrVC: UITableViewDelegate, UITableViewDataSource {
         let section = section[indexPath.section]
         
         switch section {
-        case .modelCars:
-            switch modelCars[indexPath.row] {
-            case .carBrend:
-                realmServise.addObjectInSearchSetting(carBrend: "")
-            case .carModel:
-                realmServise.addObjectInSearchSetting(carModel: "")
-            }
         case .parametrs:
             switch parametrs[indexPath.row] {
             case .yearOfProduction:
@@ -316,12 +365,29 @@ extension ListSearchParametrVC: UITableViewDelegate, UITableViewDataSource {
                 conditionsStruct.remove(conditions[indexPath.row].options)
                 realmServise.addObjectInSearchSetting(conditionAuto: conditionsStruct.rawValue)
             }
+        default:
+            break
         }
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         CreateSections.allCases[section].title
     }
-
-
+    
+    
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        guard let header = view as? UITableViewHeaderFooterView,
+              let headerText = header.textLabel  else { return }
+        headerText.textColor = .myCustomPurple
+        headerText.font = UIFont.systemFont(ofSize: 17, weight: .heavy)
+        let viewForBackground = UIView()
+        header.clipsToBounds = true
+        header.layer.cornerRadius = 10
+        header.addSubview(viewForBackground)
+        viewForBackground.frame = header.bounds
+        viewForBackground.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        viewForBackground.backgroundColor = .clear
+        header.backgroundView = viewForBackground
+    }
+    
 }

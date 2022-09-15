@@ -22,19 +22,23 @@ class BrendCarVC: BaseViewController {
     
     private lazy var tableView: UITableView = {
         var tableView = UITableView()
-        tableView.backgroundColor = .purple
+        tableView.backgroundColor = .clear
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(BrendCarCell.self, forCellReuseIdentifier: BrendCarCell.key)
         return tableView
     }()
     
+    private var realmServise: RealmServiceProtocol!
+    
     var carBrend: [CarBrend] = []
+    var isSearch = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addSubview(titleName)
-        view.addSubview(tableView)
+        realmServise = RealmService()
+        addElements()
+        offLargeTitle()
     }
     
     override func updateViewConstraints() {
@@ -55,6 +59,11 @@ class BrendCarVC: BaseViewController {
             $0.top.equalToSuperview().inset(65)
         }
     }
+    
+    private func addElements() {
+        view.addSubview(titleName)
+        view.addSubview(tableView)
+    }
 }
 
 extension BrendCarVC: UITableViewDelegate, UITableViewDataSource {
@@ -72,9 +81,15 @@ extension BrendCarVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let carModel = carBrend[indexPath.row]
         let VC = ModelCarVC()
-        VC.carModel = carModel
+        VC.carModel = carModel.modelSeries
+        VC.isSearch = isSearch
+        if isSearch {
+            realmServise.addObjectInSearchSetting(carModel: "")
+            realmServise.addObjectInSearchSetting(carBrend: carModel.name)
+        } else {
+            realmServise.addAdsParams(carBrendName: carModel.name)
+        }
         VC.changeTitleName(name: carModel.name)
         navigationController?.pushViewController(VC, animated: true)
     }
-    
 }
