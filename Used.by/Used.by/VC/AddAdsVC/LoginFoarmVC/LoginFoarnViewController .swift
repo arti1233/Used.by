@@ -259,14 +259,16 @@ final class LoginFormViewController: UIViewController {
         
         guard let keyboard = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
 
-        let height = view.frame.maxY - viewForRegisterUser.frame.minY - passwordForRegisterTextField.frame.maxY
-        let value = keyboard.height - height
-        
-        if value > 0 {
-            view.frame.origin.y = -value - 32
+        if passwordForRegisterTextField.isEditing {
+            let height = view.frame.maxY - viewForRegisterUser.frame.minY - passwordForRegisterTextField.frame.maxY
+            let value = keyboard.height - height
+            
+            if value > 0 {
+                view.frame.origin.y = -value - 32
+            }
+            
+            
         }
-        
-        
     }
     
     @objc private func keyboardWillHide(_ notification: NSNotification) {

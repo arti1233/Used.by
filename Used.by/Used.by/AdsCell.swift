@@ -186,34 +186,19 @@ class AdsCell: UITableViewCell {
             $0.top.equalTo(titleCell.snp.bottom).offset(8)
         }
     
-        if isSmallCell {
-            colectionView.snp.makeConstraints {
-                $0.top.equalTo(costLabel.snp.bottom).offset(16)
-                $0.trailing.leading.equalTo(viewForContent).inset(16)
-                $0.height.equalTo(100)
-            }
-        } else {
-            colectionView.snp.makeConstraints {
-                $0.top.equalTo(costLabel.snp.bottom).offset(16)
-                $0.trailing.leading.equalTo(viewForContent).inset(16)
-                $0.height.equalTo(250)
-            }
+    
+        colectionView.snp.makeConstraints {
+            $0.top.equalTo(costLabel.snp.bottom).offset(16)
+            $0.trailing.leading.equalTo(viewForContent).inset(16)
+            $0.height.equalTo(isSmallCell ? 100 : 250)
         }
-        
-        if isSmallCell {
-            spinerView.snp.makeConstraints {
-                $0.top.equalTo(costLabel.snp.bottom).offset(16)
-                $0.trailing.leading.equalTo(viewForContent).inset(16)
-                $0.height.equalTo(100)
-            }
-        } else {
-            spinerView.snp.makeConstraints {
-                $0.top.equalTo(costLabel.snp.bottom).offset(16)
-                $0.trailing.leading.equalTo(viewForContent).inset(16)
-                $0.height.equalTo(250)
-            }
+   
+        spinerView.snp.makeConstraints {
+            $0.top.equalTo(costLabel.snp.bottom).offset(16)
+            $0.trailing.leading.equalTo(viewForContent).inset(16)
+            $0.height.equalTo( isSmallCell ? 100 : 250)
         }
-        
+
         smallDescription.snp.makeConstraints {
             $0.top.equalTo(colectionView.snp.bottom).offset(16)
             $0.trailing.leading.bottom.equalTo(viewForContent).inset(16)
