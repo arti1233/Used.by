@@ -55,6 +55,7 @@ class AddAdsVC: BaseViewController {
     private var carModelForCell: CarBrend?
     private var adsConfigure = AdsConfigure()
     private var catalogImage: [UIImage] = []
+    var complition: (() -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -158,6 +159,7 @@ class AddAdsVC: BaseViewController {
                   showAlertController(text: "Check all text fields")
             return
         }
+        
         fireBase.createNewAds(userId: userData.userID,
                               carBrend: adsConfigure.carBrendName,
                               carModel: adsConfigure.carModelName,
@@ -172,6 +174,8 @@ class AddAdsVC: BaseViewController {
                               photo: catalogImage,
                               phoneNumber: adsConfigure.phoneNumber,
                               condition: adsConfigure.condition)
+        guard let complition = complition else { return }
+        complition()
         dismiss(animated: true)
     }
     

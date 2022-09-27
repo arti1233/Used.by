@@ -125,6 +125,10 @@ class ProfileViewController: BaseViewController {
     @objc private func addAds(sender: UIBarButtonItem) {
         if userData.isUserSingIn {
             let vc = AddAdsVC()
+            vc.complition = { [weak self] in
+                guard let self = self else { return }
+                self.getUserInfo(userId: self.userData.userID)
+            }
             present(vc, animated: true)
         } else {
             showAlertController(textError: "Login in your account")
@@ -183,6 +187,7 @@ class ProfileViewController: BaseViewController {
                 self.nameUser = result.name
                 self.email = result.email
                 self.getUserAds(userId: userId)
+                self.tableView.reloadData()
             case .failure:
                 self.nameUser = "Please log in apps"
                 self.email = ""
