@@ -73,7 +73,6 @@ class ListSearchParametrVC: BaseViewController {
             searchSettinmgItems = realmServise.getListSearchSetting()
         }
         getCarbrend()
-        print(Realm.Configuration.defaultConfiguration.fileURL)
         
         guard let items = searchSettinmgItems.first else { return }
         searchParams = items

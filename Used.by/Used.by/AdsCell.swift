@@ -70,6 +70,8 @@ class AdsCell: UITableViewCell {
         spiner.layer.cornerRadius = 10
         return spiner
     }()
+    
+    private let cache = NSCache<NSNumber, UIImage>()
 
     var complition: (([UIImage]) -> Void)?
     var isTransitionOnLookPhoto = false
@@ -87,6 +89,7 @@ class AdsCell: UITableViewCell {
                                                       height: 250)
         }
         addElements()
+        
     }
     
     
@@ -196,7 +199,7 @@ class AdsCell: UITableViewCell {
         spinerView.snp.makeConstraints {
             $0.top.equalTo(costLabel.snp.bottom).offset(16)
             $0.trailing.leading.equalTo(viewForContent).inset(16)
-            $0.height.equalTo( isSmallCell ? 100 : 250)
+            $0.height.equalTo(isSmallCell ? 100 : 250)
         }
 
         smallDescription.snp.makeConstraints {

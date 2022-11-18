@@ -23,7 +23,7 @@ protocol RestAPIProviderProtocol {
 class AlamofireProvider: RestAPIProviderProtocol {
     
     func getUserInfo(id: String, completion: @escaping (Result<Users, Error>) -> Void) {
-        AF.request(Constants.getUserInfoURl.appending("\(id).json"), method: .get).responseDecodable(of: Users.self) { response in
+        AF.request(Constants.baseURL.appending("\(id).json"), method: .get).responseDecodable(of: Users.self) { response in
             switch response.result {
             case .success(let result):
                 return completion(.success(result))
@@ -34,7 +34,7 @@ class AlamofireProvider: RestAPIProviderProtocol {
     }
     
     func getUserAds(id: String, completion: @escaping (Result<UsersAds, Error>) -> Void) {
-        AF.request(Constants.getUserInfoURl.appending("\(id).json"), method: .get).responseDecodable(of: UsersAds.self) { response in
+        AF.request(Constants.baseURL.appending("\(id).json"), method: .get).responseDecodable(of: UsersAds.self) { response in
             switch response.result {
             case .success(let result):
                 return completion(.success(result))
@@ -45,7 +45,7 @@ class AlamofireProvider: RestAPIProviderProtocol {
     }
     
     func getSaveUserAds(id: String, completion: @escaping (Result<UsersSaveAds, Error>) -> Void) {
-        AF.request(Constants.getUserInfoURl.appending("\(id).json"), method: .get).responseDecodable(of: UsersSaveAds.self) { response in
+        AF.request(Constants.baseURL.appending("\(id).json"), method: .get).responseDecodable(of: UsersSaveAds.self) { response in
             switch response.result {
             case .success(let result):
                 return completion(.success(result))

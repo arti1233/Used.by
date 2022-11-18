@@ -102,8 +102,7 @@ class CellForTextField: UITableViewCell, UITextFieldDelegate {
 
         guard CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: string)),
               let currentText = textField.text,
-              let stringRange = Range(range, in: currentText),
-              let target = targetTextField else { return false }
+              let stringRange = Range(range, in: currentText) else { return false }
 
         let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
         

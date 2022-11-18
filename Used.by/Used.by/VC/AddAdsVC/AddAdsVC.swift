@@ -217,12 +217,34 @@ class AddAdsVC: BaseViewController {
     
     // image Picker
     
-    func imagePickerForAllerController(){
+    func imagePickerForAllerController(type: UIImagePickerController.SourceType){
         let imagePicker = UIImagePickerController()
-        imagePicker.sourceType = .photoLibrary
+        imagePicker.sourceType = type
         imagePicker.delegate = self
         imagePicker.allowsEditing = true
         self.present(imagePicker, animated: true)
+    }
+    
+    // AlertController for imagePicker
+    
+    func alertControllerForImagePicker() {
+        let alertSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let cameraButton = UIAlertAction(title: "Camera", style: .default) { [weak self] _ in
+            guard let self = self else { return }
+            self.imagePickerForAllerController(type: .camera)
+        }
+        
+        let photoLibrary = UIAlertAction(title: "Photo library", style: .default) { [weak self] _ in
+            guard let self = self else { return }
+            self.imagePickerForAllerController(type: .photoLibrary)
+        }
+        
+        let cancelButton = UIAlertAction(title: "Cancel", style: .cancel)
+        
+        alertSheet.addAction(cancelButton)
+        alertSheet.addAction(cameraButton)
+        alertSheet.addAction(photoLibrary)
+        present(alertSheet, animated: true)
     }
     
     // go to ChooseParamsVC
@@ -367,9 +389,10 @@ extension AddAdsVC: UITableViewDataSource, UITableViewDelegate {
             return cellForPhoneNumber
         case .photo:
             cellForPhoto.addPhotoInScroll(photo: catalogImage)
-            cellForPhoto.comletion = {
+            cellForPhoto.comletion = { [weak self] in
+                guard let self = self else { return }
                 if self.catalogImage.count <= 6 {
-                    self.imagePickerForAllerController()
+                    self.alertControllerForImagePicker()
                 }
             }
             cellForPhoto.prepareForReuse()
@@ -447,7 +470,7 @@ extension AddAdsVC: UITableViewDataSource, UITableViewDelegate {
 // Extentions for ImagePicker
 extension AddAdsVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let pickedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
+        if let pickedImage = (info[.editedImage] ?? info[.originalImage]) as? UIImage {
             catalogImage.append(pickedImage)
             tableView.reloadData()
             picker.dismiss(animated: true)

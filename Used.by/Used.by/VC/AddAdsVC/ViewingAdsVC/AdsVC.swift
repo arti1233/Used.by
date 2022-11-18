@@ -73,10 +73,7 @@ class AdsVC: BaseViewController {
             })
         }
         
-        if isUserAds {
-            callButton.isEnabled = false
-            saveAdsButton.isEnabled = false
-        }
+        changeCallButton(isUserAds: isUserAds)
     }
     
     override func updateViewConstraints() {
@@ -94,25 +91,48 @@ class AdsVC: BaseViewController {
     
 //MARK: Actions
     @objc private func callButtonPressed(sender: UIButton) {
-        showAlertController()
+        if isUserAds {
+            allertForDeletButton()
+        } else {
+            showAlertController()
+        }
     }
     
     @objc private func saveAdsPressed(sender: UIButton) {
-        if userData.isUserSingIn {
-            guard let adsInfo = adsInfo else { return }
-            firebase.addSaveUserAds(userId: userData.userID, adsId: adsInfo.id) { [weak self] result in
-                guard let self = self else { return }
-                self.changeSaveButton(isAdsSave: result)
+        if !isUserAds {
+            if userData.isUserSingIn {
+                guard let adsInfo = adsInfo else { return }
+                firebase.addSaveUserAds(userId: userData.userID, adsId: adsInfo.id) { [weak self] result in
+                    guard let self = self else { return }
+                    self.changeSaveButton(isAdsSave: result)
+                }
+            } else {
+                alertForSaveButton()
             }
-        } else {
-            alertForSaveButton()
         }
-        
     }
     
     
     
 //MARK: Metods
+    private func changeCallButton(isUserAds: Bool) {
+        callButton.setTitle(isUserAds ? "Delete your ads" : "Сall the seller", for: .normal)
+        callButton.backgroundColor = isUserAds ? .logInColor : .myCustomPurple
+        saveAdsButton.isHidden = isUserAds
+        if isUserAds {
+            callButton.snp.makeConstraints { [weak self] in
+                guard let self = self else { return }
+                $0.leading.trailing.equalToSuperview().inset(16)
+                $0.bottom.equalTo(self.view.safeAreaLayoutGuide).inset(16)
+                $0.height.equalTo(50)
+            }
+            saveAdsButton.snp.makeConstraints {
+                $0.trailing.equalToSuperview().offset(0)
+                $0.bottom.equalToSuperview().inset(0)
+                $0.height.width.equalTo(0)
+            }
+        }
+    }
     
     private func changeSaveButton(isAdsSave: Bool) {
         saveAdsButton.setImage(UIImage(systemName: isAdsSave ? "bookmark.fill" : "bookmark"), for: .normal)
@@ -159,6 +179,20 @@ class AdsVC: BaseViewController {
         
         alertController.addAction(closeButton)
         alertController.addAction(phoneNumber)
+        present(alertController, animated: true)
+    }
+    
+    private func allertForDeletButton() {
+        let alertController = UIAlertController(title: "Attention", message: "Do you want to delete your ad?", preferredStyle: .alert)
+        let deletButton = UIAlertAction(title: "Delet", style: .destructive) { [weak self] _ in
+            guard let self = self, let adsInfo = self.adsInfo else { return }
+            self.firebase.deletUserAds(userId: self.userData.userID, adsId: adsInfo.id)
+            self.navigationController?.popViewController(animated: true)
+        }
+        let closeButton = UIAlertAction(title: "Close", style: .cancel)
+        
+        alertController.addAction(closeButton)
+        alertController.addAction(deletButton)
         present(alertController, animated: true)
     }
     
