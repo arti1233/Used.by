@@ -47,10 +47,9 @@ protocol FireBaseProtocol {
 
 class FireBaseService: FireBaseProtocol {
    
-    let referenceUsers = Database.database().reference().child("users")
-    let refAds = Database.database(url: "https://used-by-64d67-17a16.firebaseio.com").reference().child("ads")
-    let refAdsForDelete = Database.database(url: "https://used-by-64d67-17a16.firebaseio.com").reference()
-    let refID = Database.database(url: "https://used-by-64d67-4879b.firebaseio.com/").reference()
+    let referenceUsers = Database.database().reference().child("used").child("users").child("users")
+    let refAds = Database.database().reference().child("used").child("adsInfo").child("ads")
+    let refID = Database.database().reference().child("used").child("adsID")
     
     let storage = Storage.storage().reference().child("pic")
     
@@ -136,41 +135,35 @@ class FireBaseService: FireBaseProtocol {
     func createNewAds(userId: String, carBrend: String, carModel: String, year: Int, typeEngine: Int, gearBox: Int, typeDrive: Int, capacity: Double, mileage: Int, cost: Int, description: String, photo: [UIImage], phoneNumber: Int, condition: Int) {
         guard let adsId = refAds.childByAutoId().key else { return }
         var arrayUrl: [URL] = []
-        let group = DispatchGroup()
         for image in photo {
-            group.enter()
             uploadPhoto(photo: image) { (result) in
                 switch result {
                 case .success(let url):
                     arrayUrl.append(url)
-                    group.leave()
+                    self.refAds.child(adsId).child("photo").setValue(arrayUrl.map({$0.description}))
                 case .failure:
                     print("No ok photo")
                 }
             }
         }
         
-        group.notify(queue: .main) { [weak self] in
-            guard let self = self else { return }
             let stringUrl = arrayUrl.map({$0.description})
-            self.apendNewIdInBase(id: adsId)
-            self.refAds.child(adsId).updateChildValues(["id": adsId,
-                                                "carBrend": carBrend,
-                                                "carModel": carModel,
-                                                "year": year,
-                                                "typeEngine": typeEngine,
-                                                "gearBox": gearBox,
-                                                "typeDrive": typeDrive,
-                                                "capacity": capacity,
-                                                "mileage": mileage,
-                                                "photo": stringUrl,
-                                                "cost": cost,
-                                                "description": description,
-                                                "phoneNumber": phoneNumber,
-                                                "condition": condition])
-            self.addAdsIdInUsers(userId: userId, adsId: adsId)
-            
-        }
+            apendNewIdInBase(id: adsId)
+            refAds.child(adsId).updateChildValues(["id": adsId,
+                                           "carBrend": carBrend,
+                                           "carModel": carModel,
+                                           "year": year,
+                                           "typeEngine": typeEngine,
+                                           "gearBox": gearBox,
+                                           "typeDrive": typeDrive,
+                                           "capacity": capacity,
+                                           "mileage": mileage,
+                                           "photo": stringUrl,
+                                           "cost": cost,
+                                           "description": description,
+                                           "phoneNumber": phoneNumber,
+                                           "condition": condition])
+            addAdsIdInUsers(userId: userId, adsId: adsId)
     }
     
     func apendNewIdInBase(id: String) {
